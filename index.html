@@ -611,6 +611,67 @@ footer {
   .article-link { text-align: center; justify-content: center; }
 }
 
+/* ====== VERSION LIST ====== */
+.version-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.version-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  padding: 1.5rem 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.version-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-glow);
+  transform: translateX(4px);
+}
+
+.version-card-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.version-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-violet);
+  letter-spacing: 1px;
+}
+
+.version-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.version-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.version-arrow {
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.version-card:hover .version-arrow {
+  color: var(--accent-violet);
+  transform: translateX(4px);
+}
+
 /* ====== ANIMATIONS ====== */
 @keyframes fadeSlideUp {
   from { opacity: 0; transform: translateY(20px); }
@@ -716,12 +777,12 @@ footer {
           <h3 class="project-title">Japanese Knowledge King</h3>
           <div class="project-subtitle">日文知識王</div>
           <p class="project-desc">
-            A quiz-based learning platform powered by AI, helping users master Japanese through adaptive, gamified challenges.
+            A 1v1 quiz game for learning Japanese vocabulary — built with Expo/React Native and shipped to the App Store. Currently on v1.2.0.
           </p>
           <div class="project-tags">
             <span class="tag">AI</span>
-            <span class="tag">EdTech</span>
-            <span class="tag">Language</span>
+            <span class="tag">React Native</span>
+            <span class="tag">App Store</span>
           </div>
           <div class="project-arrow">↗</div>
         </a>
@@ -889,25 +950,96 @@ footer {
       <h1 class="article-h1">Japanese Knowledge King<br><span style="color:var(--accent-violet)">日文知識王</span></h1>
       <div class="article-meta">
         <span>By Tim</span>
+        <span>Ongoing project</span>
+        <span>Currently v1.2.0</span>
+      </div>
+    </div>
+    <div class="article-links">
+      <a class="article-link primary" href="https://apps.apple.com/app/id6759833560" target="_blank">📱 App Store</a>
+      <a class="article-link secondary" href="https://github.com/waitinghir/jp-knowledge-king" target="_blank">⟨/⟩ View on GitHub</a>
+    </div>
+    <div class="article-body">
+      <p>Nihongo Quiz King is a 1v1 quiz game for learning Japanese vocabulary, built with Expo/React Native and shipped to the App Store. This is an ongoing project — each article below documents a phase of its evolution.</p>
+
+      <div class="version-list">
+        <a class="version-card" onclick="showArticle('jpquiz-v1')">
+          <div class="version-card-left">
+            <span class="version-tag">v1.0.0 → v1.1.0</span>
+            <span class="version-title">From Zero to the App Store</span>
+            <span class="version-desc">Core game, App Store submission, bilingual update, and surviving the review process</span>
+          </div>
+          <span class="version-arrow">→</span>
+        </a>
+        <a class="version-card" style="opacity:0.4; pointer-events:none;">
+          <div class="version-card-left">
+            <span class="version-tag">v1.2.0+</span>
+            <span class="version-title">Coming Soon</span>
+            <span class="version-desc">Cloud question bank, fallback architecture, and what's next</span>
+          </div>
+          <span class="version-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JPQUIZ v1.0–v1.1 ARTICLE -->
+<div id="article-jpquiz-v1" class="article-page">
+  <div class="container">
+    <a class="article-back" onclick="showArticle('jpquiz')">← Back to version list</a>
+    <div class="article-header">
+      <div class="article-category">日文知識王 — v1.0.0 → v1.1.0</div>
+      <h1 class="article-h1">From Zero to the App Store</h1>
+      <div class="article-meta">
+        <span>By Tim</span>
         <span>2025</span>
-        <span>5 min read</span>
+        <span>9 min read</span>
       </div>
     </div>
     <div class="article-body">
-      <div class="placeholder-note">
-        ✏️ Article draft pending — Tim will provide project details for this write-up.
-        <br>Topics to cover: motivation, features, AI integration, challenges, results.
-      </div>
+
       <h2>Overview</h2>
-      <p>[To be written — brief summary of what the project is and why it was built.]</p>
-      <h2>The Problem</h2>
-      <p>[To be written — what gap or opportunity did this project address?]</p>
-      <h2>Solution & Key Features</h2>
-      <p>[To be written — how AI was used, what the user experience looks like.]</p>
-      <h2>Technical Highlights</h2>
-      <p>[To be written — architecture, tools, and interesting technical decisions.]</p>
-      <h2>Results & Reflections</h2>
-      <p>[To be written — outcomes, lessons learned, what you'd do differently.]</p>
+      <p>Nihongo Quiz King (日文知識王) is a mobile quiz game where you go head-to-head against an AI opponent, answering Japanese vocabulary questions under time pressure. It started as a personal learning tool — I was studying for the JLPT N4 and wanted something more engaging than flashcards — and ended up becoming my first app published on the App Store. Version 1.0 shipped as a Chinese-only app; version 1.1 added full English localization to reach a wider audience.</p>
+
+      <h2>Why I Built This</h2>
+      <p>Most Japanese learning apps follow the same pattern: see a word, flip a card, repeat. It works, but it's lonely and low-stakes. I wanted the tension of competition — someone else answering at the same time, a countdown ticking, the pressure of knowing that hesitation costs points. A 1v1 format turns vocabulary review from a chore into a game you actually want to win.</p>
+      <p>Beyond the product itself, I had a second goal: learn the entire iOS publishing pipeline from scratch. I'm not an iOS developer by background. I wanted to see whether AI-assisted development could take a non-native mobile developer from an empty folder to a live App Store listing — and how painful that journey would actually be.</p>
+
+      <h2>Core Gameplay</h2>
+      <p>Each match is a rapid-fire series of questions drawn from a pool of 200 JLPT N4 vocabulary words. You see a Japanese word in kana (hiragana/katakana only — no kanji displayed, which matters for Chinese speakers since kanji would essentially give away the answer), and pick the correct meaning from four options within 10 seconds. An AI opponent answers simultaneously, with its accuracy calibrated to your skill level so matches stay competitive.</p>
+      <p>Speed matters: faster correct answers earn more points. After each question, you see a head-to-head comparison — did you both get it right? Who was faster? At the end of the match, a results screen shows the final score with win/loss animations and sound effects. Your stats persist across sessions: level, cumulative score, and win rate are all tracked locally.</p>
+
+      <h2>How AI Was Used</h2>
+      <p>Claude was involved in virtually every layer of this project. The collaboration went well beyond "generate some code" — it covered the full stack of shipping a product.</p>
+      <p><strong>Architecture and code:</strong> Claude set up the Expo project structure with expo-router, built all the core game logic (scoring engine, AI opponent behavior, question selection, AsyncStorage persistence), and implemented every screen — home, matchmaking, battle, and results. The animated ring timer (SVG-based countdown) and option button animations (bounce on correct, shake on wrong) were all Claude's work.</p>
+      <p><strong>Content creation:</strong> The entire 200-word N4 question bank was produced through collaboration with Claude — Chinese meanings, English meanings, category tags, and carefully crafted distractor options in both languages. Getting distractors right is harder than it sounds: they need to be plausible enough to challenge the player but not so similar that the question feels unfair.</p>
+      <p><strong>Asset generation:</strong> App icons and splash screens were generated via Python Pillow scripts that Claude wrote. Sound effects (six distinct audio cues for correct, wrong, timeout, victory, defeat, and match start) were also generated programmatically through Python scripts.</p>
+      <p><strong>Publishing support:</strong> Claude helped navigate the entire App Store Connect workflow — writing app descriptions and keywords in both Chinese and English, generating properly sized screenshots, configuring EAS Build settings, and debugging submission issues.</p>
+
+      <h2>Key Technical Decisions</h2>
+      <p><strong>Expo + EAS over native Xcode.</strong> As a non-iOS developer, going fully native would have been a massive detour. Expo with EAS Build let me compile in the cloud without touching Xcode for most of the process. The trade-off is less control over native modules, but for a game that runs entirely in React Native views, it was the right call.</p>
+      <p><strong>AI opponent instead of real-time multiplayer.</strong> Real PvP would require a backend server, matchmaking logic, and infrastructure costs. An AI opponent that adjusts its accuracy based on the player's level gives the same competitive feeling at zero server cost. It's a solo app that feels like a multiplayer one.</p>
+      <p><strong>Kana-only display, no kanji.</strong> This was a game design decision disguised as a UI choice. Japanese kanji and Chinese characters overlap heavily — if the question showed 食べる, any Chinese speaker would immediately know it relates to eating. Showing only たべる forces genuine recall. It's a small detail, but it's the difference between a real quiz and a giveaway.</p>
+      <p><strong>Auto-detect language, no manual toggle.</strong> Version 1.1 added English localization using expo-localization. Rather than adding a language picker to the UI, the app simply follows the device language. One fewer setting to think about, one fewer screen to build, and users get the right language automatically.</p>
+
+      <h2>The Worst Part: One Week in Review Limbo</h2>
+      <p>Version 1.0 was rejected by App Store review. The reason turned out to be absurdly simple: the <code>name</code> field in <code>app.json</code> didn't exactly match the app name configured in App Store Connect's primary language settings. That's it. A string mismatch.</p>
+      <p>But finding that answer took a full week. App Store review feedback can be vague, and as a first-time submitter, I didn't have the pattern recognition to quickly narrow down the cause. I cycled through dozens of hypotheses — wrong bundle ID? Missing privacy declarations? Screenshot issues? — before landing on the actual problem.</p>
+      <p>The fix took 30 seconds. The debugging took seven days. That week cost more calendar time than the entire development phase before it. The lesson is now permanently burned into my process: <em>every time you submit a build, verify that app.json name matches App Store Connect exactly.</em></p>
+
+      <h2>Other Painful Lessons</h2>
+      <p><strong>react-native-svg dependency hell.</strong> A version conflict between React 19.1 and 19.2 broke the SVG package. The fix required <code>--legacy-peer-deps</code> during local install <em>and</em> adding <code>legacy-peer-deps=true</code> to <code>.npmrc</code> so EAS Build's cloud environment would also cooperate. This kind of issue — works locally, breaks in CI — is uniquely frustrating.</p>
+      <p><strong>Reanimated v4's naming trap.</strong> Version 4 of react-native-reanimated requires a package called <code>react-native-worklets</code>. Version 3 used <code>react-native-worklets-core</code>. Almost the same name, completely different package. Installing the wrong one silently breaks all animations with no useful error message. Hours lost to a hyphen.</p>
+      <p><strong>App Store Connect's hidden UI.</strong> The app name isn't set on the version page — it's under "App Information," a separate section. Adding a new language for localization is buried in a dropdown labeled "Not Yet Localized" on the version page. Every language needs its own screenshots, description, and release notes filled in separately. None of this is obvious to a first-time user.</p>
+
+      <h2>What Shipped</h2>
+      <p>Version 1.0 launched as a Chinese-only app with the full 200-word question bank, AI opponent, scoring, sound effects, and persistent stats. Version 1.1 added complete English localization — UI strings, question bank (meanings, categories, and distractors all translated), and bilingual App Store metadata. The app is live on the App Store and the source code is open on GitHub.</p>
+
+      <h2>Reflections</h2>
+      <p>This project proved something I'd suspected but hadn't tested: a non-iOS developer can go from zero to a live App Store product using AI-assisted development, and the result doesn't have to feel like a prototype. The game is genuinely playable, the animations feel polished, and the publishing is real.</p>
+      <p>The most expensive mistakes weren't technical. They were process mistakes — not understanding App Store conventions, not knowing where settings live in App Store Connect, not anticipating dependency conflicts in cloud build environments. These are the things that no amount of code generation can prevent. You learn them by shipping, failing, and shipping again.</p>
+      <p>The cross-conversation memory file (MEMORY.md) that Claude and I maintained turned out to be critical. Without it, every new conversation would start from scratch — re-explaining the project structure, the tech stack, the decisions already made. With it, Claude could pick up exactly where we left off. For any multi-session AI project, this is the single highest-leverage practice I'd recommend.</p>
+
     </div>
   </div>
 </div>
