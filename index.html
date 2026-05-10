@@ -809,12 +809,12 @@ footer {
           <h3 class="project-title">Memories of Flight</h3>
           <div class="project-subtitle">飛行的回憶</div>
           <p class="project-desc">
-            An AI-powered interactive storytelling experience that transforms personal travel memories into a narrative journey through the skies.
+            A narrative game where mechanics are metaphors — catch memories, dodge pain, and feel a story about loss unfold through your fingertips.
           </p>
           <div class="project-tags">
             <span class="tag">AI</span>
-            <span class="tag">Storytelling</span>
-            <span class="tag">Interactive</span>
+            <span class="tag">Canvas</span>
+            <span class="tag">Narrative</span>
           </div>
           <div class="project-arrow">↗</div>
         </a>
@@ -1079,29 +1079,68 @@ footer {
   <div class="container">
     <a class="article-back" onclick="showHome()">← Back to all projects</a>
     <div class="article-header">
-      <div class="article-category">Project 04 — Storytelling × AI</div>
+      <div class="article-category">Project 04 — Interactive Storytelling × AI</div>
       <h1 class="article-h1">Memories of Flight<br><span style="color:var(--accent-cyan)">飛行的回憶</span></h1>
       <div class="article-meta">
         <span>By Tim</span>
         <span>2025</span>
-        <span>5 min read</span>
+        <span>9 min read</span>
       </div>
     </div>
+    <div class="article-links">
+      <a class="article-link primary" href="https://waitinghir.github.io/flight-of-memories/" target="_blank">▶ Play in Browser</a>
+      <a class="article-link secondary" href="https://github.com/waitinghir/flight-of-memories" target="_blank">⟨/⟩ View on GitHub</a>
+    </div>
     <div class="article-body">
-      <div class="placeholder-note">
-        ✏️ Article draft pending — Tim will provide project details for this write-up.
-        <br>Topics to cover: motivation, features, AI integration, challenges, results.
-      </div>
+
       <h2>Overview</h2>
-      <p>[To be written — brief summary of what the project is and why it was built.]</p>
-      <h2>The Problem</h2>
-      <p>[To be written — what gap or opportunity did this project address?]</p>
-      <h2>Solution & Key Features</h2>
-      <p>[To be written — how AI was used, what the user experience looks like.]</p>
-      <h2>Technical Highlights</h2>
-      <p>[To be written — architecture, tools, and interesting technical decisions.]</p>
-      <h2>Results & Reflections</h2>
-      <p>[To be written — outcomes, lessons learned, what you'd do differently.]</p>
+      <p>Memories of Flight (飛行的回憶) is not a game you play to win. It's a game you play to feel something. Built as a single HTML file using Canvas and vanilla JavaScript, it's a narrative experience about loss, regret, and the slow work of reconciliation — told not through cutscenes, but through the act of dodging and catching words as they fall from the sky.</p>
+      <p>The premise is simple: you control a glowing soul drifting upward through six chapters. White text fragments are memories to catch. Red text fragments are pain to avoid. But the mechanics carry a deeper logic — and the way the screen responds to damage tells you more about the story than any dialogue could.</p>
+
+      <h2>Why I Built This</h2>
+      <p>Traditional storytelling media — novels, films — let you <em>observe</em> emotion. Interactive media can let you <em>inhabit</em> it. I wanted to test a specific hypothesis: that game mechanics themselves can function as metaphor. When your thumb is physically trembling to dodge a red phrase that reads "it's all your fault," you're not just processing information. You're experiencing a micro-simulation of emotional impact.</p>
+      <p>The goal wasn't to make something fun. It was to make something that lingers — that players remember not because of a high score, but because of what they felt in the gap between catching a beautiful memory and being immediately punished for it.</p>
+
+      <h2>Mechanics as Metaphor</h2>
+      <p>The core interaction — catch white words, dodge red words — sounds like any other arcade game. What makes it different is that every design decision maps to an emotional idea.</p>
+      <p><strong>Collision detection is deliberately uneven.</strong> White text (memories) has a generous hit zone. Red text (pain) has a tight one. This isn't a balance problem — it's the point. In life, warmth is hard to hold onto; hurt finds you easily. The asymmetric collision radii encode that feeling directly into the controls.</p>
+      <p><strong>Catching a memory triggers a danger spike.</strong> After you successfully grab a white fragment, the red text spawn rate jumps from 50% to 95%. Every beautiful recollection is immediately followed by a wave of pain. This is the emotional core of the game: remembering something good doesn't bring comfort — it brings everything that came after.</p>
+      <p><strong>Your soul glows brighter when it remembers.</strong> Each white text collected expands the player character's glow radius and quickens its pulse. It's a tiny visual reward — a moment of warmth before the red flood hits.</p>
+
+      <h2>Two Kinds of Pain</h2>
+      <p>The game's two main chapters use identical core mechanics but completely different damage aesthetics. This was a deliberate design decision rooted in a simple insight: not all pain looks the same.</p>
+      <p><strong>Chapter 1 — "One Month Ago":</strong> The palette is blue-purple. When red text hits you, the screen flashes red and shakes violently. The words shatter into individual character fragments that rain down like debris. This is acute trauma — sharp, loud, impossible to ignore.</p>
+      <p><strong>Chapter 2 — "Three Months Ago":</strong> The palette goes darker, colder. When red text hits, the screen doesn't shake — it slowly loses color, fading toward grayscale. Long sentences crack in half mid-flight and plummet at accelerated speed. This is a different kind of pain: the quiet erosion of a relationship. Words that break off before they finish. The feeling of something draining away rather than exploding.</p>
+      <p>The technical implementation behind each is distinct: Chapter 1 uses CSS-style screen flash and particle burst effects; Chapter 2 uses <code>getImageData</code> pixel manipulation to progressively desaturate the entire canvas. Same engine, completely different emotional register.</p>
+
+      <h2>Narrative Structure</h2>
+      <p>The game is organized through a state machine: HOME → STORY → CHAPTER_TITLE → GAMEPLAY → RECAP, cycling through six chapters across two timelines. Between gameplay segments, chapter recaps display three illustrated scenes with typewriter-style text that fades in line by line. At the end of each recap, the scene shatters into particles before transitioning to the next chapter — a visual metaphor for memories fragmenting.</p>
+      <p>The text content — both the white fragments you catch ("that Friday afternoon," "the text message you sent," "a small shoe rolling across the floor") and the red phrases you dodge ("you only ever loved your work," "I regret everything") — was all written to carry narrative weight. They're not random vocabulary. They're pieces of a story the player assembles through play.</p>
+
+      <h2>How AI Was Used</h2>
+      <p>Claude's role in this project went beyond code generation into something closer to creative collaboration. When I described abstract emotional goals — "I want the pain in Chapter 2 to feel <em>muffled</em>, not loud" — Claude translated that into a concrete technical proposal: replace the screen shake with progressive desaturation. When I said "the sentence should feel like it was cut short, like someone who stopped talking mid-thought," Claude implemented a text-splitting mechanic triggered at 20% of screen height, with the broken halves accelerating at 2.5x speed.</p>
+      <p>The codebase still carries traces of our debugging conversations: console logs tagged with emoji (<code>🎯 生成紅字...</code>, <code>💥 碰撞!...</code>, <code>📊 統計...</code>) that we used to trace why certain red texts weren't shattering correctly, or why the sentence-split timing was off in Chapter 2. These aren't cleaned up — they're artifacts of a working process.</p>
+      <p>Claude also handled the deployment pipeline: setting up the GitHub repository, configuring jsdelivr CDN for image assets (<code>https://cdn.jsdelivr.net/gh/{user}/{repo}@main/{path}</code> with <code>crossOrigin = 'anonymous'</code>), and walking through GitHub Pages setup.</p>
+
+      <h2>Key Design Decisions</h2>
+      <p><strong>Canvas over DOM.</strong> Particle systems, real-time pixel manipulation (the grayscale filter), radial glow effects, and screen shake all perform far better on Canvas than with DOM elements. The trade-off is losing built-in accessibility — every UI element had to be drawn manually. For a game that's fundamentally about visual and kinesthetic experience, Canvas was the right medium.</p>
+      <p><strong>Subtraction as a design principle.</strong> Mid-development, the UI had accumulated score displays, timers, hint text, and health indicators. I deliberately removed most of them, keeping only a minimal health bar and a memory score. The reasoning: any element that reminds the player "this is a game" breaks the emotional immersion. In an era where AI can generate infinite content, knowing when to <em>stop adding</em> is the harder skill.</p>
+      <p><strong>Player size reduction.</strong> The player avatar shrank from 50px to 35px during iteration. Smaller meant more precise dodging, which meant each near-miss felt more personal. When you barely escape a red phrase by a few pixels, the relief is visceral in a way a 50px hitbox can't deliver.</p>
+      <p><strong>Split point at 20%, not 50%.</strong> Chapter 2's sentence-breaking mechanic initially triggered at the midpoint of the screen. But at that height, fast-falling text often passed the trigger without being detected. Moving it to 20% gave the split more screen time — players could actually see the sentence crack apart and accelerate — and gave them more (but not enough) reaction time.</p>
+
+      <h2>Technical Challenges</h2>
+      <p><strong>Sentence split timing.</strong> The hardest bug to fix. Text was flying past the split trigger point between frame checks, so sentences that should have broken in half just fell through intact. The solution involved tightening the detection window and adding safety logs to confirm splits were firing. A timing problem disguised as a rendering problem.</p>
+      <p><strong>Cross-origin image loading.</strong> Local image paths broke on GitHub Pages. The fix required hosting images via jsdelivr's GitHub CDN and adding <code>crossOrigin = 'anonymous'</code> to every image load — without it, Canvas <code>getImageData</code> (used for the grayscale effect) throws a security error because the canvas becomes "tainted."</p>
+      <p><strong>Cross-device scaling.</strong> A single scale factor (<code>Math.min(W / 375, H / 667)</code>) applied to all game elements — player size, text size, spawn positions, collision radii — kept the experience consistent across phones and desktops. Both mouse and touch inputs are supported, with <code>touch-action: none</code> preventing accidental zoom on mobile.</p>
+
+      <h2>What Shipped</h2>
+      <p>A complete, playable narrative game in a single 996-line HTML file. Six chapters across two timelines, each with three illustrated recap scenes. A full visual effects system: particle bursts, screen shake, progressive grayscale, radial glow, static noise, tunnel vision. Cross-device support via dynamic scaling and dual input handling. Deployed on GitHub Pages with CDN-hosted assets. A modular architecture where adding new chapters means extending arrays, not rewriting systems.</p>
+
+      <h2>Reflections</h2>
+      <p>This project confirmed something I'd believed but hadn't proven: game mechanics can carry emotional weight without a single line of traditional dialogue. When the screen slowly loses color in Chapter 2, players don't need a narrator to explain what's happening — they feel it. The mechanic <em>is</em> the message.</p>
+      <p>The collaboration model with Claude worked especially well for this kind of project, where the gap between creative intent and technical implementation is wide. I could say "the pain should feel like it's being swallowed, not screamed" and get back a concrete implementation using pixel-level desaturation instead of screen flash. That translation layer — from emotion to code — is where AI collaboration adds the most value in creative work.</p>
+      <p>If I were to build on this, I'd add an ambient soundtrack that shifts with the chapter mood, and explore whether the finale could use the accumulated memories (the white texts the player caught) to generate a personalized ending. The architecture supports it. The emotional logic demands it.</p>
+
     </div>
   </div>
 </div>
