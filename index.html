@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tim's AI Lab — Building the Future with AI</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ====== CSS VARIABLES ====== */
 :root {
@@ -21,7 +21,7 @@
   --text-muted: #55556a;
   --border-subtle: rgba(255,255,255,0.06);
   --border-glow: rgba(0,229,255,0.15);
-  --font-display: 'Outfit', sans-serif;
+  --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --glow-cyan: 0 0 40px rgba(0,229,255,0.15), 0 0 80px rgba(0,229,255,0.05);
   --glow-magenta: 0 0 40px rgba(255,0,110,0.15), 0 0 80px rgba(255,0,110,0.05);
@@ -672,6 +672,26 @@ footer {
   transform: translateX(4px);
 }
 
+/* ====== LANGUAGE TOGGLE ====== */
+[lang="en"] .lang-zh { display: none !important; }
+[lang="zh"] .lang-en { display: none !important; }
+.lang-toggle {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+.lang-toggle:hover {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+
 /* ====== ANIMATIONS ====== */
 @keyframes fadeSlideUp {
   from { opacity: 0; transform: translateY(20px); }
@@ -710,11 +730,12 @@ footer {
   <div class="container">
     <a href="#" class="nav-logo" onclick="showHome()">tim<span>.ai</span></a>
     <div class="nav-links">
-      <a href="#projects" onclick="showHome()">Projects</a>
-      <a href="#about" onclick="showHome()">About</a>
-      <a href="mailto:your@email.com">Contact</a>
+      <a href="#projects" onclick="showHome()"><span class="lang-en">Projects</span><span class="lang-zh">專案</span></a>
+      <a href="#about" onclick="showHome()"><span class="lang-en">About</span><span class="lang-zh">關於我</span></a>
+      <a href="mailto:your@email.com"><span class="lang-en">Contact</span><span class="lang-zh">聯絡</span></a>
+      <button class="lang-toggle" onclick="toggleLang()">中文</button>
     </div>
-    <div class="nav-status">Open to work</div>
+    <div class="nav-status"><span class="lang-en">Open to work</span><span class="lang-zh">求職中</span></div>
   </div>
 </nav>
 
@@ -727,17 +748,16 @@ footer {
       <div class="hero-content">
         <div class="hero-tag">// Product Manager × AI Builder</div>
         <h1 class="hero-title">
-          Building things that<br>
-          <span class="gradient-text">matter with AI</span>
+          <span class="lang-en">Building things that<br><span class="gradient-text">matter with AI</span></span>
+          <span class="lang-zh">用 AI 打造<br><span class="gradient-text">真正有意義的產品</span></span>
         </h1>
         <p class="hero-subtitle">
-          I'm Tim — a product manager based in Tokyo who designs and ships
-          AI-powered experiences. From gamified learning apps to interactive
-          storytelling, I turn ideas into products people actually enjoy using.
+          <span class="lang-en">I'm Tim — a product manager based in Tokyo who designs and ships AI-powered experiences. From gamified learning apps to interactive storytelling, I turn ideas into products people actually enjoy using.</span>
+          <span class="lang-zh">我是 Tim，一位常駐東京的產品經理，專注於設計與交付 AI 驅動的產品體驗。從遊戲化學習 App 到互動敘事，我把想法變成人們真正喜歡使用的產品。</span>
         </p>
         <div class="hero-cta">
-          <a href="#projects" class="btn-primary">View Projects ↓</a>
-          <a href="#about" class="btn-ghost">About Me</a>
+          <a href="#projects" class="btn-primary"><span class="lang-en">View Projects ↓</span><span class="lang-zh">查看專案 ↓</span></a>
+          <a href="#about" class="btn-ghost"><span class="lang-en">About Me</span><span class="lang-zh">關於我</span></a>
         </div>
       </div>
     </div>
@@ -746,11 +766,11 @@ footer {
   <!-- PROJECTS -->
   <section id="projects">
     <div class="container">
-      <div class="section-label">// Featured Work</div>
-      <h2 class="section-title">AI Projects</h2>
+      <div class="section-label">// <span class="lang-en">Featured Work</span><span class="lang-zh">精選作品</span></div>
+      <h2 class="section-title"><span class="lang-en">AI Projects</span><span class="lang-zh">AI 專案</span></h2>
       <p class="section-desc">
-        A collection of AI-powered products I've designed, built, and shipped —
-        each solving a real problem in a creative way.
+        <span class="lang-en">A collection of AI-powered products I've designed, built, and shipped — each solving a real problem in a creative way.</span>
+        <span class="lang-zh">這些是我設計、開發並上線的 AI 產品——每一個都以創新的方式解決真實的問題。</span>
       </p>
 
       <div class="projects-grid">
@@ -761,12 +781,13 @@ footer {
           <h3 class="project-title">Lunar New Year Challenge</h3>
           <div class="project-subtitle">新春大作戰</div>
           <p class="project-desc">
-            An interactive, AI-driven experience designed for the Lunar New Year season — blending cultural celebration with engaging gameplay.
+            <span class="lang-en">An interactive, AI-driven experience designed for the Lunar New Year season — blending cultural celebration with engaging gameplay.</span>
+            <span class="lang-zh">一款以農曆新年為主題的互動遊戲體驗，將傳統文化元素融入遊戲機制中。</span>
           </p>
           <div class="project-tags">
             <span class="tag">AI</span>
-            <span class="tag">Gamification</span>
-            <span class="tag">Seasonal</span>
+            <span class="tag"><span class="lang-en">Gamification</span><span class="lang-zh">遊戲化</span></span>
+            <span class="tag"><span class="lang-en">Seasonal</span><span class="lang-zh">節慶</span></span>
           </div>
           <div class="project-arrow">↗</div>
         </a>
@@ -777,7 +798,8 @@ footer {
           <h3 class="project-title">Japanese Knowledge King</h3>
           <div class="project-subtitle">日文知識王</div>
           <p class="project-desc">
-            A 1v1 quiz game for learning Japanese vocabulary — built with Expo/React Native and shipped to the App Store. Currently on v1.3.0.
+            <span class="lang-en">A 1v1 quiz game for learning Japanese vocabulary — built with Expo/React Native and shipped to the App Store. Currently on v1.3.0.</span>
+            <span class="lang-zh">一款 1v1 日文單字對戰遊戲，使用 Expo/React Native 開發並上架 App Store。目前版本 v1.3.0。</span>
           </p>
           <div class="project-tags">
             <span class="tag">AI</span>
@@ -793,12 +815,13 @@ footer {
           <h3 class="project-title">Gamified Job Search</h3>
           <div class="project-subtitle">求職遊戲化</div>
           <p class="project-desc">
-            Turning the grueling job search process into a structured, game-like experience — tracking progress, earning milestones, and staying motivated.
+            <span class="lang-en">Turning the grueling job search process into a structured, game-like experience — tracking progress, earning milestones, and staying motivated.</span>
+            <span class="lang-zh">把艱辛的求職過程轉化為結構化的遊戲體驗——追蹤進度、達成里程碑、保持動力。</span>
           </p>
           <div class="project-tags">
             <span class="tag">AI</span>
-            <span class="tag">Gamification</span>
-            <span class="tag">Career</span>
+            <span class="tag"><span class="lang-en">Gamification</span><span class="lang-zh">遊戲化</span></span>
+            <span class="tag"><span class="lang-en">Career</span><span class="lang-zh">職涯</span></span>
           </div>
           <div class="project-arrow">↗</div>
         </a>
@@ -809,12 +832,13 @@ footer {
           <h3 class="project-title">Memories of Flight</h3>
           <div class="project-subtitle">飛行的回憶</div>
           <p class="project-desc">
-            A narrative game where mechanics are metaphors — catch memories, dodge pain, and feel a story about loss unfold through your fingertips.
+            <span class="lang-en">A narrative game where mechanics are metaphors — catch memories, dodge pain, and feel a story about loss unfold through your fingertips.</span>
+            <span class="lang-zh">一款以機制作為隱喻的敘事遊戲——接住回憶、閃避傷痛，用指尖感受一段關於失去的故事。</span>
           </p>
           <div class="project-tags">
             <span class="tag">AI</span>
             <span class="tag">Canvas</span>
-            <span class="tag">Narrative</span>
+            <span class="tag"><span class="lang-en">Narrative</span><span class="lang-zh">敘事</span></span>
           </div>
           <div class="project-arrow">↗</div>
         </a>
@@ -826,44 +850,37 @@ footer {
   <!-- ABOUT -->
   <section id="about">
     <div class="container">
-      <div class="section-label">// About</div>
-      <h2 class="section-title">Who I Am</h2>
+      <div class="section-label">// <span class="lang-en">About</span><span class="lang-zh">關於</span></div>
+      <h2 class="section-title"><span class="lang-en">Who I Am</span><span class="lang-zh">關於我</span></h2>
       <div class="about-grid">
         <div class="about-text fade-in">
-          <p>
-            I'm a product manager with a passion for AI and a hands-on approach
-            to building. Based in Tokyo, I bridge the worlds of technology and
-            user experience — turning complex AI capabilities into products that
-            feel intuitive and delightful.
-          </p>
-          <p>
-            My background spans IT product management, and I bring a unique
-            perspective as someone who works across English, Chinese, and Japanese.
-            I believe the best AI products aren't just technically impressive —
-            they solve real human problems in surprisingly elegant ways.
-          </p>
-          <p>
-            Every project in this portfolio was built end-to-end: from concept
-            and design through to a working, shippable product — with AI as
-            a core collaborator in the process.
-          </p>
+          <span class="lang-en">
+          <p>I'm a product manager with a passion for AI and a hands-on approach to building. Based in Tokyo, I bridge the worlds of technology and user experience — turning complex AI capabilities into products that feel intuitive and delightful.</p>
+          <p>My background spans IT product management, and I bring a unique perspective as someone who works across English, Chinese, and Japanese. I believe the best AI products aren't just technically impressive — they solve real human problems in surprisingly elegant ways.</p>
+          <p>Every project in this portfolio was built end-to-end: from concept and design through to a working, shippable product — with AI as a core collaborator in the process.</p>
+          </span>
+          <span class="lang-zh">
+          <p>我是一位熱愛 AI 並親手打造產品的產品經理。目前常駐東京，在技術與使用者體驗之間搭建橋樑——把複雜的 AI 能力轉化為直覺而令人愉悅的產品。</p>
+          <p>我的背景橫跨 IT 產品管理，能以英文、中文、日文三語工作，這讓我擁有獨特的視角。我相信最好的 AI 產品不只是技術上令人印象深刻，而是以出人意料的優雅方式解決真實的人類問題。</p>
+          <p>這個作品集中的每一個專案都是從概念到上線完整走過——而 AI 在這個過程中扮演核心的協作夥伴。</p>
+          </span>
         </div>
         <div class="about-stats fade-in">
           <div class="stat-card">
             <div class="stat-value">4</div>
-            <div class="stat-label">AI Projects Shipped</div>
+            <div class="stat-label"><span class="lang-en">AI Projects Shipped</span><span class="lang-zh">已上線 AI 專案</span></div>
           </div>
           <div class="stat-card">
             <div class="stat-value">3</div>
-            <div class="stat-label">Languages Spoken</div>
+            <div class="stat-label"><span class="lang-en">Languages Spoken</span><span class="lang-zh">使用語言</span></div>
           </div>
           <div class="stat-card">
             <div class="stat-value">JP</div>
-            <div class="stat-label">Based in Tokyo</div>
+            <div class="stat-label"><span class="lang-en">Based in Tokyo</span><span class="lang-zh">常駐東京</span></div>
           </div>
           <div class="stat-card">
             <div class="stat-value">PM</div>
-            <div class="stat-label">Product Manager</div>
+            <div class="stat-label"><span class="lang-en">Product Manager</span><span class="lang-zh">產品經理</span></div>
           </div>
         </div>
       </div>
@@ -875,106 +892,111 @@ footer {
 <!-- ====== ARTICLE PAGES ====== -->
 <div id="article-cny" class="article-page">
   <div class="container">
-    <a class="article-back" onclick="showHome()">← Back to all projects</a>
+    <a class="article-back" onclick="showHome()"><span class="lang-en">← Back to all projects</span><span class="lang-zh">← 回到所有專案</span></a>
     <div class="article-header">
       <div class="article-category">Project 01 — Gamification × AI</div>
-      <h1 class="article-h1">Lunar New Year Challenge<br><span style="color:var(--accent-magenta)">新春大作戰</span></h1>
+      <h1 class="article-h1"><span class="lang-en">Lunar New Year Challenge</span><span class="lang-zh">新春大作戰</span><br><span style="color:var(--accent-magenta)">新春大作戰</span></h1>
       <div class="article-meta">
         <span>By Tim</span>
         <span>2025</span>
-        <span>7 min read</span>
+        <span><span class="lang-en">7 min read</span><span class="lang-zh">閱讀 7 分鐘</span></span>
       </div>
     </div>
     <div class="article-links">
-      <a class="article-link primary" href="https://waitinghir.github.io/Lunar-New-Year-game/" target="_blank">▶ Play the Game</a>
-      <a class="article-link secondary" href="https://github.com/waitinghir/Lunar-New-Year-game" target="_blank">⟨/⟩ View on GitHub</a>
+      <a class="article-link primary" href="https://waitinghir.github.io/Lunar-New-Year-game/" target="_blank"><span class="lang-en">▶ Play the Game</span><span class="lang-zh">▶ 開始遊戲</span></a>
+      <a class="article-link secondary" href="https://github.com/waitinghir/Lunar-New-Year-game" target="_blank">⟨/⟩ GitHub</a>
     </div>
     <div class="article-body">
-
+      <span class="lang-en">
       <h2>Overview</h2>
       <p>Lunar New Year Challenge (新春大作戰) is a three-stage mobile web game that transforms traditional Chinese New Year cultural elements — red envelopes, lottery tickets, and firecrackers — into playable game mechanics. The entire game runs as a single HTML file in any mobile browser, requiring zero installation. The goal was simple: build something fun enough to share with family and friends during the holiday season, while celebrating the cultural traditions that make Lunar New Year special.</p>
-
-      <div style="margin:2rem 0; max-width:360px;">
-        <img class="article-img" src="cny-cover.png" alt="Lunar New Year Challenge — Start Screen showing the horse character and Stage 1 instructions">
-      </div>
-
+      <div style="margin:2rem 0; max-width:360px;"><img class="article-img" src="cny-cover.png" alt="Lunar New Year Challenge — Start Screen"></div>
       <h2>Why I Built This</h2>
       <p>I wanted to explore whether a complete, polished mobile game could be built entirely through human-AI collaboration — with me providing the creative direction and gameplay feedback, and Claude handling all the technical implementation. Lunar New Year felt like the perfect theme: it's culturally rich, visually vibrant, and inherently social. Instead of just another greeting card app, I wanted to create something people would actually <em>play</em>.</p>
-
       <h2>The Three Stages</h2>
       <p>Each stage introduces a completely different gameplay type, keeping players engaged through variety rather than repetition.</p>
-
       <p><strong>Stage 1 — Red Envelope Defense:</strong> Players control a horse character (a nod to the Chinese zodiac) and catch red envelopes falling from the sky while dodging obstacles. It's a classic action format built around an HP system, collision detection, and touch controls — designed to feel snappy and satisfying on a phone screen.</p>
-
       <p><strong>Stage 2 — New Year Lottery:</strong> A memory-based challenge where players must remember and collect the correct number combinations. This one plays on the "scratch card" atmosphere of the holiday season, testing short-term memory instead of reflexes.</p>
-
       <p><strong>Stage 3 — Firecracker Frenzy:</strong> A survival mode where players dodge waves of firecrackers with varying trajectories and blast patterns. The longer you survive, the more intense it gets — multiple explosion types keep the visuals fresh even in extended sessions.</p>
-
       <p>Between stages, animated transition screens and firework particle effects give the game a complete, polished feel — not just three mini-games stitched together, but a cohesive experience from start to finish.</p>
-
-
       <h2>How AI Was Used</h2>
       <p>This project was built entirely through conversation with Claude. The collaboration model worked like this: I described what I wanted a stage to <em>feel</em> like, Claude produced a fully functional implementation, I playtested it on my phone, and then I fed back specific observations — "the red envelopes fall too fast," "the win button is too easy to miss-tap," "the explosions feel repetitive after 30 seconds." Claude would then adjust parameters, restructure UI elements, or add visual variety based on that feedback.</p>
-
       <p>What made this work wasn't just code generation — it was the iterative loop. Claude built the entire Canvas game engine from scratch, including the game loop, state machine, collision system, particle effects, and multi-layer canvas rendering. But the <em>quality</em> of the game came from dozens of test-and-refine cycles where I translated subjective gameplay feel into concrete change requests.</p>
-
       <h2>Key Design Decisions</h2>
-
       <p><strong>Memory games need real memory pressure.</strong> The first version of Stage 2 displayed the target numbers on screen the entire time — which completely defeated the purpose. Removing the persistent hint was an obvious fix in hindsight, but it reinforced an important principle: the core tension of a memory game is "can you remember it?" Anything that undermines that tension undermines the entire mechanic.</p>
-
       <p><strong>Primary actions must look primary.</strong> After clearing a stage, the "Next Stage" and "Retry" buttons were originally the same size and prominence. During playtesting, I kept accidentally hitting "Retry" right after winning — turning a moment of triumph into frustration. The fix was straightforward: make "Next Stage" visually dominant and demote "Retry" to a secondary style. It's a basic UX principle, but one you only truly internalize when you feel the pain yourself.</p>
-
       <p><strong>Difficulty curves can't be designed on paper.</strong> Both Stage 1 and Stage 3 involve objects spawning continuously. Too fast and the player is overwhelmed instantly; too slow and it's boring. Finding the sweet spot — "consistently tense but never hopeless" — required playing the game over and over and nudging spawn rates by small increments. No amount of theoretical planning could have replaced that hands-on tuning.</p>
-
       <p><strong>Visual repetition kills spectacle.</strong> Stage 3's explosions initially used a single animation pattern. It looked impressive for the first few seconds, then became wallpaper. Adding multiple explosion styles and particle variations solved this — the same mechanic felt dramatically more engaging simply because each detonation looked slightly different.</p>
-
       <h2>Tech Stack</h2>
       <p>The game is a single HTML file using HTML5 Canvas for rendering, vanilla JavaScript for game logic and state management, CSS3 animations for UI transitions, the Touch Events API for mobile controls, multi-canvas layering for visual depth (firework effects rendered on separate layers), and a custom particle system for all explosion and celebration effects. No frameworks, no build tools, no dependencies — just one file you can open in a browser and play.</p>
-
       <h2>Reflections</h2>
       <p>The biggest takeaway from this project isn't technical — it's about the collaboration model. Building a game through conversation with an AI inverts the traditional workflow. Instead of writing code and then testing, I was <em>playing</em> and then describing. The hardest part was articulating "game feel" — an inherently fuzzy concept — precisely enough for Claude to translate it into parameter changes. Saying "it feels too hard" isn't useful. Saying "enemies spawn every 0.8 seconds and I can't physically move my thumb fast enough to dodge them all" is.</p>
-
       <p>The cultural elements weren't just a skin. Red envelopes, lottery, and firecrackers each naturally map to a different game genre (action, puzzle, survival), which meant the theme actually <em>drove</em> gameplay variety rather than just decorating it. That was a happy discovery — the best design decisions often come from constraints rather than from open-ended brainstorming.</p>
-
       <p>If I were to do it again, I'd add a scoring system that persists across all three stages and some form of social sharing — a screenshot or short animation players could send to friends. The game was built to be shared, and making that sharing frictionless would have completed the loop.</p>
-
+      </span>
+      <span class="lang-zh">
+      <h2>概覽</h2>
+      <p>新春大作戰是一款三關式手機網頁遊戲，將農曆新年的傳統文化元素——紅包、樂透、爆竹——轉化為可遊玩的遊戲機制。整個遊戲以單一 HTML 檔案運行在任何手機瀏覽器上，零安裝。目標很簡單：做一個有趣到值得在過年期間和親友分享的東西，同時慶祝讓農曆新年特別的文化傳統。</p>
+      <div style="margin:2rem 0; max-width:360px;"><img class="article-img" src="cny-cover.png" alt="新春大作戰——開始畫面"></div>
+      <h2>為什麼做這個</h2>
+      <p>我想驗證一個想法：一款完整、有品質的手機遊戲，能否完全透過人與 AI 的協作來完成——我負責創意方向和遊玩回饋，Claude 負責所有技術實作。農曆新年是完美的主題：文化底蘊豐富、視覺鮮豔、天然適合社交分享。與其做一張電子賀卡，我想做人們真正會<em>玩</em>的東西。</p>
+      <h2>三個關卡</h2>
+      <p>每一關都是完全不同的遊戲類型，透過多樣性保持玩家的投入感。</p>
+      <p><strong>第一關——紅包防衛戰：</strong>玩家操控一匹馬角色（呼應生肖主題），接住從天而降的紅包，同時閃避障礙物。這是經典的動作遊戲模式，建立在血量系統、碰撞偵測和觸控操作之上——設計上追求在手機螢幕上的爽快手感。</p>
+      <p><strong>第二關——新春大樂透：</strong>記憶型挑戰，玩家需要記住並收集正確的數字組合。這一關玩的是年節「刮刮樂」的氛圍，考驗的是短期記憶而非反射神經。</p>
+      <p><strong>第三關——爆竹一聲響：</strong>生存模式，玩家閃避不同軌跡和爆炸範圍的爆竹浪潮。撐越久越激烈——多種爆炸類型讓視覺在長時間遊玩中保持新鮮。</p>
+      <p>在關卡之間，過場動畫搭配煙火粒子特效讓遊戲有完整的質感——不是三個小遊戲硬拼在一起，而是從頭到尾一氣呵成的體驗。</p>
+      <h2>AI 如何參與</h2>
+      <p>這個專案完全透過與 Claude 的對話來完成。協作模式是這樣的：我描述一個關卡要有什麼「感覺」，Claude 產出完整可運行的實作，我在手機上實測，然後回饋具體觀察——「紅包掉太快了」、「過關按鈕太容易按錯」、「爆炸看 30 秒就膩了」。Claude 再根據回饋調整參數、重新排列 UI 元素或增加視覺多樣性。</p>
+      <p>讓這一切運作的不只是程式碼生成——而是迭代循環。Claude 從零建立了整個 Canvas 遊戲引擎，包含遊戲迴圈、狀態機、碰撞系統、粒子特效和多層畫布渲染。但遊戲的<em>品質</em>來自數十次測試與調整的循環，在這些循環中，我把主觀的遊戲手感轉譯為具體的修改需求。</p>
+      <h2>關鍵設計決策</h2>
+      <p><strong>記憶遊戲需要真正的記憶壓力。</strong>第二關的第一版在畫面上全程顯示目標數字——這完全消除了挑戰性。移除持續提示事後看來理所當然，但它強化了一個重要原則：記憶遊戲的核心張力在於「你記不記得住」，任何削弱這個張力的設計都會讓整個機制失去意義。</p>
+      <p><strong>主要動作必須看起來就是主要的。</strong>過關後，「下一關」和「重試」按鈕原本大小和醒目程度相同。實測時我不斷在剛贏的時候誤按「重試」——把勝利的喜悅變成挫折。修正很直接：讓「下一關」在視覺上佔主導，把「重試」降為次要樣式。這是基本的 UX 原則，但只有自己承受過痛苦才會真正內化。</p>
+      <p><strong>難度曲線無法紙上設計。</strong>第一關和第三關都涉及物件持續生成。太快玩家瞬間被淹沒，太慢又覺得無聊。找到那個甜蜜點——「持續緊張但不至於絕望」——需要反覆遊玩，一點一點微調生成速率。再多的理論規劃都無法取代這種手感調校。</p>
+      <p><strong>視覺重複會扼殺華麗感。</strong>第三關的爆炸最初只有一種動畫模式。前幾秒看起來很炫，之後就變成壁紙。加入多種爆炸樣式和粒子變化解決了這個問題——同樣的機制僅僅因為每次爆炸看起來稍有不同，就讓體驗感受截然不同。</p>
+      <h2>技術棧</h2>
+      <p>遊戲是一個單一 HTML 檔案，使用 HTML5 Canvas 做渲染、原生 JavaScript 做遊戲邏輯和狀態管理、CSS3 動畫做 UI 轉場、Touch Events API 做手機觸控操作、多層 Canvas 疊加做視覺層次（煙火特效渲染在獨立圖層上），以及自製的粒子系統處理所有爆炸和慶祝效果。沒有框架、沒有建置工具、沒有相依套件——一個檔案，在瀏覽器打開就能玩。</p>
+      <h2>反思</h2>
+      <p>這個專案最大的收穫不在技術——而在協作模式。透過對話和 AI 一起做遊戲，翻轉了傳統的開發流程。不是先寫程式再測試，而是先<em>玩</em>再描述。最難的部分是把「遊戲手感」——一個本質上模糊的概念——精確到足以讓 Claude 轉化為參數調整。說「感覺太難了」沒有用，說「敵人每 0.8 秒生成一次，我的拇指物理上來不及閃」才有用。</p>
+      <p>文化元素不只是皮膚。紅包、樂透、爆竹各自天然對應不同的遊戲類型（動作、益智、生存），這意味著主題實際上<em>驅動</em>了玩法多樣性，而不只是裝飾。這是個快樂的發現——最好的設計決策往往來自限制，而非天馬行空的腦力激盪。</p>
+      <p>如果重來一次，我會加入跨三關的累積計分系統，以及某種社交分享——讓玩家可以傳一張截圖或短動畫給朋友。這遊戲生來就是要被分享的，讓分享變得零摩擦才能完成整個循環。</p>
+      </span>
     </div>
   </div>
 </div>
 
 <div id="article-jpquiz" class="article-page">
   <div class="container">
-    <a class="article-back" onclick="showHome()">← Back to all projects</a>
+    <a class="article-back" onclick="showHome()"><span class="lang-en">← Back to all projects</span><span class="lang-zh">← 回到所有專案</span></a>
     <div class="article-header">
       <div class="article-category">Project 02 — EdTech × AI</div>
-      <h1 class="article-h1">Japanese Knowledge King<br><span style="color:var(--accent-violet)">日文知識王</span></h1>
+      <h1 class="article-h1"><span class="lang-en">Japanese Knowledge King</span><span class="lang-zh">日文知識王</span><br><span style="color:var(--accent-violet)">日文知識王</span></h1>
       <div class="article-meta">
         <span>By Tim</span>
-        <span>Ongoing project</span>
-        <span>Currently v1.3.0</span>
+        <span><span class="lang-en">Ongoing project</span><span class="lang-zh">持續開發中</span></span>
+        <span><span class="lang-en">Currently v1.3.0</span><span class="lang-zh">目前 v1.3.0</span></span>
       </div>
     </div>
     <div class="article-links">
       <a class="article-link primary" href="https://apps.apple.com/app/id6759833560" target="_blank">📱 App Store</a>
-      <a class="article-link secondary" href="https://github.com/waitinghir/jp-knowledge-king" target="_blank">⟨/⟩ View on GitHub</a>
+      <a class="article-link secondary" href="https://github.com/waitinghir/jp-knowledge-king" target="_blank">⟨/⟩ GitHub</a>
     </div>
     <div class="article-body">
-      <p>Nihongo Quiz King is a 1v1 quiz game for learning Japanese vocabulary, built with Expo/React Native and shipped to the App Store. This is an ongoing project — each article below documents a phase of its evolution.</p>
-
+      <p><span class="lang-en">Nihongo Quiz King is a 1v1 quiz game for learning Japanese vocabulary, built with Expo/React Native and shipped to the App Store. This is an ongoing project — each article below documents a phase of its evolution.</span><span class="lang-zh">日文知識王是一款 1v1 日文單字對戰遊戲，使用 Expo/React Native 開發並上架 App Store。這是一個持續進行的專案——以下每篇文章記錄一個演進階段。</span></p>
       <div class="version-list">
         <a class="version-card" onclick="showArticle('jpquiz-v1')">
           <div class="version-card-left">
             <span class="version-tag">v1.0.0 → v1.1.0</span>
-            <span class="version-title">From Zero to the App Store</span>
-            <span class="version-desc">Core game, App Store submission, bilingual update, and surviving the review process</span>
+            <span class="version-title"><span class="lang-en">From Zero to the App Store</span><span class="lang-zh">從零到上架 App Store</span></span>
+            <span class="version-desc"><span class="lang-en">Core game, App Store submission, bilingual update, and surviving the review process</span><span class="lang-zh">核心遊戲、App Store 送審、雙語更新，以及在審查流程中存活下來</span></span>
           </div>
           <span class="version-arrow">→</span>
         </a>
         <a class="version-card" onclick="showArticle('jpquiz-v2')">
           <div class="version-card-left">
             <span class="version-tag">v1.2.0 → v1.3.0</span>
-            <span class="version-title">Cloud Architecture and N3 Expansion</span>
-            <span class="version-desc">Remote question bank, per-source fallback, N3 vocabulary, and difficulty selection</span>
+            <span class="version-title"><span class="lang-en">Cloud Architecture and N3 Expansion</span><span class="lang-zh">雲端架構與 N3 擴充</span></span>
+            <span class="version-desc"><span class="lang-en">Remote question bank, per-source fallback, N3 vocabulary, and difficulty selection</span><span class="lang-zh">遠端題庫、逐來源 fallback 架構、N3 單字與難度選擇</span></span>
           </div>
           <span class="version-arrow">→</span>
         </a>
@@ -982,7 +1004,7 @@ footer {
           <div class="version-card-left">
             <span class="version-tag">v1.4.0+</span>
             <span class="version-title">Coming Soon</span>
-            <span class="version-desc">What's next for Nihongo Quiz King</span>
+            <span class="version-desc"><span class="lang-en">What's next for Nihongo Quiz King</span><span class="lang-zh">日文知識王的下一步</span></span>
           </div>
           <span class="version-arrow">→</span>
         </a>
@@ -994,60 +1016,83 @@ footer {
 <!-- JPQUIZ v1.0–v1.1 ARTICLE -->
 <div id="article-jpquiz-v1" class="article-page">
   <div class="container">
-    <a class="article-back" onclick="showArticle('jpquiz')">← Back to version list</a>
+    <a class="article-back" onclick="showArticle('jpquiz')"><span class="lang-en">← Back to version list</span><span class="lang-zh">← 回到版本列表</span></a>
     <div class="article-header">
       <div class="article-category">日文知識王 — v1.0.0 → v1.1.0</div>
-      <h1 class="article-h1">From Zero to the App Store</h1>
-      <div class="article-meta">
-        <span>By Tim</span>
-        <span>2025</span>
-        <span>9 min read</span>
-      </div>
+      <h1 class="article-h1"><span class="lang-en">From Zero to the App Store</span><span class="lang-zh">從零到上架 App Store</span></h1>
+      <div class="article-meta"><span>By Tim</span><span>2025</span><span><span class="lang-en">9 min read</span><span class="lang-zh">閱讀 9 分鐘</span></span></div>
     </div>
     <div class="article-body">
-
+      <span class="lang-en">
       <h2>Overview</h2>
       <p>Nihongo Quiz King (日文知識王) is a mobile quiz game where you go head-to-head against an AI opponent, answering Japanese vocabulary questions under time pressure. It started as a personal learning tool — I was studying for the JLPT N4 and wanted something more engaging than flashcards — and ended up becoming my first app published on the App Store. Version 1.0 shipped as a Chinese-only app; version 1.1 added full English localization to reach a wider audience.</p>
-
       <h2>Why I Built This</h2>
       <p>Most Japanese learning apps follow the same pattern: see a word, flip a card, repeat. It works, but it's lonely and low-stakes. I wanted the tension of competition — someone else answering at the same time, a countdown ticking, the pressure of knowing that hesitation costs points. A 1v1 format turns vocabulary review from a chore into a game you actually want to win.</p>
       <p>Beyond the product itself, I had a second goal: learn the entire iOS publishing pipeline from scratch. I'm not an iOS developer by background. I wanted to see whether AI-assisted development could take a non-native mobile developer from an empty folder to a live App Store listing — and how painful that journey would actually be.</p>
-
       <h2>Core Gameplay</h2>
       <p>Each match is a rapid-fire series of questions drawn from a pool of 200 JLPT N4 vocabulary words. You see a Japanese word in kana (hiragana/katakana only — no kanji displayed, which matters for Chinese speakers since kanji would essentially give away the answer), and pick the correct meaning from four options within 10 seconds. An AI opponent answers simultaneously, with its accuracy calibrated to your skill level so matches stay competitive.</p>
       <p>Speed matters: faster correct answers earn more points. After each question, you see a head-to-head comparison — did you both get it right? Who was faster? At the end of the match, a results screen shows the final score with win/loss animations and sound effects. Your stats persist across sessions: level, cumulative score, and win rate are all tracked locally.</p>
-
       <h2>How AI Was Used</h2>
       <p>Claude was involved in virtually every layer of this project. The collaboration went well beyond "generate some code" — it covered the full stack of shipping a product.</p>
       <p><strong>Architecture and code:</strong> Claude set up the Expo project structure with expo-router, built all the core game logic (scoring engine, AI opponent behavior, question selection, AsyncStorage persistence), and implemented every screen — home, matchmaking, battle, and results. The animated ring timer (SVG-based countdown) and option button animations (bounce on correct, shake on wrong) were all Claude's work.</p>
       <p><strong>Content creation:</strong> The entire 200-word N4 question bank was produced through collaboration with Claude — Chinese meanings, English meanings, category tags, and carefully crafted distractor options in both languages. Getting distractors right is harder than it sounds: they need to be plausible enough to challenge the player but not so similar that the question feels unfair.</p>
       <p><strong>Asset generation:</strong> App icons and splash screens were generated via Python Pillow scripts that Claude wrote. Sound effects (six distinct audio cues for correct, wrong, timeout, victory, defeat, and match start) were also generated programmatically through Python scripts.</p>
       <p><strong>Publishing support:</strong> Claude helped navigate the entire App Store Connect workflow — writing app descriptions and keywords in both Chinese and English, generating properly sized screenshots, configuring EAS Build settings, and debugging submission issues.</p>
-
       <h2>Key Technical Decisions</h2>
       <p><strong>Expo + EAS over native Xcode.</strong> As a non-iOS developer, going fully native would have been a massive detour. Expo with EAS Build let me compile in the cloud without touching Xcode for most of the process. The trade-off is less control over native modules, but for a game that runs entirely in React Native views, it was the right call.</p>
       <p><strong>AI opponent instead of real-time multiplayer.</strong> Real PvP would require a backend server, matchmaking logic, and infrastructure costs. An AI opponent that adjusts its accuracy based on the player's level gives the same competitive feeling at zero server cost. It's a solo app that feels like a multiplayer one.</p>
       <p><strong>Kana-only display, no kanji.</strong> This was a game design decision disguised as a UI choice. Japanese kanji and Chinese characters overlap heavily — if the question showed 食べる, any Chinese speaker would immediately know it relates to eating. Showing only たべる forces genuine recall. It's a small detail, but it's the difference between a real quiz and a giveaway.</p>
       <p><strong>Auto-detect language, no manual toggle.</strong> Version 1.1 added English localization using expo-localization. Rather than adding a language picker to the UI, the app simply follows the device language. One fewer setting to think about, one fewer screen to build, and users get the right language automatically.</p>
-
       <h2>The Worst Part: One Week in Review Limbo</h2>
       <p>Version 1.0 was rejected by App Store review. The reason turned out to be absurdly simple: the <code>name</code> field in <code>app.json</code> didn't exactly match the app name configured in App Store Connect's primary language settings. That's it. A string mismatch.</p>
       <p>But finding that answer took a full week. App Store review feedback can be vague, and as a first-time submitter, I didn't have the pattern recognition to quickly narrow down the cause. I cycled through dozens of hypotheses — wrong bundle ID? Missing privacy declarations? Screenshot issues? — before landing on the actual problem.</p>
       <p>The fix took 30 seconds. The debugging took seven days. That week cost more calendar time than the entire development phase before it. The lesson is now permanently burned into my process: <em>every time you submit a build, verify that app.json name matches App Store Connect exactly.</em></p>
-
       <h2>Other Painful Lessons</h2>
       <p><strong>react-native-svg dependency hell.</strong> A version conflict between React 19.1 and 19.2 broke the SVG package. The fix required <code>--legacy-peer-deps</code> during local install <em>and</em> adding <code>legacy-peer-deps=true</code> to <code>.npmrc</code> so EAS Build's cloud environment would also cooperate. This kind of issue — works locally, breaks in CI — is uniquely frustrating.</p>
       <p><strong>Reanimated v4's naming trap.</strong> Version 4 of react-native-reanimated requires a package called <code>react-native-worklets</code>. Version 3 used <code>react-native-worklets-core</code>. Almost the same name, completely different package. Installing the wrong one silently breaks all animations with no useful error message. Hours lost to a hyphen.</p>
       <p><strong>App Store Connect's hidden UI.</strong> The app name isn't set on the version page — it's under "App Information," a separate section. Adding a new language for localization is buried in a dropdown labeled "Not Yet Localized" on the version page. Every language needs its own screenshots, description, and release notes filled in separately. None of this is obvious to a first-time user.</p>
-
       <h2>What Shipped</h2>
       <p>Version 1.0 launched as a Chinese-only app with the full 200-word question bank, AI opponent, scoring, sound effects, and persistent stats. Version 1.1 added complete English localization — UI strings, question bank (meanings, categories, and distractors all translated), and bilingual App Store metadata. The app is live on the App Store and the source code is open on GitHub.</p>
-
       <h2>Reflections</h2>
       <p>This project proved something I'd suspected but hadn't tested: a non-iOS developer can go from zero to a live App Store product using AI-assisted development, and the result doesn't have to feel like a prototype. The game is genuinely playable, the animations feel polished, and the publishing is real.</p>
       <p>The most expensive mistakes weren't technical. They were process mistakes — not understanding App Store conventions, not knowing where settings live in App Store Connect, not anticipating dependency conflicts in cloud build environments. These are the things that no amount of code generation can prevent. You learn them by shipping, failing, and shipping again.</p>
       <p>The cross-conversation memory file (MEMORY.md) that Claude and I maintained turned out to be critical. Without it, every new conversation would start from scratch — re-explaining the project structure, the tech stack, the decisions already made. With it, Claude could pick up exactly where we left off. For any multi-session AI project, this is the single highest-leverage practice I'd recommend.</p>
-
+      </span>
+      <span class="lang-zh">
+      <h2>概覽</h2>
+      <p>日文知識王是一款手機答題遊戲，你和 AI 對手面對面，在時間壓力下回答日文單字題目。最初只是一個個人學習工具——我在準備 JLPT N4，想要比單字卡更有趣的東西——最終成為我第一個上架 App Store 的 App。1.0 版以純中文發布；1.1 版加入完整英文本地化，擴大觸及範圍。</p>
+      <h2>為什麼做這個</h2>
+      <p>大多數日文學習 App 都是同一個套路：看單字、翻卡片、重複。有效，但孤單且沒有壓力。我想要競爭的張力——有人同時在回答、倒數在跳動、知道猶豫會扣分。1v1 的模式把單字複習從苦差事變成你真心想贏的遊戲。</p>
+      <p>除了產品本身，我還有第二個目標：從零學習整個 iOS 上架流程。我不是 iOS 開發者出身。我想看看 AI 輔助開發能否帶一個非原生手機開發者從空資料夾走到上架 App Store——以及這條路到底有多痛苦。</p>
+      <h2>核心玩法</h2>
+      <p>每場對戰是從 200 個 JLPT N4 單字中快速連續出題。畫面顯示假名（平假名/片假名，不顯示漢字——這對中文母語者很重要，因為漢字基本上等於送分），玩家在 10 秒內從四個選項中選出正確意思。AI 對手同時作答，其正確率會根據你的等級調整，讓對戰始終保持競爭性。</p>
+      <p>速度很重要：答對越快得分越高。每題結束後有即時對比——你們都答對了嗎？誰比較快？對戰結束後的結算畫面顯示最終分數，搭配勝敗動畫和音效。你的數據跨場次保留：等級、累計分數和勝率都在本地追蹤。</p>
+      <h2>AI 如何參與</h2>
+      <p>Claude 參與了這個專案幾乎每一層。協作遠遠超過「幫我生成一些程式碼」——涵蓋了出貨一個產品的完整環節。</p>
+      <p><strong>架構與程式碼：</strong>Claude 建立了 Expo 專案結構（expo-router）、所有核心遊戲邏輯（計分引擎、AI 對手行為、題目選擇、AsyncStorage 持久化），以及每個畫面——首頁、配對頁、對戰頁、結算頁。環形計時器動畫（基於 SVG 的倒數）和選項按鈕動畫（答對彈跳、答錯震動）都是 Claude 的作品。</p>
+      <p><strong>內容製作：</strong>完整的 200 字 N4 題庫都是與 Claude 協作產出——中文字義、英文字義、類別標籤，以及精心設計的中英文干擾選項。做好干擾選項比聽起來更難：它們需要夠有說服力來挑戰玩家，但又不能太相似讓題目感覺不公平。</p>
+      <p><strong>素材生成：</strong>App Icon 和 Splash Screen 透過 Claude 撰寫的 Python Pillow 腳本生成。音效（六種不同的音訊提示：答對、答錯、超時、勝利、失敗、開始）也是用 Python 腳本程式生成的。</p>
+      <p><strong>上架支援：</strong>Claude 協助走完整個 App Store Connect 流程——撰寫中英文的 App 描述和關鍵字、生成正確尺寸的截圖、設定 EAS Build，以及排查送審問題。</p>
+      <h2>關鍵技術決策</h2>
+      <p><strong>選 Expo + EAS，不用原生 Xcode。</strong>作為非 iOS 開發者，走全原生會是巨大的繞路。Expo 搭配 EAS Build 讓我可以在雲端編譯，大部分流程不需碰 Xcode。代價是對原生模組的控制力較低，但對一個完全跑在 React Native view 裡的遊戲來說，這是正確的選擇。</p>
+      <p><strong>AI 對手取代即時多人對戰。</strong>真正的 PvP 需要後端伺服器、配對邏輯和基礎建設成本。根據玩家等級調整正確率的 AI 對手，以零伺服器成本給出同樣的競技感。這是一個感覺像多人遊戲的單機 App。</p>
+      <p><strong>只顯示假名，不顯示漢字。</strong>這是一個偽裝成 UI 選擇的遊戲設計決策。日文漢字和中文字高度重疊——如果題目顯示「食べる」，任何中文母語者立刻知道和吃有關。只顯示「たべる」才能強制真正的記憶提取。細節很小，但它是真正考試和直接送分之間的差別。</p>
+      <p><strong>自動偵測語言，不做手動切換。</strong>1.1 版用 expo-localization 加入英文本地化。沒有在 UI 加語言選擇器，App 直接跟裝置語言走。少一個設定要想、少一個畫面要做，用戶自動得到正確的語言。</p>
+      <h2>最痛的部分：退審一週</h2>
+      <p>1.0 版被 App Store 審查退回。原因極其簡單：<code>app.json</code> 的 <code>name</code> 欄位和 App Store Connect 主要語言設定中的 App 名稱不完全一致。就這樣，一個字串不匹配。</p>
+      <p>但找到這個答案花了整整一週。App Store 審查回饋有時很模糊，作為第一次送審的人，我沒有足夠的經驗來快速縮小原因範圍。我循環測試了幾十個假設——Bundle ID 錯了？隱私聲明漏了？截圖有問題？——最後才找到真正的問題。</p>
+      <p>修復花了 30 秒。除錯花了七天。那一週花的日曆時間比之前整個開發階段都長。這個教訓現在已經永久刻在我的流程裡：<em>每次送審前，確認 app.json name 和 App Store Connect 完全一致。</em></p>
+      <h2>其他痛苦的教訓</h2>
+      <p><strong>react-native-svg 依賴地獄。</strong>React 19.1 和 19.2 的版本衝突搞壞了 SVG 套件。修復需要在本機安裝時用 <code>--legacy-peer-deps</code>，<em>而且</em>在 <code>.npmrc</code> 加 <code>legacy-peer-deps=true</code> 讓 EAS Build 的雲端環境也能配合。這種「本機正常、CI 爆炸」的問題格外令人抓狂。</p>
+      <p><strong>Reanimated v4 的命名陷阱。</strong>react-native-reanimated v4 需要一個叫 <code>react-native-worklets</code> 的套件。v3 用的是 <code>react-native-worklets-core</code>。名字幾乎一樣，完全不同的套件。裝錯的話所有動畫靜默失效，沒有有用的錯誤訊息。為了一個連字號浪費好幾個小時。</p>
+      <p><strong>App Store Connect 隱藏的 UI。</strong>App 名稱不在版本頁設定——在「App 資訊」，一個獨立的區塊。新增本地化語言藏在版本頁一個寫著「尚未本地化」的下拉選單裡。每個語言都需要各自填寫截圖、描述和更新說明。對第一次使用的人來說完全不直覺。</p>
+      <h2>交付成果</h2>
+      <p>1.0 版以純中文 App 上架，包含完整 200 字題庫、AI 對手、計分、音效和持久化數據。1.1 版加入完整英文本地化——UI 文字、題庫（字義、類別、干擾選項全部翻譯）和雙語 App Store 元資料。App 已在 App Store 上線，原始碼在 GitHub 公開。</p>
+      <h2>反思</h2>
+      <p>這個專案證明了我一直懷疑但未曾驗證的事：一個非 iOS 開發者可以透過 AI 輔助開發從零走到上架 App Store，而且成品不必感覺像是原型。遊戲真正可玩、動畫感覺精緻、上架是真的。</p>
+      <p>最貴的錯誤不是技術問題。是流程問題——不了解 App Store 慣例、不知道設定藏在 App Store Connect 的哪裡、沒預料到雲端建置環境的依賴衝突。這些是再多程式碼生成都無法預防的。你只能靠出貨、失敗、再出貨來學。</p>
+      <p>我和 Claude 共同維護的跨對話記憶檔（MEMORY.md）被證明至關重要。沒有它，每次新對話都得從頭解釋——專案結構、技術棧、已經做過的決策。有了它，Claude 可以準確地從上次的地方接手。對任何多次對話的 AI 專案來說，這是我最推薦的單一高槓桿做法。</p>
+      </span>
     </div>
   </div>
 </div>
@@ -1055,151 +1100,170 @@ footer {
 <!-- JPQUIZ v1.2–v1.3 ARTICLE -->
 <div id="article-jpquiz-v2" class="article-page">
   <div class="container">
-    <a class="article-back" onclick="showArticle('jpquiz')">← Back to version list</a>
+    <a class="article-back" onclick="showArticle('jpquiz')"><span class="lang-en">← Back to version list</span><span class="lang-zh">← 回到版本列表</span></a>
     <div class="article-header">
       <div class="article-category">日文知識王 — v1.2.0 → v1.3.0</div>
-      <h1 class="article-h1">Cloud Architecture and N3 Expansion</h1>
-      <div class="article-meta">
-        <span>By Tim</span>
-        <span>2025</span>
-        <span>5 min read</span>
-      </div>
+      <h1 class="article-h1"><span class="lang-en">Cloud Architecture and N3 Expansion</span><span class="lang-zh">雲端架構與 N3 擴充</span></h1>
+      <div class="article-meta"><span>By Tim</span><span>2025</span><span><span class="lang-en">5 min read</span><span class="lang-zh">閱讀 5 分鐘</span></span></div>
     </div>
     <div class="article-body">
-
+      <span class="lang-en">
       <h2>Overview</h2>
       <p>With the core game live on the App Store and bilingual support in place, the next challenge was infrastructure. Version 1.2 decoupled the question bank from the app binary, making it updatable without resubmission. Version 1.3 expanded content to JLPT N3 vocabulary and introduced difficulty selection — but doing so exposed a flaw in the original cloud architecture that required a meaningful rethink.</p>
-
       <h2>v1.2.0 — Cloud Question Bank</h2>
       <p>The original app bundled all 200 N4 words directly in the binary. Adding or fixing questions meant rebuilding the app and going through App Store review again — a process that, as documented in the v1.0 article, could take a week for reasons entirely outside your control. The solution was straightforward: host the question bank as a JSON file on GitHub and fetch it at runtime.</p>
       <p>But "just fetch from a URL" isn't enough for a mobile app. Network requests fail — planes, subways, spotty connections, GitHub outages. The app needs to work regardless. So v1.2 introduced a three-layer fallback system: try the GitHub-hosted JSON first; if that fails, use the last successfully fetched version cached in AsyncStorage; if there's no cache (first launch, cleared data), fall back to the JSON bundled inside the app. The user always has questions to play with. They just might not be the newest ones.</p>
       <p>This took about half a day to implement. The architecture was simple, the behavior was predictable, and it shipped cleanly. What I didn't anticipate was how it would break when the question bank stopped being a single file.</p>
-
       <h2>v1.3.0 — N3 Vocabulary and Difficulty Selection</h2>
       <p>The next step was adding JLPT N3 content — 40 new words at a harder difficulty level — and letting players choose what they want to practice. The UI addition was simple: a difficulty selector before each match offering N4, N3, or a combined pool.</p>
       <p>The content work followed the same pattern as v1.0: Claude generated the question entries (Japanese words, meanings in Chinese and English, category tags, and four plausible distractors per language), and I reviewed them for accuracy and pedagogical quality. N3 vocabulary is trickier than N4 — the words are more abstract, the distractors need to be more carefully calibrated, and there are more near-synonyms that could create genuinely ambiguous questions.</p>
-
       <h2>The Fallback Architecture Problem</h2>
       <p>Here's where things got interesting. The v1.2 fallback system treated the question bank as a single monolithic file. When I added N3 as a separate JSON file (<code>n3-words.json</code> alongside <code>n4-words.json</code>), the original logic broke in a subtle way: if the GitHub fetch for <em>either</em> file failed, the entire cloud fetch was considered failed, and the app fell back to the local bundle — which only contained N4 words. Result: N3 mode would show zero questions, with no error message.</p>
       <p>The fix was to refactor from a monolithic fallback to a <strong>per-source fallback</strong> architecture. Each question file now has its own independent fetch-cache-local pipeline:</p>
-      <p style="font-family:var(--font-mono); font-size:0.85rem; color:var(--text-secondary); background:var(--bg-card); padding:1.2rem 1.5rem; border:1px solid var(--border-subtle); margin:1.5rem 0; line-height:1.8;">
-        n4-words.json: GitHub → AsyncStorage cache → local bundled file<br>
-        n3-words.json: GitHub → AsyncStorage cache → local bundled file<br>
-        ↓<br>
-        Merge results based on selected difficulty → serve to game
-      </p>
+      <p style="font-family:var(--font-mono); font-size:0.85rem; color:var(--text-secondary); background:var(--bg-card); padding:1.2rem 1.5rem; border:1px solid var(--border-subtle); margin:1.5rem 0; line-height:1.8;">n4-words.json: GitHub → AsyncStorage cache → local bundled file<br>n3-words.json: GitHub → AsyncStorage cache → local bundled file<br>↓<br>Merge results based on selected difficulty → serve to game</p>
       <p>This means a new question file can be pushed to GitHub and immediately available, while a file that hasn't been uploaded yet (or fails to fetch) gracefully falls back to its local version. Each source is independent — one failing doesn't contaminate the other.</p>
       <p>It's a small architectural change, but it's the kind of thing that only surfaces when you move from one data source to two. The lesson: fallback logic that works for a single resource often has implicit assumptions about atomicity that break the moment you have multiple resources.</p>
-
       <h2>What Shipped</h2>
       <p>Version 1.3.0 added 40 N3 vocabulary words (bringing the total to 240), a pre-match difficulty selector (N4 / N3 / All), and the per-source fallback architecture. The app is live on the App Store with bilingual support, full sound effects, persistent player stats, and a question bank that can be updated without resubmission.</p>
-
       <h2>Reflections</h2>
       <p>These two versions were smaller in scope than the v1.0→v1.1 journey, but they represent a shift in what the project is about. The first phase was "can I ship an app?" This phase was "can I maintain and grow one?" Different problems: backward compatibility, data architecture, content pipelines, update-without-resubmission strategies.</p>
       <p>The per-source fallback refactor is a good example of a pattern I keep seeing in AI-assisted development: the first implementation is fast and clean because the problem is simple. The second iteration reveals assumptions baked into the first design. The value of having Claude as a collaborator isn't just speed — it's being able to refactor quickly when those assumptions surface, rather than living with a brittle design because rewriting feels expensive.</p>
       <p>Next up: expanding the N3 bank, potentially adding N5 for beginners, and exploring whether the AI opponent's behavior can be made more nuanced — right now it adjusts accuracy by level, but it could adapt to the player's weak categories specifically.</p>
-
+      </span>
+      <span class="lang-zh">
+      <h2>概覽</h2>
+      <p>核心遊戲已在 App Store 上線、雙語支援也就位後，下一個挑戰是基礎架構。1.2 版把題庫從 App 本體中解耦，讓它可以在不重新送審的情況下更新。1.3 版擴充了 JLPT N3 單字並加入難度選擇——但這麼做暴露了原本雲端架構的一個缺陷，需要真正的重新思考。</p>
+      <h2>v1.2.0 — 雲端題庫</h2>
+      <p>原本的 App 把 200 個 N4 單字直接打包在二進位檔裡。新增或修正題目意味著重新建置 App 並再走一次 App Store 審查——如 v1.0 文章所記錄的，這個過程可能因為完全不受你控制的原因花上一週。解法很直接：把題庫以 JSON 檔案託管在 GitHub，在執行時拉取。</p>
+      <p>但「從 URL 拉取」對手機 App 來說不夠。網路請求會失敗——飛機上、地鐵裡、訊號不穩、GitHub 故障。App 無論如何都要能運作。所以 1.2 版引入了三層 fallback 系統：先試 GitHub 上的 JSON；失敗就用上次成功拉取的 AsyncStorage 快取；沒有快取（首次啟動、資料被清除）就 fallback 到 App 內建的 JSON。使用者永遠有題目可玩，只是可能不是最新的。</p>
+      <p>實作花了約半天。架構簡單、行為可預測、乾淨地上線了。我沒預料到的是，當題庫不再是單一檔案時，它會怎麼壞掉。</p>
+      <h2>v1.3.0 — N3 單字與難度選擇</h2>
+      <p>下一步是加入 JLPT N3 內容——40 個更難的新單字——並讓玩家選擇要練什麼。UI 新增很簡單：對戰前的難度選擇器，提供 N4、N3 或全部混合。</p>
+      <p>內容製作延續 v1.0 的模式：Claude 生成題目條目（日文單字、中英文字義、類別標籤、每種語言四個合理的干擾選項），我審查正確性和教學品質。N3 單字比 N4 棘手——詞彙更抽象、干擾選項需要更仔細校準、有更多近義詞可能造成真正有歧義的題目。</p>
+      <h2>Fallback 架構的問題</h2>
+      <p>有趣的部分來了。v1.2 的 fallback 系統把題庫當成單一整體檔案處理。當我把 N3 加為獨立的 JSON 檔案（<code>n3-words.json</code> 和 <code>n4-words.json</code> 並列），原本的邏輯以微妙的方式壞掉了：如果 GitHub 拉取<em>任一</em>檔案失敗，整個雲端拉取就被視為失敗，App fallback 到本地打包——而本地只有 N4 單字。結果：N3 模式顯示零題，沒有錯誤訊息。</p>
+      <p>修復是從整體式 fallback 重構為<strong>逐來源 fallback</strong> 架構。每個題庫檔案現在有自己獨立的拉取-快取-本地管線：</p>
+      <p style="font-family:var(--font-mono); font-size:0.85rem; color:var(--text-secondary); background:var(--bg-card); padding:1.2rem 1.5rem; border:1px solid var(--border-subtle); margin:1.5rem 0; line-height:1.8;">n4-words.json: GitHub → AsyncStorage 快取 → 本地內建檔<br>n3-words.json: GitHub → AsyncStorage 快取 → 本地內建檔<br>↓<br>根據選擇的難度合併結果 → 提供給遊戲</p>
+      <p>這代表新的題庫檔案推上 GitHub 後立即可用，而尚未上傳（或拉取失敗）的檔案優雅地 fallback 到本地版本。每個來源獨立運作——一個失敗不會污染另一個。</p>
+      <p>這是一個小的架構改動，但它是那種只有從一個資料源變成兩個時才會浮現的問題。教訓：對單一資源有效的 fallback 邏輯，往往內含關於原子性的隱含假設，在你有多個資源的瞬間就會崩壞。</p>
+      <h2>交付成果</h2>
+      <p>1.3.0 版新增了 40 個 N3 單字（總數達 240）、對戰前難度選擇器（N4 / N3 / 全部），以及逐來源 fallback 架構。App 在 App Store 上線中，具備雙語支援、完整音效、持久化玩家數據，以及無需送審即可更新的題庫。</p>
+      <h2>反思</h2>
+      <p>這兩個版本的規模比 v1.0→v1.1 的旅程小，但它們代表了專案本質的轉變。第一階段是「我能不能出貨一個 App？」這個階段是「我能不能維護和發展一個？」不同的問題：向後相容、資料架構、內容管線、免送審更新策略。</p>
+      <p>逐來源 fallback 的重構是一個我在 AI 輔助開發中反覆看到的模式的好例子：第一版實作又快又乾淨，因為問題很簡單。第二次迭代揭露了第一版設計中烘焙進去的假設。有 Claude 作為協作者的價值不只是速度——而是當這些假設浮現時能快速重構，而不是因為重寫感覺太貴就忍受脆弱的設計。</p>
+      <p>接下來：擴充 N3 題庫、可能加入 N5 給初學者，以及探索 AI 對手的行為能否做得更細膩——目前是按等級調整正確率，但可以針對玩家的弱項類別做特定適應。</p>
+      </span>
     </div>
   </div>
 </div>
 
 <div id="article-jobgame" class="article-page">
   <div class="container">
-    <a class="article-back" onclick="showHome()">← Back to all projects</a>
+    <a class="article-back" onclick="showHome()"><span class="lang-en">← Back to all projects</span><span class="lang-zh">← 回到所有專案</span></a>
     <div class="article-header">
       <div class="article-category">Project 03 — Career × Gamification</div>
-      <h1 class="article-h1">Gamified Job Search<br><span style="color:var(--accent-emerald)">求職遊戲化</span></h1>
-      <div class="article-meta">
-        <span>By Tim</span>
-        <span>2025</span>
-        <span>5 min read</span>
-      </div>
+      <h1 class="article-h1"><span class="lang-en">Gamified Job Search</span><span class="lang-zh">求職遊戲化</span><br><span style="color:var(--accent-emerald)">求職遊戲化</span></h1>
+      <div class="article-meta"><span>By Tim</span><span>2025</span><span><span class="lang-en">Coming soon</span><span class="lang-zh">即將發布</span></span></div>
     </div>
     <div class="article-body">
-      <div class="placeholder-note">
-        ✏️ Article draft pending — Tim will provide project details for this write-up.
-        <br>Topics to cover: motivation, features, AI integration, challenges, results.
-      </div>
-      <h2>Overview</h2>
-      <p>[To be written — brief summary of what the project is and why it was built.]</p>
-      <h2>The Problem</h2>
-      <p>[To be written — what gap or opportunity did this project address?]</p>
-      <h2>Solution & Key Features</h2>
-      <p>[To be written — how AI was used, what the user experience looks like.]</p>
-      <h2>Technical Highlights</h2>
-      <p>[To be written — architecture, tools, and interesting technical decisions.]</p>
-      <h2>Results & Reflections</h2>
-      <p>[To be written — outcomes, lessons learned, what you'd do differently.]</p>
+      <div class="placeholder-note"><span class="lang-en">✏️ Article in progress — check back soon.</span><span class="lang-zh">✏️ 文章撰寫中——請稍後再來。</span></div>
     </div>
   </div>
 </div>
 
 <div id="article-flight" class="article-page">
   <div class="container">
-    <a class="article-back" onclick="showHome()">← Back to all projects</a>
+    <a class="article-back" onclick="showHome()"><span class="lang-en">← Back to all projects</span><span class="lang-zh">← 回到所有專案</span></a>
     <div class="article-header">
       <div class="article-category">Project 04 — Interactive Storytelling × AI</div>
-      <h1 class="article-h1">Memories of Flight<br><span style="color:var(--accent-cyan)">飛行的回憶</span></h1>
-      <div class="article-meta">
-        <span>By Tim</span>
-        <span>2025</span>
-        <span>9 min read</span>
-      </div>
+      <h1 class="article-h1"><span class="lang-en">Memories of Flight</span><span class="lang-zh">飛行的回憶</span><br><span style="color:var(--accent-cyan)">飛行的回憶</span></h1>
+      <div class="article-meta"><span>By Tim</span><span>2025</span><span><span class="lang-en">9 min read</span><span class="lang-zh">閱讀 9 分鐘</span></span></div>
     </div>
     <div class="article-links">
-      <a class="article-link primary" href="https://waitinghir.github.io/flight-of-memories/" target="_blank">▶ Play in Browser</a>
-      <a class="article-link secondary" href="https://github.com/waitinghir/flight-of-memories" target="_blank">⟨/⟩ View on GitHub</a>
+      <a class="article-link primary" href="https://waitinghir.github.io/flight-of-memories/" target="_blank"><span class="lang-en">▶ Play in Browser</span><span class="lang-zh">▶ 在瀏覽器遊玩</span></a>
+      <a class="article-link secondary" href="https://github.com/waitinghir/flight-of-memories" target="_blank">⟨/⟩ GitHub</a>
     </div>
     <div class="article-body">
-
+      <span class="lang-en">
       <h2>Overview</h2>
       <p>Memories of Flight (飛行的回憶) is not a game you play to win. It's a game you play to feel something. Built as a single HTML file using Canvas and vanilla JavaScript, it's a narrative experience about loss, regret, and the slow work of reconciliation — told not through cutscenes, but through the act of dodging and catching words as they fall from the sky.</p>
       <p>The premise is simple: you control a glowing soul drifting upward through six chapters. White text fragments are memories to catch. Red text fragments are pain to avoid. But the mechanics carry a deeper logic — and the way the screen responds to damage tells you more about the story than any dialogue could.</p>
-
       <h2>Why I Built This</h2>
       <p>Traditional storytelling media — novels, films — let you <em>observe</em> emotion. Interactive media can let you <em>inhabit</em> it. I wanted to test a specific hypothesis: that game mechanics themselves can function as metaphor. When your thumb is physically trembling to dodge a red phrase that reads "it's all your fault," you're not just processing information. You're experiencing a micro-simulation of emotional impact.</p>
       <p>The goal wasn't to make something fun. It was to make something that lingers — that players remember not because of a high score, but because of what they felt in the gap between catching a beautiful memory and being immediately punished for it.</p>
-
       <h2>Mechanics as Metaphor</h2>
       <p>The core interaction — catch white words, dodge red words — sounds like any other arcade game. What makes it different is that every design decision maps to an emotional idea.</p>
       <p><strong>Collision detection is deliberately uneven.</strong> White text (memories) has a generous hit zone. Red text (pain) has a tight one. This isn't a balance problem — it's the point. In life, warmth is hard to hold onto; hurt finds you easily. The asymmetric collision radii encode that feeling directly into the controls.</p>
       <p><strong>Catching a memory triggers a danger spike.</strong> After you successfully grab a white fragment, the red text spawn rate jumps from 50% to 95%. Every beautiful recollection is immediately followed by a wave of pain. This is the emotional core of the game: remembering something good doesn't bring comfort — it brings everything that came after.</p>
       <p><strong>Your soul glows brighter when it remembers.</strong> Each white text collected expands the player character's glow radius and quickens its pulse. It's a tiny visual reward — a moment of warmth before the red flood hits.</p>
-
       <h2>Two Kinds of Pain</h2>
       <p>The game's two main chapters use identical core mechanics but completely different damage aesthetics. This was a deliberate design decision rooted in a simple insight: not all pain looks the same.</p>
       <p><strong>Chapter 1 — "One Month Ago":</strong> The palette is blue-purple. When red text hits you, the screen flashes red and shakes violently. The words shatter into individual character fragments that rain down like debris. This is acute trauma — sharp, loud, impossible to ignore.</p>
       <p><strong>Chapter 2 — "Three Months Ago":</strong> The palette goes darker, colder. When red text hits, the screen doesn't shake — it slowly loses color, fading toward grayscale. Long sentences crack in half mid-flight and plummet at accelerated speed. This is a different kind of pain: the quiet erosion of a relationship. Words that break off before they finish. The feeling of something draining away rather than exploding.</p>
       <p>The technical implementation behind each is distinct: Chapter 1 uses CSS-style screen flash and particle burst effects; Chapter 2 uses <code>getImageData</code> pixel manipulation to progressively desaturate the entire canvas. Same engine, completely different emotional register.</p>
-
       <h2>Narrative Structure</h2>
       <p>The game is organized through a state machine: HOME → STORY → CHAPTER_TITLE → GAMEPLAY → RECAP, cycling through six chapters across two timelines. Between gameplay segments, chapter recaps display three illustrated scenes with typewriter-style text that fades in line by line. At the end of each recap, the scene shatters into particles before transitioning to the next chapter — a visual metaphor for memories fragmenting.</p>
       <p>The text content — both the white fragments you catch ("that Friday afternoon," "the text message you sent," "a small shoe rolling across the floor") and the red phrases you dodge ("you only ever loved your work," "I regret everything") — was all written to carry narrative weight. They're not random vocabulary. They're pieces of a story the player assembles through play.</p>
-
       <h2>How AI Was Used</h2>
       <p>Claude's role in this project went beyond code generation into something closer to creative collaboration. When I described abstract emotional goals — "I want the pain in Chapter 2 to feel <em>muffled</em>, not loud" — Claude translated that into a concrete technical proposal: replace the screen shake with progressive desaturation. When I said "the sentence should feel like it was cut short, like someone who stopped talking mid-thought," Claude implemented a text-splitting mechanic triggered at 20% of screen height, with the broken halves accelerating at 2.5x speed.</p>
       <p>The codebase still carries traces of our debugging conversations: console logs tagged with emoji (<code>🎯 生成紅字...</code>, <code>💥 碰撞!...</code>, <code>📊 統計...</code>) that we used to trace why certain red texts weren't shattering correctly, or why the sentence-split timing was off in Chapter 2. These aren't cleaned up — they're artifacts of a working process.</p>
       <p>Claude also handled the deployment pipeline: setting up the GitHub repository, configuring jsdelivr CDN for image assets (<code>https://cdn.jsdelivr.net/gh/{user}/{repo}@main/{path}</code> with <code>crossOrigin = 'anonymous'</code>), and walking through GitHub Pages setup.</p>
-
       <h2>Key Design Decisions</h2>
       <p><strong>Canvas over DOM.</strong> Particle systems, real-time pixel manipulation (the grayscale filter), radial glow effects, and screen shake all perform far better on Canvas than with DOM elements. The trade-off is losing built-in accessibility — every UI element had to be drawn manually. For a game that's fundamentally about visual and kinesthetic experience, Canvas was the right medium.</p>
       <p><strong>Subtraction as a design principle.</strong> Mid-development, the UI had accumulated score displays, timers, hint text, and health indicators. I deliberately removed most of them, keeping only a minimal health bar and a memory score. The reasoning: any element that reminds the player "this is a game" breaks the emotional immersion. In an era where AI can generate infinite content, knowing when to <em>stop adding</em> is the harder skill.</p>
       <p><strong>Player size reduction.</strong> The player avatar shrank from 50px to 35px during iteration. Smaller meant more precise dodging, which meant each near-miss felt more personal. When you barely escape a red phrase by a few pixels, the relief is visceral in a way a 50px hitbox can't deliver.</p>
       <p><strong>Split point at 20%, not 50%.</strong> Chapter 2's sentence-breaking mechanic initially triggered at the midpoint of the screen. But at that height, fast-falling text often passed the trigger without being detected. Moving it to 20% gave the split more screen time — players could actually see the sentence crack apart and accelerate — and gave them more (but not enough) reaction time.</p>
-
       <h2>Technical Challenges</h2>
       <p><strong>Sentence split timing.</strong> The hardest bug to fix. Text was flying past the split trigger point between frame checks, so sentences that should have broken in half just fell through intact. The solution involved tightening the detection window and adding safety logs to confirm splits were firing. A timing problem disguised as a rendering problem.</p>
       <p><strong>Cross-origin image loading.</strong> Local image paths broke on GitHub Pages. The fix required hosting images via jsdelivr's GitHub CDN and adding <code>crossOrigin = 'anonymous'</code> to every image load — without it, Canvas <code>getImageData</code> (used for the grayscale effect) throws a security error because the canvas becomes "tainted."</p>
       <p><strong>Cross-device scaling.</strong> A single scale factor (<code>Math.min(W / 375, H / 667)</code>) applied to all game elements — player size, text size, spawn positions, collision radii — kept the experience consistent across phones and desktops. Both mouse and touch inputs are supported, with <code>touch-action: none</code> preventing accidental zoom on mobile.</p>
-
       <h2>What Shipped</h2>
       <p>A complete, playable narrative game in a single 996-line HTML file. Six chapters across two timelines, each with three illustrated recap scenes. A full visual effects system: particle bursts, screen shake, progressive grayscale, radial glow, static noise, tunnel vision. Cross-device support via dynamic scaling and dual input handling. Deployed on GitHub Pages with CDN-hosted assets. A modular architecture where adding new chapters means extending arrays, not rewriting systems.</p>
-
       <h2>Reflections</h2>
       <p>This project confirmed something I'd believed but hadn't proven: game mechanics can carry emotional weight without a single line of traditional dialogue. When the screen slowly loses color in Chapter 2, players don't need a narrator to explain what's happening — they feel it. The mechanic <em>is</em> the message.</p>
       <p>The collaboration model with Claude worked especially well for this kind of project, where the gap between creative intent and technical implementation is wide. I could say "the pain should feel like it's being swallowed, not screamed" and get back a concrete implementation using pixel-level desaturation instead of screen flash. That translation layer — from emotion to code — is where AI collaboration adds the most value in creative work.</p>
       <p>If I were to build on this, I'd add an ambient soundtrack that shifts with the chapter mood, and explore whether the finale could use the accumulated memories (the white texts the player caught) to generate a personalized ending. The architecture supports it. The emotional logic demands it.</p>
-
+      </span>
+      <span class="lang-zh">
+      <h2>概覽</h2>
+      <p>飛行的回憶不是一款讓你玩來贏的遊戲。它是一款讓你玩來感受的遊戲。以單一 HTML 檔案、Canvas 和原生 JavaScript 打造，它是一段關於失去、悔恨與和解的敘事體驗——不是透過過場動畫來訴說，而是透過閃避和接住從天而降的文字這個動作本身。</p>
+      <p>前提很簡單：你操控一個發光的靈魂，緩緩穿越六個章節。白色文字碎片是要接住的回憶。紅色文字碎片是要閃避的傷痛。但機制承載著更深的邏輯——畫面對傷害的反應方式，比任何對白都更能說明這個故事。</p>
+      <h2>為什麼做這個</h2>
+      <p>傳統敘事媒介——小說、電影——讓你<em>觀察</em>情緒。互動媒介可以讓你<em>住進</em>情緒裡。我想驗證一個具體的假設：遊戲機制本身可以作為隱喻。當你的拇指物理上在顫抖著閃避一段寫著「都是你的錯」的紅色文字時，你不只是在處理資訊，你在經歷一次微型的情緒衝擊模擬。</p>
+      <p>目標不是做一個好玩的東西，而是做一個會留下來的東西——玩家記住它不是因為高分，而是因為在接住一段美好回憶後立刻被懲罰的那個間隙裡，他們感受到的。</p>
+      <h2>機制即隱喻</h2>
+      <p>核心互動——接住白字、閃避紅字——聽起來和任何街機遊戲一樣。讓它不同的是，每個設計決策都對應一個情緒概念。</p>
+      <p><strong>碰撞判定刻意不對稱。</strong>白色文字（回憶）有寬鬆的判定範圍。紅色文字（傷痛）有嚴格的判定範圍。這不是平衡問題——這就是重點。在人生中，溫暖難以抓住；傷害輕易找上你。不對稱的碰撞半徑把這種感受直接編碼進操控裡。</p>
+      <p><strong>接住回憶會觸發危險激增。</strong>成功抓到白色碎片後，紅字的生成率從 50% 飆升到 95%。每一段美好的回憶都立刻接著一波痛苦。這是遊戲的情緒核心：想起美好的事不會帶來安慰——它帶來的是之後發生的一切。</p>
+      <p><strong>你的靈魂在記住時會發光更亮。</strong>每接住一段白色文字，玩家角色的發光範圍會擴大、脈動加快。這是一個微小的視覺獎勵——紅色洪流來臨前的一刻溫暖。</p>
+      <h2>兩種不同的痛</h2>
+      <p>遊戲的兩個主要章節使用相同的核心機制，但完全不同的傷害美學。這是一個刻意的設計決策，根植於一個簡單的洞察：不是所有的痛看起來都一樣。</p>
+      <p><strong>第一章——「一個月前」：</strong>色調偏藍紫。當紅字擊中你時，畫面紅光閃爍並劇烈震動。文字碎裂成單字碎片如雨般落下。這是急性創傷——尖銳、響亮、無法忽視。</p>
+      <p><strong>第二章——「三個月前」：</strong>色調更暗、更冷。紅字擊中時畫面不會震動——而是慢慢失去色彩，逐漸褪向黑白。長句子在飛行途中斷裂成兩半，加速墜落。這是不同的痛：一段關係的靜默侵蝕。話說到一半就斷了。某種東西在流逝而非爆炸的感覺。</p>
+      <p>背後的技術實作各有不同：第一章用 CSS 風格的螢幕閃光和粒子爆發效果；第二章用 <code>getImageData</code> 像素操作，逐步去飽和整個畫布。同一個引擎，完全不同的情緒調性。</p>
+      <h2>敘事結構</h2>
+      <p>遊戲透過狀態機組織：HOME → STORY → CHAPTER_TITLE → GAMEPLAY → RECAP，在兩條時間線的六個章節中循環。在遊戲環節之間，章節回顧顯示三幕插畫場景，搭配逐行淡入的打字機風格文字。每段回顧結束時，場景碎裂成粒子後轉場到下一章——一個記憶碎裂的視覺隱喻。</p>
+      <p>文字內容——無論是你接住的白色碎片（「那個週五下午」、「妳傳來簡訊」、「滾落的小球鞋」）還是閃避的紅色語句（「你只愛工作」、「我好後悔」）——都是帶著敘事份量寫的。它們不是隨機詞彙，而是玩家透過遊玩拼湊出的故事碎片。</p>
+      <h2>AI 如何參與</h2>
+      <p>Claude 在這個專案中的角色超越了程式碼生成，更接近創意協作。當我描述抽象的情緒目標——「我希望第二章的痛感覺是<em>悶住的</em>，不是大聲的」——Claude 把它翻譯成具體的技術方案：用漸進式去飽和取代螢幕震動。當我說「句子應該感覺像是被截斷了，像某個人說到一半就不說了」，Claude 實作了一個在螢幕高度 20% 處觸發的文字斷裂機制，斷裂的兩半以 2.5 倍速加速。</p>
+      <p>程式碼裡至今留著我們除錯對話的痕跡：帶 emoji 標記的 console log（<code>🎯 生成紅字...</code>、<code>💥 碰撞!...</code>、<code>📊 統計...</code>），我們用來追蹤為什麼某些紅字沒有正確碎裂，或者第二章的句子斷裂時機為什麼不對。這些沒被清理——它們是工作過程的遺跡。</p>
+      <p>Claude 也負責了部署流程：建立 GitHub 倉庫、設定 jsdelivr CDN 託管圖片資源（<code>https://cdn.jsdelivr.net/gh/{user}/{repo}@main/{path}</code> 搭配 <code>crossOrigin = 'anonymous'</code>），以及引導 GitHub Pages 設定。</p>
+      <h2>關鍵設計決策</h2>
+      <p><strong>Canvas 勝過 DOM。</strong>粒子系統、即時像素操作（灰階濾鏡）、徑向發光效果和螢幕震動，在 Canvas 上的表現遠優於 DOM 元素。代價是失去內建的無障礙性——每個 UI 元素都需要手動繪製。對於一款本質上關乎視覺與動覺體驗的遊戲，Canvas 是正確的媒介。</p>
+      <p><strong>減法作為設計原則。</strong>開發中期，UI 累積了分數顯示、計時器、提示文字和血量指示器。我刻意移除了大部分，只留最精簡的血條和記憶分數。理由：任何讓玩家「想起這是個遊戲」的元素，都會打斷情緒沉浸。在 AI 能無限產出內容的時代，知道何時<em>停止添加</em>才是更難的技藝。</p>
+      <p><strong>縮小玩家尺寸。</strong>玩家角色在迭代中從 50px 縮小到 35px。更小意味著更精準的閃避，這讓每次險險避開都更加私人化。當你僅以幾個像素之差逃過一段紅色語句時，那種如釋重負是 50px 判定框無法給予的。</p>
+      <p><strong>斷裂點在 20%，不是 50%。</strong>第二章的句子斷裂機制最初在螢幕中點觸發。但在那個高度，快速下落的文字經常在幀檢查之間越過觸發點。移到 20% 讓斷裂有更多螢幕時間——玩家真的可以看到句子裂開並加速——也給了他們更多（但仍不夠）的反應時間。</p>
+      <h2>技術挑戰</h2>
+      <p><strong>句子斷裂的時序。</strong>最難修的 bug。文字在幀檢查之間飛過斷裂觸發點，本該斷成兩半的句子原封不動地飛過去了。解法是收緊偵測窗口，並加上安全日誌確認斷裂有在觸發。一個偽裝成渲染問題的時序問題。</p>
+      <p><strong>跨域圖片載入。</strong>本地圖片路徑在 GitHub Pages 上失效。修復需要透過 jsdelivr 的 GitHub CDN 託管圖片，並在每次圖片載入時加上 <code>crossOrigin = 'anonymous'</code>——否則 Canvas 的 <code>getImageData</code>（用於灰階效果）會因為畫布被「污染」而拋出安全錯誤。</p>
+      <p><strong>跨裝置縮放。</strong>一個單一縮放因子（<code>Math.min(W / 375, H / 667)</code>）套用到所有遊戲元素——玩家大小、文字大小、生成位置、碰撞半徑——讓手機和桌機的體驗保持一致。同時支援滑鼠和觸控輸入，以 <code>touch-action: none</code> 防止手機上的意外縮放。</p>
+      <h2>交付成果</h2>
+      <p>一個完整可玩的敘事遊戲，濃縮在 996 行的單一 HTML 檔案裡。兩條時間線的六個章節，每章三幕插畫回顧場景。完整的視覺特效系統：粒子爆發、螢幕震動、漸進式灰階、徑向發光、靜態雜訊、隧道視野。透過動態縮放和雙輸入處理支援跨裝置。部署在 GitHub Pages，圖片資源由 CDN 託管。模組化架構——新增章節只需擴充陣列，不需重寫系統。</p>
+      <h2>反思</h2>
+      <p>這個專案確認了我一直相信但未曾證明的事：遊戲機制可以承載情緒重量，不需要一行傳統對白。當畫面在第二章中慢慢失去色彩時，玩家不需要旁白解釋正在發生什麼——他們感受得到。機制<em>就是</em>訊息。</p>
+      <p>和 Claude 的協作模式在這類專案中特別有效，因為創意意圖和技術實作之間的落差很大。我可以說「痛應該感覺像是被吞下去的，不是被吼出來的」，然後得到一個用像素級去飽和取代螢幕閃光的具體實作。那個翻譯層——從情緒到程式碼——是 AI 協作在創意工作中最能增值的地方。</p>
+      <p>如果要繼續發展，我會加入隨章節情緒變化的環境音效，並探索結局能否使用累積的記憶（玩家接住的白色文字）生成個人化的結尾。架構支援這麼做。情緒邏輯也要求這麼做。</p>
+      </span>
     </div>
   </div>
 </div>
@@ -1208,7 +1272,7 @@ footer {
 <footer>
   <div class="container">
     <div class="footer-content">
-      <div class="footer-text">© 2025 Tim. Built with AI, shipped with intent.</div>
+      <div class="footer-text"><span class="lang-en">© 2025 Tim. Built with AI, shipped with intent.</span><span class="lang-zh">© 2025 Tim. 用 AI 打造，帶著意圖出貨。</span></div>
       <div class="footer-links">
         <a href="#">LinkedIn</a>
         <a href="#">GitHub</a>
@@ -1219,6 +1283,23 @@ footer {
 </footer>
 
 <script>
+// ====== LANGUAGE TOGGLE ======
+let currentLang = 'en';
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'zh' : 'en';
+  document.documentElement.lang = currentLang;
+  document.querySelector('.lang-toggle').textContent = currentLang === 'en' ? '中文' : 'EN';
+  localStorage.setItem('lang', currentLang);
+}
+(function() {
+  const saved = localStorage.getItem('lang');
+  if (saved) {
+    currentLang = saved;
+    document.documentElement.lang = currentLang;
+    document.querySelector('.lang-toggle').textContent = currentLang === 'en' ? '中文' : 'EN';
+  }
+})();
+
 // ====== PAGE NAVIGATION ======
 function showArticle(id) {
   document.getElementById('home-page').style.display = 'none';
