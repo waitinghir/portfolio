@@ -843,6 +843,23 @@ footer {
           <div class="project-arrow">↗</div>
         </a>
 
+        <!-- Project 05 -->
+        <a class="project-card fade-in" data-accent="cyan" onclick="showArticle('i18n')" style="grid-column: 1 / -1;">
+          <div class="project-number">PROJECT 05</div>
+          <h3 class="project-title"><span class="lang-en">Bilingual-izing This Site with AI</span><span class="lang-zh">用 AI 把這個網站雙語化</span></h3>
+          <div class="project-subtitle"><span class="lang-en">A meta case study</span><span class="lang-zh">一個 meta 的案例研究</span></div>
+          <p class="project-desc">
+            <span class="lang-en">How I used Claude to add full EN/ZH bilingual support to a 1,300-line static site — including the part where it crashed trying to do it all at once.</span>
+            <span class="lang-zh">我如何用 Claude 為一個 1,300 行的靜態網站加入完整的英文/中文雙語支援——包括它試圖一次改完然後當掉的部分。</span>
+          </p>
+          <div class="project-tags">
+            <span class="tag">AI</span>
+            <span class="tag">i18n</span>
+            <span class="tag">Meta</span>
+          </div>
+          <div class="project-arrow">↗</div>
+        </a>
+
       </div>
     </div>
   </section>
@@ -867,7 +884,7 @@ footer {
         </div>
         <div class="about-stats fade-in">
           <div class="stat-card">
-            <div class="stat-value">4</div>
+            <div class="stat-value">5</div>
             <div class="stat-label"><span class="lang-en">AI Projects Shipped</span><span class="lang-zh">已上線 AI 專案</span></div>
           </div>
           <div class="stat-card">
@@ -1263,6 +1280,86 @@ footer {
       <p>這個專案確認了我一直相信但未曾證明的事：遊戲機制可以承載情緒重量，不需要一行傳統對白。當畫面在第二章中慢慢失去色彩時，玩家不需要旁白解釋正在發生什麼——他們感受得到。機制<em>就是</em>訊息。</p>
       <p>和 Claude 的協作模式在這類專案中特別有效，因為創意意圖和技術實作之間的落差很大。我可以說「痛應該感覺像是被吞下去的，不是被吼出來的」，然後得到一個用像素級去飽和取代螢幕閃光的具體實作。那個翻譯層——從情緒到程式碼——是 AI 協作在創意工作中最能增值的地方。</p>
       <p>如果要繼續發展，我會加入隨章節情緒變化的環境音效，並探索結局能否使用累積的記憶（玩家接住的白色文字）生成個人化的結尾。架構支援這麼做。情緒邏輯也要求這麼做。</p>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- ====== ARTICLE: I18N ====== -->
+<div id="article-i18n" class="article-page">
+  <div class="container">
+    <a class="article-back" onclick="showHome()"><span class="lang-en">← Back to all projects</span><span class="lang-zh">← 回到所有專案</span></a>
+    <div class="article-header">
+      <div class="article-category">Project 05 — Meta × AI</div>
+      <h1 class="article-h1"><span class="lang-en">Bilingual-izing This Site with AI</span><span class="lang-zh">用 AI 把這個網站雙語化</span></h1>
+      <div class="article-meta"><span>By Tim</span><span>2025</span><span><span class="lang-en">5 min read</span><span class="lang-zh">閱讀 5 分鐘</span></span></div>
+    </div>
+    <div class="article-body">
+      <span class="lang-en">
+      <h2>Overview</h2>
+      <p>This article is about itself — or rather, about the process of making it readable in two languages. This portfolio site started as an English-only, 1,200-line static HTML file. I wanted to add full Traditional Chinese support with a one-click toggle, and I used Claude to do it. The process was instructive not because it was hard, but because of <em>how</em> it failed before it succeeded.</p>
+
+      <h2>The Goal</h2>
+      <p>Add bilingual EN/ZH support to every piece of text on the site: navigation, hero section, project cards, about section, footer, and four full-length project articles. The user clicks a button in the top-right corner, and everything switches instantly. Their preference persists across page reloads via localStorage.</p>
+
+      <h2>The Approach That Didn't Work</h2>
+      <p>The first attempt was straightforward: rewrite the entire file with bilingual markup in one shot. Claude would take the 1,200-line HTML file, wrap every text element with <code>&lt;span class="lang-en"&gt;</code> and <code>&lt;span class="lang-zh"&gt;</code> tags, add the CSS toggle rules, insert the JavaScript, and output a complete new file.</p>
+      <p>It failed. Repeatedly. The file was too large for a single coherent rewrite — Claude would lose track of the structure partway through, producing truncated or malformed output. This happened multiple times before I (the human) called it out: "you keep failing, you need to change your approach."</p>
+      <p>In hindsight, the failure makes sense. A 1,200-line file with deeply nested HTML, long-form article content in English that needs Chinese equivalents, plus new CSS and JavaScript — that's a lot of moving parts to hold in context simultaneously. The task isn't intellectually hard, but it's <em>volumetrically</em> hard. There's a difference.</p>
+
+      <h2>The Approach That Worked</h2>
+      <p>The fix was to decompose the work into sequential, verifiable steps:</p>
+      <p><strong>Step 1 — Infrastructure:</strong> Add the CSS language toggle rules (<code>[lang="en"] .lang-zh { display: none }</code> and vice versa), the nav toggle button, and the JavaScript switching function. Don't touch any content yet. Verify the button appears and the CSS logic works.</p>
+      <p><strong>Step 2 — Homepage:</strong> Translate the hero, project cards, about section, and footer. Checkpoint: download, preview, confirm the toggle switches all homepage text correctly.</p>
+      <p><strong>Step 3 — Articles, one at a time:</strong> Wrap each article's English content in <code>&lt;span class="lang-en"&gt;</code>, write the full Chinese translation in <code>&lt;span class="lang-zh"&gt;</code>, and add it to the file. Checkpoint after each article.</p>
+      <p>Each step produced a working, downloadable file. If something broke, the blast radius was one article, not the entire site. The checkpoints weren't just nice-to-have — they were the mechanism that made the whole process reliable.</p>
+
+      <h2>Technical Implementation</h2>
+      <p>The i18n system is deliberately minimal. No framework, no JSON translation files, no build step. Just CSS and HTML:</p>
+      <p>The <code>&lt;html lang="en"&gt;</code> attribute controls which language is visible. CSS rules hide the non-active language: <code>[lang="en"] .lang-zh { display: none !important }</code>. A JavaScript function toggles the <code>lang</code> attribute and saves the preference to localStorage. On page load, it checks localStorage and applies the saved language.</p>
+      <p>Every translatable element contains both versions inline: <code>&lt;span class="lang-en"&gt;Projects&lt;/span&gt;&lt;span class="lang-zh"&gt;專案&lt;/span&gt;</code>. For long article content, the entire body is wrapped in two sibling spans — one per language. This means the HTML file is roughly twice its original size, but for a static site with no build process, the simplicity is worth the payload.</p>
+
+      <h2>What I Learned</h2>
+      <p><strong>Volume is a different kind of complexity.</strong> Bilingual-izing a website isn't conceptually difficult. It's wrapping text in spans and writing translations. But when the file is 1,200+ lines with four long-form articles, the sheer volume overwhelms a single-pass approach. The lesson applies beyond i18n: any large-scale transformation of existing content is better done incrementally than all at once, especially with AI.</p>
+      <p><strong>Checkpoints are infrastructure, not overhead.</strong> Every step ended with "download this, verify it works." That discipline caught issues early and kept the working version intact. Without it, a single bad edit deep in the file could have corrupted hours of work with no easy rollback.</p>
+      <p><strong>The human's job is strategy, not content.</strong> I didn't write any of the Chinese translations — Claude did all of that. What I contributed was the decision to stop the failing approach, the decomposition into steps, and the verification at each checkpoint. In AI collaboration, knowing <em>when to change the plan</em> is more valuable than knowing how to execute the plan.</p>
+      <p><strong>Simple beats clever for static sites.</strong> There are elegant i18n solutions — JSON translation files, framework-level routing, compile-time generation. For a single-file static site on GitHub Pages, inline spans with CSS toggles are the right level of complexity. It's not scalable to 50 languages, but it doesn't need to be. It needs to work for two, today, with zero dependencies.</p>
+
+      <h2>The Meta Observation</h2>
+      <p>This article exists because the process of building it was interesting enough to document. The portfolio site was built by AI, the articles were written by AI, and the bilingual system was implemented by AI. But the decisions — what to build, when to change strategy, what quality bar to set — were all human. That division of labor is, in miniature, the thesis of this entire portfolio.</p>
+      </span>
+      <span class="lang-zh">
+      <h2>概覽</h2>
+      <p>這篇文章講的是它自己——或者更精確地說，是讓它能被兩種語言閱讀的過程。這個作品集網站最初是一個純英文、1,200 行的靜態 HTML 檔案。我想加入完整的正體中文支援，按一個鍵就能切換，並用 Claude 來實作。這個過程很有啟發性，不是因為它很難，而是因為它<em>怎麼失敗</em>然後才成功的。</p>
+
+      <h2>目標</h2>
+      <p>為網站上的每一段文字加入雙語 EN/ZH 支援：導航列、首頁大標、專案卡片、關於區塊、頁尾，以及四篇完整的專案文章。使用者點一下右上角的按鈕，所有內容立即切換。偏好設定透過 localStorage 在重新載入頁面後保留。</p>
+
+      <h2>行不通的做法</h2>
+      <p>第一個嘗試很直接：一次重寫整個檔案，加入雙語標記。Claude 會拿到 1,200 行的 HTML 檔案，在每個文字元素外包上 <code>&lt;span class="lang-en"&gt;</code> 和 <code>&lt;span class="lang-zh"&gt;</code> 標籤，加入 CSS 切換規則，插入 JavaScript，然後輸出一個完整的新檔案。</p>
+      <p>失敗了。而且重複失敗。檔案太大，無法在一次通過中保持連貫——Claude 寫到一半就會失去對結構的掌控，產出截斷或格式錯誤的輸出。這發生了好幾次，直到我（人類）指出：「你一直失敗，你得換個做法。」</p>
+      <p>事後看來，失敗是合理的。一個 1,200 行、深度巢狀的 HTML 檔案，加上需要中文對應的長篇英文文章內容，再加上新的 CSS 和 JavaScript——這是同時要在上下文中維持的大量移動部件。這個任務在智識上不難，但在<em>體量上</em>很難。兩者是不同的。</p>
+
+      <h2>行得通的做法</h2>
+      <p>修正方法是把工作分解為循序的、可驗證的步驟：</p>
+      <p><strong>步驟一——基礎架構：</strong>加入 CSS 語言切換規則（<code>[lang="en"] .lang-zh { display: none }</code> 及反向規則）、導航列的切換按鈕，以及 JavaScript 切換函式。不碰任何內容。驗證按鈕出現且 CSS 邏輯運作。</p>
+      <p><strong>步驟二——首頁：</strong>翻譯 Hero 區塊、專案卡片、關於區塊和頁尾。存檔點：下載、預覽、確認切換能正確切換所有首頁文字。</p>
+      <p><strong>步驟三——文章逐篇處理：</strong>把每篇文章的英文內容包在 <code>&lt;span class="lang-en"&gt;</code> 裡，寫完整的中文翻譯放在 <code>&lt;span class="lang-zh"&gt;</code> 裡，加入檔案。每篇文章後設存檔點。</p>
+      <p>每一步都產出一個可運作、可下載的檔案。如果出問題，爆炸半徑是一篇文章，不是整個網站。存檔點不只是「有也不錯」——它們是讓整個過程可靠的機制。</p>
+
+      <h2>技術實作</h2>
+      <p>i18n 系統刻意保持精簡。沒有框架、沒有 JSON 翻譯檔、沒有建置步驟。只有 CSS 和 HTML：</p>
+      <p><code>&lt;html lang="en"&gt;</code> 屬性控制哪個語言可見。CSS 規則隱藏非啟用的語言：<code>[lang="en"] .lang-zh { display: none !important }</code>。一個 JavaScript 函式切換 <code>lang</code> 屬性並把偏好存到 localStorage。頁面載入時檢查 localStorage 並套用儲存的語言。</p>
+      <p>每個可翻譯的元素都包含兩個版本：<code>&lt;span class="lang-en"&gt;Projects&lt;/span&gt;&lt;span class="lang-zh"&gt;專案&lt;/span&gt;</code>。對於長篇文章內容，整個 body 包在兩個並列的 span 裡——每個語言一個。這意味著 HTML 檔案大約是原來的兩倍大，但對於一個沒有建置流程的靜態網站來說，簡單性值得這個代價。</p>
+
+      <h2>我學到的</h2>
+      <p><strong>體量是一種不同的複雜性。</strong>把網站雙語化在概念上不難。就是在文字外面包 span 然後寫翻譯。但當檔案超過 1,200 行、有四篇長文章時，純粹的體量就會壓垮一次通過的做法。這個教訓不只適用於 i18n：任何對現有內容的大規模轉換，用漸進式做比一次全改更好，特別是和 AI 協作時。</p>
+      <p><strong>存檔點是基礎設施，不是額外負擔。</strong>每一步都以「下載這個，驗證它能動」結束。這個紀律在早期就能抓到問題，並保持工作版本完整。沒有它，一個藏在檔案深處的錯誤編輯可能毀掉數小時的工作，而且沒有簡單的回退方式。</p>
+      <p><strong>人類的工作是策略，不是內容。</strong>我沒有寫任何一行中文翻譯——全部是 Claude 做的。我貢獻的是決定停止失敗的做法、把工作分解成步驟、以及在每個存檔點進行驗證。在 AI 協作中，知道<em>何時該改變計劃</em>比知道如何執行計劃更有價值。</p>
+      <p><strong>對靜態網站來說，簡單勝過精巧。</strong>有很多優雅的 i18n 方案——JSON 翻譯檔、框架層級的路由、編譯時生成。對於一個放在 GitHub Pages 上的單檔靜態網站，用 inline span 加 CSS 切換是正確的複雜度層級。它無法擴展到 50 種語言，但它也不需要。它只需要今天能為兩種語言工作，零相依套件。</p>
+
+      <h2>Meta 觀察</h2>
+      <p>這篇文章之所以存在，是因為建造它的過程本身有趣到值得記錄。作品集網站是 AI 建的，文章是 AI 寫的，雙語系統是 AI 實作的。但決策——做什麼、何時改變策略、設定什麼品質標準——全部是人類做的。這種分工，就是整個作品集的論點的縮影。</p>
       </span>
     </div>
   </div>
