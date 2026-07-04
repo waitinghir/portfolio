@@ -860,6 +860,23 @@ footer {
           <div class="project-arrow">↗</div>
         </a>
 
+        <!-- Project 06 -->
+        <a class="project-card fade-in" data-accent="magenta" onclick="showArticle('jobmonitor')" style="grid-column: 1 / -1;">
+          <div class="project-number">PROJECT 06</div>
+          <h3 class="project-title"><span class="lang-en">The Job Monitor That Lied for 27 Days</span><span class="lang-zh">那個騙了我 27 天的求職監控系統</span></h3>
+          <div class="project-subtitle"><span class="lang-en">A debugging detective story</span><span class="lang-zh">一場除錯偵探故事</span></div>
+          <p class="project-desc">
+            <span class="lang-en">An AI-built daily job-search monitor that ran green on GitHub Actions for nearly a month while quietly catching nothing — and the three-act bug hunt that found out why.</span>
+            <span class="lang-zh">一個用 AI 打造的每日求職監控系統，在 GitHub Actions 上連續綠燈跑了將近一個月卻什麼都沒抓到——以及找出真相的三幕除錯偵探故事。</span>
+          </p>
+          <div class="project-tags">
+            <span class="tag">AI</span>
+            <span class="tag">GitHub Actions</span>
+            <span class="tag"><span class="lang-en">Debugging</span><span class="lang-zh">除錯</span></span>
+          </div>
+          <div class="project-arrow">↗</div>
+        </a>
+
       </div>
     </div>
   </section>
@@ -884,7 +901,7 @@ footer {
         </div>
         <div class="about-stats fade-in">
           <div class="stat-card">
-            <div class="stat-value">5</div>
+            <div class="stat-value">6</div>
             <div class="stat-label"><span class="lang-en">AI Projects Shipped</span><span class="lang-zh">已上線 AI 專案</span></div>
           </div>
           <div class="stat-card">
@@ -1360,6 +1377,111 @@ footer {
 
       <h2>Meta 觀察</h2>
       <p>這篇文章之所以存在，是因為建造它的過程本身有趣到值得記錄。作品集網站是 AI 建的，文章是 AI 寫的，雙語系統是 AI 實作的。但決策——做什麼、何時改變策略、設定什麼品質標準——全部是人類做的。這種分工，就是整個作品集的論點的縮影。</p>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div id="article-jobmonitor" class="article-page">
+  <div class="container">
+    <a class="article-back" onclick="showHome()"><span class="lang-en">← Back to all projects</span><span class="lang-zh">← 回到所有專案</span></a>
+    <div class="article-header">
+      <div class="article-category">Project 06 — Automation × AI</div>
+      <h1 class="article-h1"><span class="lang-en">The Job Monitor That Lied for 27 Days</span><span class="lang-zh">那個騙了我 27 天的求職監控系統</span></h1>
+      <div class="article-meta"><span>By Tim</span><span>2025</span><span><span class="lang-en">9 min read</span><span class="lang-zh">閱讀 9 分鐘</span></span></div>
+    </div>
+    <div class="article-body">
+      <span class="lang-en">
+      <h2>Overview</h2>
+      <p>I was running a multi-market, multi-platform job search and getting buried in noise. Every job site's built-in "save this search, email me matches" feature has a terrible signal-to-noise ratio — you end up scanning dozens of irrelevant postings to find the one that matters. So I built a small system to do it for me: scrape a few platforms daily, score every posting against what I'm actually looking for, and email me only the ones that clear a threshold. It runs on GitHub Actions, costs nothing, and notifies me by email every morning. It also, for 27 days, ran perfectly and found nothing — without telling me that anything was wrong. This is the story of that bug.</p>
+
+      <h2>The One Rule: Find and Notify, Never Auto-Apply</h2>
+      <p>The original idea was bigger: auto-find and auto-apply. I dropped the second half almost immediately, for three reasons. A resume that isn't tailored to the specific posting dilutes your signal — sending the same one to fifty jobs is worse than sending five tailored ones. Job platforms detect automated behavior and can restrict the account you actually need for your real search. And a posting whose title looks like a match is, surprisingly often, a different kind of role entirely once you read the description — auto-applying on title alone wastes real opportunities. So the system only ever does two things: find, and notify. A human decides what to do next.</p>
+
+      <h2>The Architecture (and a Decision That Would Come Back to Haunt Me)</h2>
+      <p>The system is unglamorous on purpose: a GitHub Actions cron job runs daily, a scraper searches a handful of keywords across a couple of platforms, a scoring function filters the results, and a notify script emails the survivors over Gmail SMTP. Already-seen postings are tracked in a JSON file committed to the repo — no database needed.</p>
+      <p>The first real decision was how to fetch the data. Calling a platform's internal search API directly with plain HTTP requests returned 403 every time — it wanted cookies, a referer, full browser-shaped headers. The fix was to stop pretending to be an API client and instead drive an actual headless Chromium browser with Playwright, load the real search page, and parse the rendered DOM. From the platform's point of view, that's indistinguishable from a person browsing. Anti-bot defenses aimed at API clients have nothing to say about a real browser.</p>
+      <p>It was the right call at the time. It also turned out, months later, to be the exact decision that broke everything — for reasons that had nothing to do with bots.</p>
+
+      <h2>From Blacklist to a Scoring System</h2>
+      <p>The first filtering approach was a blacklist: exclude postings whose title contained certain words, exclude postings from certain companies. It fell apart within days. The exclusion list never stopped growing — every new flavor of noise needed its own new rule. It misfired constantly — blocking one ambiguous word in a title would also block a posting that was actually a perfect match. And it was unexplainable — there was no way to answer "why did this get filtered out?"</p>
+      <p>The fix was to stop thinking in yes/no and start scoring every posting on a point scale, with a threshold for notification. A title that exactly matches the target role scores high enough to clear the bar by itself. A title with a related-but-not-exact term scores a smaller bonus. A title with an obviously different role scores a heavy penalty. Ambiguous seniority words in a title get only a token penalty — light enough that a strong description can still pull the score back up. Description keywords add a little, capped so keyword-stuffing can't game it. A company name that's a strong negative signal subtracts enough to override a good title score on its own.</p>
+      <p>The bigger design choice underneath all of this was choosing loose over strict. A strict system blocks anything ambiguous and produces less noise, but quietly drops the postings whose titles are understated but whose descriptions are exactly right. A loose system lets ambiguous titles through and lets the description redeem them, producing more noise but losing fewer real opportunities. I chose loose, because in a job search, missing a good opportunity costs far more than spending an extra minute skimming past a bad one.</p>
+
+      <h2>The Bug That Wore a Green Checkmark for 27 Days</h2>
+      <p>The system shipped, ran clean for about a week, and I stopped watching the logs — which is exactly when it broke. About three weeks later I noticed I hadn't gotten an email in a while. I went to check the Actions history: every single run, for roughly a month, had a green checkmark. And every single run had found zero new postings. No errors. No failed steps. Just twenty-some consecutive clean runs that had quietly done nothing.</p>
+      <p>A green checkmark turned out to be the most dangerous failure mode there is — it doesn't just fail to alert you, it actively tells you everything is fine.</p>
+      <p>Fixing it took three rounds, and the first two both looked, at the time, like the real answer.</p>
+      <p><strong>Act One — the wrong mountaintop:</strong> Running the scraper locally with step-by-step logging showed every search hanging at the page-load step, then timing out after 30 seconds. The wait condition was <code>networkidle</code> — wait until the network goes quiet for 500ms before continuing. But the target page kept a steady stream of third-party tracking scripts firing in the background, so the network never went quiet, and the wait never resolved. The timeout got caught by a try/except and the code moved on to the next keyword — which is why the whole workflow reported success. The fix looked obvious: switch to <code>domcontentloaded</code> plus a more specific <code>wait_for_selector</code> for the job card element, so the code stops waiting for the entire network and instead waits for the one thing it actually needs. Locally, postings started coming through again. It looked solved.</p>
+      <p><strong>Act Two — the selectors were stale too:</strong> The data that came back was messy. Dumping the rendered HTML and reading it line by line showed the platform had also changed its DOM structure since the scraper was written. New selectors for the date, location, and description fields fixed most of it. The title field was the interesting one: the old code read <code>textContent</code> off the link, but the new markup wrapped the user's search term in a highlight <code>&lt;span&gt;</code> inside the title, so the extracted text came out with stray fragments mixed in. Reading the <code>title</code> attribute instead gave back the clean string. Local runs were now stable, pulling in a normal day's worth of postings. I committed it and pushed.</p>
+      <p><strong>Act Three — local was fine, the cloud was still zero:</strong> The next morning's Actions run came back with zero postings. Same code, same commit — twenty-some postings locally, zero on GitHub's runner. That's the moment it became clear the first two fixes had only ever been treating symptoms. The variable that mattered wasn't timing and it wasn't selectors. It was the environment itself.</p>
+      <p>To actually measure that, I wrote a small diagnostic script that used nothing but the standard library — no browser at all — wired it into a throwaway, manually-triggered workflow, and let it run directly on a GitHub Actions runner. It checked three things at once: the runner's outbound IP and rough location, a direct HTTP call to the platform's underlying JSON API, and the raw HTML of the search page itself.</p>
+      <p>The results were unambiguous. The runner sat on a US datacenter IP. The raw HTML of the search page was a near-empty shell — a few kilobytes, zero job links in it. And the direct HTTP call to the platform's own API came back with a full 200 and a complete page of results.</p>
+      <p>The platform, it turned out, had quietly become a pure front-end single-page app at some point. The server now sends an empty shell; the actual postings are fetched by a client-side XHR call to an API and rendered in the browser afterward. Locally, Playwright's full Chromium executes that JavaScript, the XHR goes through, and postings render normally. On the runner, the exact same XHR call — made by a headless browser sitting on a datacenter IP — was getting silently blocked by anti-bot defenses. But a plain HTTP request to that same API, from that same datacenter IP, sailed through with no problem at all.</p>
+      <p>That distinction mattered enormously: the failure was about <em>rendering</em>, not about <em>IP or geography</em>. Mistake that for a geo-block and you'd reach for a proxy or a different region of VPS — entirely the wrong fix.</p>
+      <p><strong>The actual fix — remove the browser:</strong> Since the API itself answered fine from a datacenter IP, the cleanest solution was to stop driving a browser entirely. The scraper now makes a plain HTTP request straight to the platform's JSON API and maps the response fields onto the same internal job format the rest of the pipeline already expected. The side benefits stacked up immediately: no more installing Chromium in CI, no headless-browser fingerprint to get flagged in the first place, and salary and date fields that came out of the API cleaner than anything scraped from the DOM ever did.</p>
+      <p>There's a particular irony here. This fix walks straight back into the path that the original architecture decision explicitly rejected — calling the platform's API directly. The "403 for everyone" conclusion from months earlier turned out to no longer hold; a plain user agent and referer, no cookies required, was enough. The decision that once felt like the clever way around the platform's defenses had become, by the time this bug surfaced, the actual cause of the outage — and the thing it had been built to avoid was the fix that replaced it.</p>
+
+      <h2>What Actually Saved the Debug</h2>
+      <p>This bug got handed off mid-investigation, in a different mode of working with Claude — pasting logs back and forth in a chat window is slow; every "try this" means switching to a terminal, copying output, pasting it back, at three to five minutes per round trip, with no visibility into the actual local environment. Working directly inside the project, where Claude could run the scraper itself, read its own output, and edit files immediately, cut that loop to seconds. But speed wasn't actually the thing that mattered here.</p>
+      <p>Two things were. The first: being able to measure inside the actual broken environment, not just a proxy for it. Claude Code itself runs locally — it isn't the GitHub Actions runner either — but it could write a diagnostic script, wire it into a disposable workflow, and have that workflow execute on the real runner, then read the results back. That's the step that actually separated "local works" from "cloud doesn't" instead of just guessing at the gap between them.</p>
+      <p>The second, and more important one: after Act Two, the fix looked finished, and it would have been easy to call it done right there. What stopped that was a single skeptical question — "are you sure the API actually works from the cloud, or could that be different from local too?" That question is what triggered measuring the API on the real runner before committing to a rewrite. Without it, this would very plausibly have shipped as another "fixed it" that quietly stayed broken. Good collaboration with AI isn't only about how fast it can execute — it's also about a human applying the brakes at exactly the right moment.</p>
+
+      <h2>Lessons</h2>
+      <p><strong>A green checkmark is not health.</strong> What matters is the actual output count, and "zero results for N consecutive days" deserves its own active alert — silent failure is the most dangerous failure.</p>
+      <p><strong>Don't diagnose only on the machine that works.</strong> Local (residential IP, full browser) and cloud (datacenter IP, headless) behave differently in ways that matter. A fix that only gets verified locally hasn't actually been verified where it counts.</p>
+      <p><strong>Separate the root-cause category before reaching for a fix.</strong> "Rendering is blocked" and "the IP is blocked" look identical from the outside and require completely different solutions. A few minutes spent building a probe to tell them apart is cheaper than guessing wrong and rewriting twice.</p>
+      <p><strong>When a page is a SPA, look for the API underneath it first.</strong> Calling the API directly is almost always faster, more stable, and harder for anti-bot systems to flag than driving a full browser to render the same data.</p>
+      <p><strong>The decision you're proudest of can be the one you later have to undo.</strong> The headless-browser workaround was the right call against the problem it was solving. It just wasn't the right call forever.</p>
+
+      <h2>Final Numbers</h2>
+      <p>The system now runs every morning, unattended. A typical run pulls in roughly 200 raw postings; after scoring, usually 30 to 60 clear the notification threshold. Removing the browser also cut the per-run time from a few minutes (most of it installing Chromium) down to a few seconds. GitHub Actions usage stays well inside the free tier, and Gmail SMTP is free. Total monthly cost: zero.</p>
+      </span>
+      <span class="lang-zh">
+      <h2>概覽</h2>
+      <p>我同時在多個市場、多個平台上找工作，很快就被雜訊淹沒。幾乎每個求職平台內建的「儲存搜尋條件、用 Email 通知我」功能，訊噪比都很差——你得掃過幾十筆不相關的職缺，才找到一筆真正重要的。所以我做了一個小系統幫我做這件事：每天自動掃幾個平台、把每筆職缺拿去跟我真正在找的東西打分數、只有過門檻的才用 Email 通知我。它跑在 GitHub Actions 上，零成本，每天早上準時寄信。它也曾經連續 27 天「完美運作」、什麼都沒找到——而且完全沒告訴我哪裡出了問題。這是那個 bug 的故事。</p>
+
+      <h2>唯一的原則：只找、只通知，永遠不自動投</h2>
+      <p>最初的想法更大：自動找、自動投。我幾乎立刻就放棄了後半段，理由有三個。沒有針對職缺客製化的履歷會稀釋你的訊號——同一份履歷投五十個職缺，遠比不上五份客製化履歷投五個。求職平台會偵測自動化行為，進而限制你真正需要的那個帳號。而且標題看起來像目標職務的職缺，打開描述一看常常根本是完全不同性質的工作——光靠標題自動投，浪費的是真正的機會。所以這個系統永遠只做兩件事：找，和通知。下一步永遠由人決定。</p>
+
+      <h2>架構（以及一個後來反咬自己一口的決定）</h2>
+      <p>系統本身刻意做得很樸實：一個 GitHub Actions 排程每天跑一次，scraper 用幾個關鍵字搜尋幾個平台，評分函式過濾結果，notify 腳本透過 Gmail SMTP 把過關的職缺寄出去。已經通知過的職缺記錄在一個 commit 進 repo 的 JSON 檔裡——不需要資料庫。</p>
+      <p>第一個真正的決定，是怎麼抓資料。直接用 Python 的 HTTP request 打平台的內部搜尋 API，每次都拿到 403——平台需要 cookie、Referer、完整的瀏覽器標頭才肯回應。修法是不再假裝自己是個 API client，改用 Playwright 開一個真正的 headless Chromium，載入真實的搜尋頁面，解析渲染後的 DOM。從平台的角度看，這跟真人開瀏覽器逛網站沒有差別。針對 API client 設計的反爬蟲機制，對一個真實瀏覽器毫無辦法。</p>
+      <p>在當下，這是正確的決定。但幾個月後事實證明，正是這個決定，後來把整個系統搞壞——而原因跟「機器人偵測」完全無關。</p>
+
+      <h2>從黑名單到評分制</h2>
+      <p>第一版的過濾方式是黑名單：標題含特定字就排除，公司是特定名單上的就排除。跑了幾天就垮了。排除清單永遠列不完——每出現一種新雜訊，就要再加一條新規則。它常常誤殺——擋掉標題裡一個模糊的字，連帶擋掉了一筆其實完全符合的職缺。而且它無法解釋——沒辦法回答「這筆職缺為什麼被擋掉？」</p>
+      <p>修法是不再用是非題思考，改成幫每筆職缺打分數，達到門檻才通知。標題完全符合目標職務的，單靠這一條就能過門檻。標題相關但不完全一致的詞，給比較小的加分。標題明顯是別種職務的，扣很重的分。標題裡模糊的職等字眼，只給象徵性的小扣分——輕到讓一段夠強的描述還能把分數拉回來。描述裡的關鍵字小幅加分，且設有總上限，避免靠堆關鍵字灌分。一個本身就是強烈負面訊號的公司名稱，扣分要重到足以單獨蓋過一個不錯的標題分數。</p>
+      <p>底下更大的設計取捨，是選擇寬鬆而不是嚴格。嚴格的系統會擋掉任何模糊的東西、雜訊較少，但會悄悄漏掉那些標題含蓄、描述卻完全符合的好職缺。寬鬆的系統讓模糊標題先過關，靠描述去把它救回來或刷掉，雜訊較多，但漏掉的真機會更少。我選了寬鬆，因為在求職這件事上，漏掉一個好機會的成本，遠高於多花一分鐘掃過一筆雜訊。</p>
+
+      <h2>那個戴著綠勾勾撒了 27 天謊的 bug</h2>
+      <p>系統上線、穩定跑了大約一週後，我就不再盯著 log 看了——而這正是它開始壞掉的時刻。大約三週後，我注意到好一段時間沒收到信了。回去查 Actions 紀錄：將近一個月，每一次執行都是綠勾勾。而每一次執行，抓到的新職缺都是零筆。沒有任何錯誤訊息，沒有任何失敗的步驟。就只是二十幾次乾乾淨淨、什麼事都沒做的「成功」執行。</p>
+      <p>綠勾勾原來是最危險的故障模式——它不只是沒有提醒你，它還主動告訴你一切正常。</p>
+      <p>修好它花了三個回合，前兩個回合在當下都看起來像是真正的答案。</p>
+      <p><strong>第一幕——錯誤的山頂：</strong>在本機直接跑 scraper、加上逐步 log，看到每個搜尋都卡在頁面載入那一步，然後 30 秒後 timeout。等待條件是 <code>networkidle</code>——要等網路靜止 500ms 才繼續往下走。但目標頁面背景持續發送第三方追蹤腳本的請求，網路永遠不會靜下來，等待條件永遠不會被滿足。Timeout 被 try/except 接住，程式接著處理下一個關鍵字——這就是為什麼整個 workflow 顯示「成功」。修法看起來很明顯：換成 <code>domcontentloaded</code>，再加一個更明確的 <code>wait_for_selector</code> 等職缺卡片元素出現，讓程式不再等整個網路安靜，而是只等它真正需要的那個東西。本機跑起來，職缺又開始抓到了。看起來解決了。</p>
+      <p><strong>第二幕——selector 也過期了：</strong>抓回來的資料卻是髒的。把渲染後的 HTML dump 出來逐行檢查，發現平台從寫這支 scraper 之後也改了整個 DOM 結構。換上日期、地點、描述欄位新的 selector，解決了大部分問題。標題欄位最有意思：舊程式碼讀的是連結的 <code>textContent</code>，但新版的標記裡，使用者搜尋的關鍵字被包在標題裡一個用來高亮的 <code>&lt;span&gt;</code> 中，抓出來的文字夾雜著奇怪的片段。改成讀 <code>title</code> 屬性，拿到的就是乾淨的字串。本機這下穩定下來，一次抓到一天該有的職缺量。我把它 commit、push 上去。</p>
+      <p><strong>第三幕——本機沒事，雲端還是零：</strong>第二天早上的 Actions 執行結果回來，還是零筆。同一份程式碼、同一個 commit——本機二十幾筆，GitHub 的 runner 上零筆。就是這一刻，前兩次修法的本質才浮現：它們從頭到尾都只是治標。真正關鍵的變因不是等待時機，也不是 selector，而是環境本身。</p>
+      <p>為了真的把這件事量出來，我寫了一支只用標準函式庫、完全不開瀏覽器的診斷腳本，接進一支拋棄式、手動觸發的 workflow，讓它直接跑在 GitHub Actions 的 runner 上。它同時量三件事：runner 對外的 IP 和大致地理位置、直接用 HTTP 打平台底層的 JSON API、以及搜尋頁本身的原始 HTML。</p>
+      <p>結果一翻兩瞪眼。runner 的 IP 是美國機房。搜尋頁的原始 HTML 幾乎是個空殼——只有幾 KB，裡面零個職缺連結。而直接打平台自己的 API，回應是完整的 200，整頁職缺資料都在裡面。</p>
+      <p>原來，這個平台在某個時間點悄悄改成了純前端的單頁應用。伺服器現在送出的是一個空殼；真正的職缺是前端用 JS 再發一支 XHR 去打 API、拿到資料後才渲染出來的。在本機，Playwright 開的是完整的 Chromium，會執行那段 JavaScript、那支 XHR 跑得通，職缺正常渲染。在 runner 上，同一支 XHR——由一個坐在機房 IP 上的 headless 瀏覽器發出——被反爬蟲機制悄悄擋掉了。但對同一支 API 發一個普通的 HTTP request，從同一個機房 IP 出發，卻完全沒有問題。</p>
+      <p>這個區分非常關鍵：故障的本質是<em>渲染被擋</em>，不是<em>IP 或地理位置被封</em>。如果把它誤判成地理封鎖，就會去找 proxy 或換一個地區的 VPS——方向完全錯了。</p>
+      <p><strong>真正的修法——把瀏覽器整個拿掉：</strong>既然 API 本身從機房 IP 打都打得通，最乾淨的解法就是不再驅動瀏覽器。scraper 現在直接對平台的 JSON API 發一個普通的 HTTP request，把回應欄位對映回整條 pipeline 原本就在用的內部職缺格式。附帶好處馬上就出現了：CI 不用再裝 Chromium、沒有 headless 瀏覽器指紋會被偵測、薪資和日期欄位從 API 拿到的，比從 DOM 刮出來的乾淨完整得多。</p>
+      <p>這裡有個特別的諷刺。這個修法，正好走回當初架構決策明確放棄的那條路——直接打平台的 API。幾個月前「一律 403」的結論，到頭來早就不成立了：一個普通的 user agent 加 Referer，不需要 cookie，就能直接打通。當年那個感覺很聰明、繞過平台防禦的決定，到這個 bug 浮現的時候，已經變成故障真正的元兇——而它當初想避開的那條路，反而成了最終取代它的解法。</p>
+
+      <h2>真正救了這次 debug 的是什麼</h2>
+      <p>這個 bug 是在調查中途接手的，用的是另一種跟 Claude 協作的模式——在對話視窗裡來回貼 log 很慢，每次「試試這個」都要切到終端機、複製輸出、貼回對話，一個來回三到五分鐘，而且完全看不到本機環境的真實狀況。直接在專案裡工作，讓 Claude 自己跑 scraper、自己讀輸出、立刻改檔案，把這個迴圈壓縮到幾秒鐘。但這次真正關鍵的，其實不是速度。</p>
+      <p>關鍵是兩件事。第一：能在真正會壞的環境裡量測，而不是只量一個替代品。Claude Code 本身也是跑在本機——它也不是 GitHub Actions 的 runner——但它可以寫一支診斷腳本、接進一支拋棄式 workflow，讓那支 workflow 真正在 runner 上執行，再把結果讀回來。正是這一步，才把「本機沒事」跟「雲端壞了」之間的差距，從猜測變成了測量。</p>
+      <p>第二件事，也更重要：第二幕修完之後，看起來已經修好了，當下很容易就此收尾。攔住這件事的，是一句懷疑：「你確定 API 在雲端真的打得通嗎？會不會跟本機又不一樣？」就是這句反問，逼出了「先在真正的 runner 上把 API 量一次，再決定要不要重寫」這一步。沒有這句話，這很可能會以另一次「修好了」收場，但其實仍然悄悄壞著。跟 AI 協作得好，不只是看它執行得多快——也在於人有沒有在正確的時刻踩一腳煞車。</p>
+
+      <h2>學到的教訓</h2>
+      <p><strong>綠勾勾不代表健康。</strong>真正重要的是實際抓到的筆數，而「連續 N 天零筆」本身就該觸發主動告警——靜默失敗才是最危險的故障。</p>
+      <p><strong>別只在跑得通的那台機器上診斷。</strong>本機（住宅 IP、完整瀏覽器）和雲端（機房 IP、headless）的行為，在關鍵的地方就是不一樣。一個只在本機驗證過的修法，等於還沒有在真正重要的地方被驗證過。</p>
+      <p><strong>動手修之前，先分清根因的類別。</strong>「渲染被擋」和「IP 被封」從外面看起來幾乎一樣，但解法完全不同。花幾分鐘做一支探針把兩者分開，比猜錯方向重寫兩次省時間。</p>
+      <p><strong>頁面是 SPA 的話，先去找它背後的 API。</strong>直接打 API，幾乎永遠比驅動一個完整瀏覽器去渲染同一份資料更快、更穩，也更不容易被反爬蟲盯上。</p>
+      <p><strong>你最得意的那個決定，很可能就是日後要親手推翻的那個。</strong>用 headless 瀏覽器繞過反爬蟲，在當時要解決的那個問題上，是正確的決定。它只是沒有「永遠正確」。</p>
+
+      <h2>最終成果</h2>
+      <p>系統現在每天早上自動跑，無人值守。一次執行通常抓到約 200 筆原始職缺，評分過濾後一般剩 30 到 60 筆過門檻。拿掉瀏覽器之後，單次執行時間也從幾分鐘（大部分時間在裝 Chromium）降到幾十秒。GitHub Actions 的用量遠低於免費額度，Gmail SMTP 免費寄信。每月維護成本：零元。</p>
       </span>
     </div>
   </div>

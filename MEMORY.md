@@ -32,7 +32,7 @@ Tim 的個人 AI 專案作品集網站，部署在 GitHub Pages。
 - 首頁（home-page）：Hero → Projects Grid → About → Footer
 - 文章頁用 `<div id="article-{id}" class="article-page">` 結構，`.active` 控制顯示
 
-### 專案列表（5 個）
+### 專案列表（6 個）
 
 | # | ID | 中文名 | 英文名 | 狀態 |
 |---|-----|--------|--------|------|
@@ -43,6 +43,7 @@ Tim 的個人 AI 專案作品集網站，部署在 GitHub Pages。
 | 03 | jobgame | 求職遊戲化 | Gamified Job Search | ⬜ Placeholder，文章未寫 |
 | 04 | flight | 飛行的回憶 | Memories of Flight | ✅ 文章完成 |
 | 05 | i18n | 用 AI 把這個網站雙語化 | Bilingual-izing This Site with AI | ✅ 文章完成 |
+| 06 | jobmonitor | 那個騙了我 27 天的求職監控系統 | The Job Monitor That Lied for 27 Days | ✅ 文章完成 |
 
 ### 日文知識王特殊結構
 - 卡片點進去是**版本索引頁**（article-jpquiz），列出各版本文章
