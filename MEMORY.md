@@ -19,6 +19,7 @@ Tim 的個人 AI 專案作品集網站，部署在 GitHub Pages。
 ~/portfolio/
 ├── index.html      # 整個網站（所有頁面、文章、CSS、JS 都在這一個檔案裡）
 ├── cny-cover.png   # 新春大作戰的封面截圖
+├── images/         # 其他截圖（jpquiz-*、flight-*，皆已縮成 540px 寬 JPG）
 ├── README.md       # Repo 說明
 └── MEMORY.md       # 本文件
 ```
@@ -100,7 +101,7 @@ Tim 的個人 AI 專案作品集網站，部署在 GitHub Pages。
 2. **編輯策略**：不要一次重寫整個檔案，用 str_replace 分段編輯。一次改完會因為體量太大而失敗（這個教訓已經寫成文章了）
 3. **部署**：`git push` 到 main branch，GitHub Pages 自動部署，通常 1-2 分鐘生效
 4. **快取問題**：更新後需 Cmd+Shift+R 強制刷新才能看到變化
-5. **圖片**：目前只有 cny-cover.png，其他專案未放截圖。圖片和 index.html 要在同一目錄
+5. **圖片**：新圖片放 `images/`。日文知識王用 App Store 素材（jp-knowledge-king repo 的 `docs/appstore/`），中英各一套，用 `.lang-en` / `.lang-zh` 包起來切換；飛行的回憶是本機跑遊戲截的圖。多張手機截圖並排用 `.screenshot-row`
 6. **Tim 的偏好**：
    - 與 Tim 用中文對話時，一律使用正體中文（繁體中文）
    - 文章英文為主，中文為翻譯版
@@ -110,8 +111,12 @@ Tim 的個人 AI 專案作品集網站，部署在 GitHub Pages。
 
 ## 待辦事項
 
-- [ ] 各專案補截圖（目前只有新春大作戰有封面圖）
 - [ ] 日文知識王後續版本文章（v1.7.0+；新手 AI 與結算畫面振假名已合併、尚未發版）
 - [ ] Tim 校稿 jpquiz-v3、v4 兩篇（依 commit 紀錄撰寫）
 - [ ] 校正中文翻譯品質（Tim 尚未校稿）
-- [ ] nav 裡的 Contact email 和 footer 的 LinkedIn/GitHub 連結待填入真實網址
+
+## 聯絡資訊
+
+- Email: waitinghir@gmail.com
+- LinkedIn: https://www.linkedin.com/in/weitim/
+- GitHub: https://github.com/waitinghir

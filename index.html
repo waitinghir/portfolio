@@ -580,6 +580,15 @@ footer {
   display: block;
 }
 
+.article-body code { overflow-wrap: anywhere; }
+
+.screenshot-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
 .img-placeholder {
   background: var(--bg-card);
   border: 2px dashed var(--border-subtle);
@@ -732,7 +741,7 @@ footer {
     <div class="nav-links">
       <a href="#projects" onclick="showHome()"><span class="lang-en">Projects</span><span class="lang-zh">專案</span></a>
       <a href="#about" onclick="showHome()"><span class="lang-en">About</span><span class="lang-zh">關於我</span></a>
-      <a href="mailto:your@email.com"><span class="lang-en">Contact</span><span class="lang-zh">聯絡</span></a>
+      <a href="mailto:waitinghir@gmail.com"><span class="lang-en">Contact</span><span class="lang-zh">聯絡</span></a>
       <button class="lang-toggle" onclick="toggleLang()">中文</button>
     </div>
     <div class="nav-status"><span class="lang-en">Open to work</span><span class="lang-zh">求職中</span></div>
@@ -996,6 +1005,7 @@ footer {
       <a class="article-link secondary" href="https://github.com/waitinghir/jp-knowledge-king" target="_blank">⟨/⟩ GitHub</a>
     </div>
     <div class="article-body">
+      <div class="lang-en"><img class="article-img" src="images/jpquiz-header-en.jpg" alt="Nihongo Quiz King App Store header" style="margin-top:2rem;"><div class="screenshot-row"><img class="article-img" src="images/jpquiz-home-en.jpg" alt="Home screen with level picker" loading="lazy"><img class="article-img" src="images/jpquiz-battle1-en.jpg" alt="Battle screen" loading="lazy"><img class="article-img" src="images/jpquiz-result-en.jpg" alt="Result screen" loading="lazy"></div></div><div class="lang-zh"><img class="article-img" src="images/jpquiz-header-zh.jpg" alt="日文知識王 App Store 橫幅" style="margin-top:2rem;"><div class="screenshot-row"><img class="article-img" src="images/jpquiz-home-zh.jpg" alt="首頁與難度選擇" loading="lazy"><img class="article-img" src="images/jpquiz-battle1-zh.jpg" alt="對戰畫面" loading="lazy"><img class="article-img" src="images/jpquiz-result-zh.jpg" alt="結算畫面" loading="lazy"></div></div>
       <p><span class="lang-en">Nihongo Quiz King is a 1v1 quiz game for learning Japanese vocabulary, built with Expo/React Native and shipped to the App Store. This is an ongoing project — each article below documents a phase of its evolution.</span><span class="lang-zh">日文知識王是一款 1v1 日文單字對戰遊戲，使用 Expo/React Native 開發並上架 App Store。這是一個持續進行的專案——以下每篇文章記錄一個演進階段。</span></p>
       <div class="version-list">
         <a class="version-card" onclick="showArticle('jpquiz-v1')">
@@ -1330,6 +1340,7 @@ footer {
       <h2>Overview</h2>
       <p>Memories of Flight (飛行的回憶) is not a game you play to win. It's a game you play to feel something. Built as a single HTML file using Canvas and vanilla JavaScript, it's a narrative experience about loss, regret, and the slow work of reconciliation — told not through cutscenes, but through the act of dodging and catching words as they fall from the sky.</p>
       <p>The premise is simple: you control a glowing soul drifting upward through six chapters. White text fragments are memories to catch. Red text fragments are pain to avoid. But the mechanics carry a deeper logic — and the way the screen responds to damage tells you more about the story than any dialogue could.</p>
+      <div class="screenshot-row"><img class="article-img" src="images/flight-title.jpg" alt="Title screen" loading="lazy"><img class="article-img" src="images/flight-level1.jpg" alt="Chapter 1 gameplay" loading="lazy"><img class="article-img" src="images/flight-level3.jpg" alt="Chapter 3 gameplay" loading="lazy"></div>
       <h2>Why I Built This</h2>
       <p>Traditional storytelling media — novels, films — let you <em>observe</em> emotion. Interactive media can let you <em>inhabit</em> it. I wanted to test a specific hypothesis: that game mechanics themselves can function as metaphor. When your thumb is physically trembling to dodge a red phrase that reads "it's all your fault," you're not just processing information. You're experiencing a micro-simulation of emotional impact.</p>
       <p>The goal wasn't to make something fun. It was to make something that lingers — that players remember not because of a high score, but because of what they felt in the gap between catching a beautiful memory and being immediately punished for it.</p>
@@ -1370,6 +1381,7 @@ footer {
       <h2>概覽</h2>
       <p>飛行的回憶不是一款讓你玩來贏的遊戲。它是一款讓你玩來感受的遊戲。以單一 HTML 檔案、Canvas 和原生 JavaScript 打造，它是一段關於失去、悔恨與和解的敘事體驗——不是透過過場動畫來訴說，而是透過閃避和接住從天而降的文字這個動作本身。</p>
       <p>前提很簡單：你操控一個發光的靈魂，緩緩穿越六個章節。白色文字碎片是要接住的回憶。紅色文字碎片是要閃避的傷痛。但機制承載著更深的邏輯——畫面對傷害的反應方式，比任何對白都更能說明這個故事。</p>
+      <div class="screenshot-row"><img class="article-img" src="images/flight-title.jpg" alt="標題畫面" loading="lazy"><img class="article-img" src="images/flight-level1.jpg" alt="第一章遊戲畫面" loading="lazy"><img class="article-img" src="images/flight-level3.jpg" alt="第三章遊戲畫面" loading="lazy"></div>
       <h2>為什麼做這個</h2>
       <p>傳統敘事媒介——小說、電影——讓你<em>觀察</em>情緒。互動媒介可以讓你<em>住進</em>情緒裡。我想驗證一個具體的假設：遊戲機制本身可以作為隱喻。當你的拇指物理上在顫抖著閃避一段寫著「都是你的錯」的紅色文字時，你不只是在處理資訊，你在經歷一次微型的情緒衝擊模擬。</p>
       <p>目標不是做一個好玩的東西，而是做一個會留下來的東西——玩家記住它不是因為高分，而是因為在接住一段美好回憶後立刻被懲罰的那個間隙裡，他們感受到的。</p>
@@ -1601,9 +1613,9 @@ footer {
     <div class="footer-content">
       <div class="footer-text"><span class="lang-en">© 2025 Tim. Built with AI, shipped with intent.</span><span class="lang-zh">© 2025 Tim. 用 AI 打造，帶著意圖出貨。</span></div>
       <div class="footer-links">
-        <a href="#">LinkedIn</a>
-        <a href="#">GitHub</a>
-        <a href="mailto:your@email.com">Email</a>
+        <a href="https://www.linkedin.com/in/weitim/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/waitinghir" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:waitinghir@gmail.com">Email</a>
       </div>
     </div>
   </div>
