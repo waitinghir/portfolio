@@ -32,7 +32,7 @@ Tim 的個人 AI 專案作品集網站，部署在 GitHub Pages。
 - 首頁（home-page）：Hero → Projects Grid → About → Footer
 - 文章頁用 `<div id="article-{id}" class="article-page">` 結構，`.active` 控制顯示
 
-### 專案列表（6 個）
+### 專案列表（5 個）
 
 | # | ID | 中文名 | 英文名 | 狀態 |
 |---|-----|--------|--------|------|
@@ -40,15 +40,18 @@ Tim 的個人 AI 專案作品集網站，部署在 GitHub Pages。
 | 02 | jpquiz | 日文知識王 | Japanese Knowledge King | ✅ 有版本索引頁 |
 | 02a | jpquiz-v1 | — | From Zero to the App Store | ✅ v1.0→v1.1 文章完成 |
 | 02b | jpquiz-v2 | — | Cloud Architecture and N3 Expansion | ✅ v1.2→v1.3 文章完成 |
-| 03 | jobgame | 求職遊戲化 | Gamified Job Search | ⬜ Placeholder，文章未寫 |
-| 04 | flight | 飛行的回憶 | Memories of Flight | ✅ 文章完成 |
-| 05 | i18n | 用 AI 把這個網站雙語化 | Bilingual-izing This Site with AI | ✅ 文章完成 |
-| 06 | jobmonitor | 那個騙了我 27 天的求職監控系統 | The Job Monitor That Lied for 27 Days | ✅ 文章完成 |
+| 02c | jpquiz-v3 | — | Real Word Lists, a Rival, and a Backend | ✅ v1.4→v1.5.1 文章完成 |
+| 02d | jpquiz-v4 | — | Quality as a System | ✅ v1.5.2→v1.6.3 文章完成 |
+| 03 | flight | 飛行的回憶 | Memories of Flight | ✅ 文章完成 |
+| 04 | i18n | 用 AI 把這個網站雙語化 | Bilingual-izing This Site with AI | ✅ 文章完成 |
+| 05 | jobmonitor | 那個騙了我 27 天的求職監控系統 | The Job Monitor That Lied for 27 Days | ✅ 文章完成 |
 
 ### 日文知識王特殊結構
 - 卡片點進去是**版本索引頁**（article-jpquiz），列出各版本文章
-- 每篇版本文章是獨立的 article-page（article-jpquiz-v1, article-jpquiz-v2）
-- Coming Soon 的 v1.4.0+ 卡片用 `opacity:0.4; pointer-events:none` 灰顯
+- 每篇版本文章是獨立的 article-page（article-jpquiz-v1 ~ v4）
+- 目前 App 版本 v1.6.3（首頁卡片與索引頁都有寫版本號，更新時要一起改）
+- 版本文章的素材來源：jp-knowledge-king repo 的 commit 訊息（寫得很詳細）
+- Coming Soon 的 v1.7.0+ 卡片用 `opacity:0.4; pointer-events:none` 灰顯
 
 ---
 
@@ -93,7 +96,7 @@ Tim 的個人 AI 專案作品集網站，部署在 GitHub Pages。
 
 ## 開發注意事項
 
-1. **單檔結構**：所有 CSS、HTML、JS 都在 index.html 裡，目前約 1,400+ 行
+1. **單檔結構**：所有 CSS、HTML、JS 都在 index.html 裡，目前約 1,650 行
 2. **編輯策略**：不要一次重寫整個檔案，用 str_replace 分段編輯。一次改完會因為體量太大而失敗（這個教訓已經寫成文章了）
 3. **部署**：`git push` 到 main branch，GitHub Pages 自動部署，通常 1-2 分鐘生效
 4. **快取問題**：更新後需 Cmd+Shift+R 強制刷新才能看到變化
@@ -107,8 +110,8 @@ Tim 的個人 AI 專案作品集網站，部署在 GitHub Pages。
 
 ## 待辦事項
 
-- [ ] 求職遊戲化（jobgame）文章——等 Tim 提供摘要
 - [ ] 各專案補截圖（目前只有新春大作戰有封面圖）
-- [ ] 日文知識王後續版本文章（v1.4.0+）
+- [ ] 日文知識王後續版本文章（v1.7.0+；新手 AI 與結算畫面振假名已合併、尚未發版）
+- [ ] Tim 校稿 jpquiz-v3、v4 兩篇（依 commit 紀錄撰寫）
 - [ ] 校正中文翻譯品質（Tim 尚未校稿）
 - [ ] nav 裡的 Contact email 和 footer 的 LinkedIn/GitHub 連結待填入真實網址
