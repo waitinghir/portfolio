@@ -790,8 +790,8 @@ footer {
           <h3 class="project-title">Lunar New Year Challenge</h3>
           <div class="project-subtitle">新春大作戰</div>
           <p class="project-desc">
-            <span class="lang-en">An interactive, AI-driven experience designed for the Lunar New Year season — blending cultural celebration with engaging gameplay.</span>
-            <span class="lang-zh">一款以農曆新年為主題的互動遊戲體驗，將傳統文化元素融入遊戲機制中。</span>
+            <span class="lang-en">A three-stage mobile game I built for Lunar New Year without writing code, and what it taught me about turning "it feels wrong" into feedback AI can act on.</span>
+            <span class="lang-zh">一款我沒寫一行程式碼、為農曆新年做的三關手機遊戲，以及它教會我的事：怎麼把「感覺不對」變成 AI 修得了的回饋。</span>
           </p>
           <div class="project-tags">
             <span class="tag">AI</span>
@@ -921,11 +921,11 @@ footer {
     <a class="article-back" onclick="showHome()"><span class="lang-en">← Back to all projects</span><span class="lang-zh">← 回到所有專案</span></a>
     <div class="article-header">
       <div class="article-category">Project 01 — Gamification × AI</div>
-      <h1 class="article-h1"><span class="lang-en">Lunar New Year Challenge</span><span class="lang-zh">新春大作戰</span><br><span style="color:var(--accent-magenta)">新春大作戰</span></h1>
+      <h1 class="article-h1"><span class="lang-en">Game Feel Is a Spec</span><span class="lang-zh">手感也是規格</span><br><span style="color:var(--accent-magenta)">新春大作戰</span></h1>
       <div class="article-meta">
         <span>By Tim</span>
         <span>2026</span>
-        <span><span class="lang-en">7 min read</span><span class="lang-zh">閱讀 7 分鐘</span></span>
+        <span><span class="lang-en">6 min read</span><span class="lang-zh">閱讀 6 分鐘</span></span>
       </div>
     </div>
     <div class="article-links">
@@ -934,58 +934,58 @@ footer {
     </div>
     <div class="article-body">
       <span class="lang-en">
-      <h2>Overview</h2>
-      <p>Lunar New Year Challenge (新春大作戰) is a three-stage mobile web game that transforms traditional Chinese New Year cultural elements — red envelopes, lottery tickets, and firecrackers — into playable game mechanics. The entire game runs as a single HTML file in any mobile browser, requiring zero installation. The goal was simple: build something fun enough to share with family and friends during the holiday season, while celebrating the cultural traditions that make Lunar New Year special.</p>
+      <p><em>Short on time? Read the first section and the last one. The launch-day story in between is the most useful part if you build with AI.</em></p>
+      <h2>"It Feels Too Hard" Fixes Nothing</h2>
+      <p>I built this game for Lunar New Year 2026 entirely in conversation with Claude, without writing any code myself. My job was to play it on my phone and describe what was wrong. That turned out to be the hard part. "It feels too hard" gave Claude nothing to work with. "I keep hitting Retry right after I win" told it exactly what to change.</p>
+      <p>When AI can rebuild a stage in minutes, the slowest part of the loop is no longer the code. It's the quality of the feedback. This article is about how I learned to give better feedback, and about launch day, when fixing one bug nearly deleted more than half the game.</p>
       <div style="margin:2rem 0; max-width:360px;"><img class="article-img" src="cny-cover.png" alt="Lunar New Year Challenge — Start Screen"></div>
-      <h2>Why I Built This</h2>
-      <p>I wanted to explore whether a complete, polished mobile game could be built entirely through human-AI collaboration — with me providing the creative direction and gameplay feedback, and Claude handling all the technical implementation. Lunar New Year felt like the perfect theme: it's culturally rich, visually vibrant, and inherently social. Instead of just another greeting card app, I wanted to create something people would actually <em>play</em>.</p>
-      <h2>The Three Stages</h2>
-      <p>Each stage introduces a completely different gameplay type, keeping players engaged through variety rather than repetition.</p>
-      <p><strong>Stage 1 — Red Envelope Defense:</strong> Players control a horse character (a nod to the Chinese zodiac) and catch red envelopes falling from the sky while dodging obstacles. It's a classic action format built around an HP system, collision detection, and touch controls — designed to feel snappy and satisfying on a phone screen.</p>
-      <p><strong>Stage 2 — New Year Lottery:</strong> A memory-based challenge where players must remember and collect the correct number combinations. This one plays on the "scratch card" atmosphere of the holiday season, testing short-term memory instead of reflexes.</p>
-      <p><strong>Stage 3 — Firecracker Frenzy:</strong> A survival mode where players dodge waves of firecrackers with varying trajectories and blast patterns. The longer you survive, the more intense it gets — multiple explosion types keep the visuals fresh even in extended sessions.</p>
-      <p>Between stages, animated transition screens and firework particle effects give the game a complete, polished feel — not just three mini-games stitched together, but a cohesive experience from start to finish.</p>
-      <h2>How AI Was Used</h2>
-      <p>This project was built entirely through conversation with Claude. The collaboration model worked like this: I described what I wanted a stage to <em>feel</em> like, Claude produced a fully functional implementation, I playtested it on my phone, and then I fed back specific observations — "the red envelopes fall too fast," "the win button is too easy to miss-tap," "the explosions feel repetitive after 30 seconds." Claude would then adjust parameters, restructure UI elements, or add visual variety based on that feedback.</p>
-      <p>What made this work wasn't just code generation — it was the iterative loop. Claude built the entire Canvas game engine from scratch, including the game loop, state machine, collision system, particle effects, and multi-layer canvas rendering. But the <em>quality</em> of the game came from dozens of test-and-refine cycles where I translated subjective gameplay feel into concrete change requests.</p>
-      <h2>Key Design Decisions</h2>
-      <p><strong>Memory games need real memory pressure.</strong> The first version of Stage 2 displayed the target numbers on screen the entire time — which completely defeated the purpose. Removing the persistent hint was an obvious fix in hindsight, but it reinforced an important principle: the core tension of a memory game is "can you remember it?" Anything that undermines that tension undermines the entire mechanic.</p>
-      <p><strong>Primary actions must look primary.</strong> After clearing a stage, the "Next Stage" and "Retry" buttons were originally the same size and prominence. During playtesting, I kept accidentally hitting "Retry" right after winning — turning a moment of triumph into frustration. The fix was straightforward: make "Next Stage" visually dominant and demote "Retry" to a secondary style. It's a basic UX principle, but one you only truly internalize when you feel the pain yourself.</p>
-      <p><strong>Difficulty curves can't be designed on paper.</strong> Both Stage 1 and Stage 3 involve objects spawning continuously. Too fast and the player is overwhelmed instantly; too slow and it's boring. Finding the sweet spot — "consistently tense but never hopeless" — required playing the game over and over and nudging spawn rates by small increments. No amount of theoretical planning could have replaced that hands-on tuning.</p>
-      <p><strong>Visual repetition kills spectacle.</strong> Stage 3's explosions initially used a single animation pattern. It looked impressive for the first few seconds, then became wallpaper. Adding multiple explosion styles and particle variations solved this — the same mechanic felt dramatically more engaging simply because each detonation looked slightly different.</p>
-      <h2>Tech Stack</h2>
-      <p>The game is a single HTML file using HTML5 Canvas for rendering, vanilla JavaScript for game logic and state management, CSS3 animations for UI transitions, the Touch Events API for mobile controls, multi-canvas layering for visual depth (firework effects rendered on separate layers), and a custom particle system for all explosion and celebration effects. No frameworks, no build tools, no dependencies — just one file you can open in a browser and play.</p>
-      <h2>Reflections</h2>
-      <p>The biggest takeaway from this project isn't technical — it's about the collaboration model. Building a game through conversation with an AI inverts the traditional workflow. Instead of writing code and then testing, I was <em>playing</em> and then describing. The hardest part was articulating "game feel" — an inherently fuzzy concept — precisely enough for Claude to translate it into parameter changes. Saying "it feels too hard" isn't useful. Saying "enemies spawn every 0.8 seconds and I can't physically move my thumb fast enough to dodge them all" is.</p>
-      <p>The cultural elements weren't just a skin. Red envelopes, lottery, and firecrackers each naturally map to a different game genre (action, puzzle, survival), which meant the theme actually <em>drove</em> gameplay variety rather than just decorating it. That was a happy discovery — the best design decisions often come from constraints rather than from open-ended brainstorming.</p>
-      <p>If I were to do it again, I'd add a scoring system that persists across all three stages and some form of social sharing — a screenshot or short animation players could send to friends. The game was built to be shared, and making that sharing frictionless would have completed the loop.</p>
+      <h2>The Game</h2>
+      <p>Lunar New Year Challenge (新春大作戰) is a three-stage mobile web game made to share with family and friends over the holiday. Each stage turns a holiday tradition into a different kind of game: catching red envelopes while dodging obstacles (action), remembering six lottery numbers and collecting them (memory), and surviving waves of firecrackers (survival). It runs as one HTML file in any phone browser, with nothing to install.</p>
+      <p>The theme did more than decorate the game. Red envelopes, lottery tickets and firecrackers each map naturally to a different genre, so the culture drove the variety instead of being a skin on top of it.</p>
+      <h2>Describe the Moment, Not the Fix</h2>
+      <p>Looking back at the feedback that worked, it always described a specific moment and what I did in it, not a solution. Claude was good at finding the fix once it knew what was actually happening:</p>
+      <p><strong>Vague:</strong> "Stage 2 is too easy."<br><strong>Useful:</strong> "The six numbers stay on screen the whole time, so I never have to remember anything."<br><strong>Fix:</strong> show the numbers once, then hide them. A memory game needs real memory pressure.</p>
+      <p><strong>Vague:</strong> "The end screen is confusing."<br><strong>Useful:</strong> "After clearing a stage, I keep hitting Retry when I mean Next, because the two buttons look the same."<br><strong>Fix:</strong> make Next visually dominant and Retry secondary. Turning a win into frustration is worse than any bug.</p>
+      <p><strong>Vague:</strong> "The explosions are boring."<br><strong>Useful:</strong> "The explosions look great for a few seconds, then they all look the same after about 30 seconds."<br><strong>Fix:</strong> several explosion styles and particle variations. Same mechanic, much more engaging.</p>
+      <p><strong>Vague:</strong> "It's too hard."<br><strong>Useful:</strong> "The red envelopes fall too fast; my thumb can't get across the screen in time."<br><strong>Fix:</strong> small changes to spawn rates, played again each time, until it felt "consistently tense but never hopeless". Difficulty curves can't be designed on paper.</p>
+      <p>This is the same skill as writing a good bug report or giving design feedback to a team: what you did, what happened, what you expected. Working with AI just makes the loop so short that weak feedback becomes the bottleneck.</p>
+      <h2>Launch Day: The Fix That Deleted the Game</h2>
+      <p>I published the game on February 18, the day after Lunar New Year. On phones, the buttons didn't respond. You couldn't even start the game.</p>
+      <p>The first fix came back as a file of 747 lines. The original had 1,820. More than half the game was gone, including the animation of lottery balls flying out during the number reveal. I rolled it back. The second attempt did the same thing, and I rolled that back too.</p>
+      <p>The fix that worked changed 18 lines. The game listened for touches across the whole screen and cancelled every one of them, so it could control the player character. That also cancelled taps on the buttons. The fix was to cancel touches only while a stage is being played.</p>
+      <p>The lesson wasn't about touch events. A tap bug shouldn't need a thousand changed lines. When a fix is much bigger than the problem, something else changed, and you need to find out what before you ship it. Being able to roll back in one step is what made it safe to try twice.</p>
+      <h2>If You Build With AI and Don't Read the Code</h2>
+      <p><strong>1. Describe the moment, not the fix.</strong> What you did, what happened, what you expected. Let the AI propose the change.</p>
+      <p><strong>2. Turn every "feels" into something you can observe.</strong> A mistake you keep making, a point where you give up, a number of seconds.</p>
+      <p><strong>3. Check the size of every fix.</strong> You don't need to read the code to notice that a one-line problem came back as a thousand-line change.</p>
+      <p><strong>4. Keep the last working version one step away.</strong> Rolling back is what lets you experiment without fear.</p>
       </span>
       <span class="lang-zh">
-      <h2>概覽</h2>
-      <p>新春大作戰是一款三關式手機網頁遊戲，將農曆新年的傳統文化元素——紅包、樂透、爆竹——轉化為可遊玩的遊戲機制。整個遊戲以單一 HTML 檔案運行在任何手機瀏覽器上，零安裝。目標很簡單：做一個有趣到值得在過年期間和親友分享的東西，同時慶祝讓農曆新年特別的文化傳統。</p>
+      <p><em>時間不多的話，讀第一節和最後一節就好。如果你也在用 AI 做東西，中間上線當天的故事最有用。</em></p>
+      <h2>「感覺太難了」什麼都修不了</h2>
+      <p>這個遊戲是我在 2026 年農曆新年，完全透過和 Claude 對話做出來的，我自己一行程式碼都沒寫。我的工作是用手機玩，然後說出哪裡不對。結果這才是最難的部分。「感覺太難了」讓 Claude 無從下手；「我贏了之後一直按到重來」則清楚告訴它要改什麼。</p>
+      <p>當 AI 幾分鐘就能重做一關，整個迴圈裡最慢的就不再是程式，而是回饋的品質。這篇文章講我怎麼學會給出更好的回饋，以及上線當天，修一個 bug 差點刪掉半個以上的遊戲。</p>
       <div style="margin:2rem 0; max-width:360px;"><img class="article-img" src="cny-cover.png" alt="新春大作戰——開始畫面"></div>
-      <h2>為什麼做這個</h2>
-      <p>我想驗證一個想法：一款完整、有品質的手機遊戲，能否完全透過人與 AI 的協作來完成——我負責創意方向和遊玩回饋，Claude 負責所有技術實作。農曆新年是完美的主題：文化底蘊豐富、視覺鮮豔、天然適合社交分享。與其做一張電子賀卡，我想做人們真正會<em>玩</em>的東西。</p>
-      <h2>三個關卡</h2>
-      <p>每一關都是完全不同的遊戲類型，透過多樣性保持玩家的投入感。</p>
-      <p><strong>第一關——紅包防衛戰：</strong>玩家操控一匹馬角色（呼應生肖主題），接住從天而降的紅包，同時閃避障礙物。這是經典的動作遊戲模式，建立在血量系統、碰撞偵測和觸控操作之上——設計上追求在手機螢幕上的爽快手感。</p>
-      <p><strong>第二關——新春大樂透：</strong>記憶型挑戰，玩家需要記住並收集正確的數字組合。這一關玩的是年節「刮刮樂」的氛圍，考驗的是短期記憶而非反射神經。</p>
-      <p><strong>第三關——爆竹一聲響：</strong>生存模式，玩家閃避不同軌跡和爆炸範圍的爆竹浪潮。撐越久越激烈——多種爆炸類型讓視覺在長時間遊玩中保持新鮮。</p>
-      <p>在關卡之間，過場動畫搭配煙火粒子特效讓遊戲有完整的質感——不是三個小遊戲硬拼在一起，而是從頭到尾一氣呵成的體驗。</p>
-      <h2>AI 如何參與</h2>
-      <p>這個專案完全透過與 Claude 的對話來完成。協作模式是這樣的：我描述一個關卡要有什麼「感覺」，Claude 產出完整可運行的實作，我在手機上實測，然後回饋具體觀察——「紅包掉太快了」、「過關按鈕太容易按錯」、「爆炸看 30 秒就膩了」。Claude 再根據回饋調整參數、重新排列 UI 元素或增加視覺多樣性。</p>
-      <p>讓這一切運作的不只是程式碼生成——而是迭代循環。Claude 從零建立了整個 Canvas 遊戲引擎，包含遊戲迴圈、狀態機、碰撞系統、粒子特效和多層畫布渲染。但遊戲的<em>品質</em>來自數十次測試與調整的循環，在這些循環中，我把主觀的遊戲手感轉譯為具體的修改需求。</p>
-      <h2>關鍵設計決策</h2>
-      <p><strong>記憶遊戲需要真正的記憶壓力。</strong>第二關的第一版在畫面上全程顯示目標數字——這完全消除了挑戰性。移除持續提示事後看來理所當然，但它強化了一個重要原則：記憶遊戲的核心張力在於「你記不記得住」，任何削弱這個張力的設計都會讓整個機制失去意義。</p>
-      <p><strong>主要動作必須看起來就是主要的。</strong>過關後，「下一關」和「重試」按鈕原本大小和醒目程度相同。實測時我不斷在剛贏的時候誤按「重試」——把勝利的喜悅變成挫折。修正很直接：讓「下一關」在視覺上佔主導，把「重試」降為次要樣式。這是基本的 UX 原則，但只有自己承受過痛苦才會真正內化。</p>
-      <p><strong>難度曲線無法紙上設計。</strong>第一關和第三關都涉及物件持續生成。太快玩家瞬間被淹沒，太慢又覺得無聊。找到那個甜蜜點——「持續緊張但不至於絕望」——需要反覆遊玩，一點一點微調生成速率。再多的理論規劃都無法取代這種手感調校。</p>
-      <p><strong>視覺重複會扼殺華麗感。</strong>第三關的爆炸最初只有一種動畫模式。前幾秒看起來很炫，之後就變成壁紙。加入多種爆炸樣式和粒子變化解決了這個問題——同樣的機制僅僅因為每次爆炸看起來稍有不同，就讓體驗感受截然不同。</p>
-      <h2>技術棧</h2>
-      <p>遊戲是一個單一 HTML 檔案，使用 HTML5 Canvas 做渲染、原生 JavaScript 做遊戲邏輯和狀態管理、CSS3 動畫做 UI 轉場、Touch Events API 做手機觸控操作、多層 Canvas 疊加做視覺層次（煙火特效渲染在獨立圖層上），以及自製的粒子系統處理所有爆炸和慶祝效果。沒有框架、沒有建置工具、沒有相依套件——一個檔案，在瀏覽器打開就能玩。</p>
-      <h2>反思</h2>
-      <p>這個專案最大的收穫不在技術——而在協作模式。透過對話和 AI 一起做遊戲，翻轉了傳統的開發流程。不是先寫程式再測試，而是先<em>玩</em>再描述。最難的部分是把「遊戲手感」——一個本質上模糊的概念——精確到足以讓 Claude 轉化為參數調整。說「感覺太難了」沒有用，說「敵人每 0.8 秒生成一次，我的拇指物理上來不及閃」才有用。</p>
-      <p>文化元素不只是皮膚。紅包、樂透、爆竹各自天然對應不同的遊戲類型（動作、益智、生存），這意味著主題實際上<em>驅動</em>了玩法多樣性，而不只是裝飾。這是個快樂的發現——最好的設計決策往往來自限制，而非天馬行空的腦力激盪。</p>
-      <p>如果重來一次，我會加入跨三關的累積計分系統，以及某種社交分享——讓玩家可以傳一張截圖或短動畫給朋友。這遊戲生來就是要被分享的，讓分享變得零摩擦才能完成整個循環。</p>
+      <h2>這個遊戲</h2>
+      <p>新春大作戰是一款三關的手機網頁遊戲，做來在過年期間分享給家人朋友。每一關把一個過年習俗變成不同類型的遊戲：一邊閃避障礙一邊接紅包（動作）、記住六個樂透號碼再把它們收集起來（記憶）、在一波波爆竹中存活下來（生存）。整個遊戲是一個 HTML 檔案，任何手機瀏覽器都能玩，不用安裝。</p>
+      <p>主題不只是裝飾。紅包、樂透、爆竹各自自然對應到一種遊戲類型，所以是文化本身帶出了玩法的多樣性，而不是一層貼在上面的皮。</p>
+      <h2>描述當下，而不是解法</h2>
+      <p>回頭看那些有用的回饋，它們都描述了一個具體的當下，以及我在那個當下做了什麼，而不是一個解法。只要 Claude 知道實際發生了什麼，它很擅長找出修法：</p>
+      <p><strong>模糊：</strong>「第二關太簡單。」<br><strong>有用：</strong>「六個號碼一直顯示在畫面上，我根本不用記。」<br><strong>修法：</strong>號碼只顯示一次，然後藏起來。記憶遊戲需要真正的記憶壓力。</p>
+      <p><strong>模糊：</strong>「結算畫面很混亂。」<br><strong>有用：</strong>「過關之後，我一直按到重來，其實我想按下一關，因為兩個按鈕長得一樣。」<br><strong>修法：</strong>讓「下一關」在視覺上明顯突出，「重來」降為次要。把勝利變成挫折，比任何 bug 都糟。</p>
+      <p><strong>模糊：</strong>「爆炸很無聊。」<br><strong>有用：</strong>「爆炸前幾秒很好看，大概 30 秒之後就全部長得一樣了。」<br><strong>修法：</strong>多種爆炸樣式和粒子變化。同樣的機制，好玩很多。</p>
+      <p><strong>模糊：</strong>「太難了。」<br><strong>有用：</strong>「紅包掉太快，我的拇指來不及移過去。」<br><strong>修法：</strong>每次小幅調整生成頻率，每次都重玩一遍，直到感覺「一直很緊張，但從不絕望」。難度曲線沒辦法在紙上設計。</p>
+      <p>這和寫一份好的 bug 回報、或是給團隊設計回饋是同一種能力：你做了什麼、發生了什麼、你預期什麼。和 AI 協作只是讓迴圈短到，模糊的回饋變成了瓶頸。</p>
+      <h2>上線當天：一個把遊戲刪掉的修法</h2>
+      <p>我在 2 月 18 日、農曆新年隔天把遊戲發布出去。在手機上，按鈕完全沒有反應，連遊戲都進不去。</p>
+      <p>第一次修法回來的檔案只有 747 行，原本有 1,820 行。超過一半的遊戲不見了，包括開獎時樂透球飛出來的動畫。我把它退回。第二次嘗試也一樣，我又退回了一次。</p>
+      <p>真正有效的修法只改了 18 行。遊戲在整個畫面上監聽觸控，並且取消每一次觸控，好用來控制角色。這也連帶取消了對按鈕的點擊。修法是只在關卡進行中才取消觸控。</p>
+      <p>教訓不在觸控事件。一個點擊的 bug，不應該需要改一千行。當修法比問題大得多，一定有別的東西被改掉了，上線前你得先搞清楚是什麼。而能一步退回上一個可用版本，才讓我敢試第二次。</p>
+      <h2>如果你用 AI 做東西，但不讀程式碼</h2>
+      <p><strong>1. 描述當下，而不是解法。</strong>你做了什麼、發生了什麼、你預期什麼。讓 AI 提出修法。</p>
+      <p><strong>2. 把每一個「感覺」變成觀察得到的東西。</strong>一個你一直犯的錯、一個你放棄的時間點、幾秒鐘。</p>
+      <p><strong>3. 檢查每一次修改的大小。</strong>你不用讀程式碼，也看得出一個一行的問題，回來變成一千行的修改。</p>
+      <p><strong>4. 讓上一個可用版本永遠只差一步。</strong>能退回，你才能放心實驗。</p>
       </span>
     </div>
   </div>
