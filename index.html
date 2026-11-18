@@ -807,8 +807,8 @@ footer {
           <h3 class="project-title">Japanese Knowledge King</h3>
           <div class="project-subtitle">日文知識王</div>
           <p class="project-desc">
-            <span class="lang-en">A 1v1 quiz game for learning Japanese vocabulary — built with Expo/React Native and shipped to the App Store. Currently on v1.6.3.</span>
-            <span class="lang-zh">一款 1v1 日文單字對戰遊戲，使用 Expo/React Native 開發並上架 App Store。目前版本 v1.6.3。</span>
+            <span class="lang-en">A 1v1 quiz game for learning Japanese vocabulary — built with Expo/React Native and shipped to the App Store. Currently on v1.8.0.</span>
+            <span class="lang-zh">一款 1v1 日文單字對戰遊戲，使用 Expo/React Native 開發並上架 App Store。目前版本 v1.8.0。</span>
           </p>
           <div class="project-tags">
             <span class="tag">AI</span>
@@ -1000,7 +1000,7 @@ footer {
       <div class="article-meta">
         <span>By Tim</span>
         <span><span class="lang-en">Ongoing project</span><span class="lang-zh">持續開發中</span></span>
-        <span><span class="lang-en">Currently v1.6.3</span><span class="lang-zh">目前 v1.6.3</span></span>
+        <span><span class="lang-en">Currently v1.8.0</span><span class="lang-zh">目前 v1.8.0</span></span>
       </div>
     </div>
     <div class="article-links">
@@ -1038,14 +1038,14 @@ footer {
         <a class="version-card" onclick="showArticle('jpquiz-v4')">
           <div class="version-card-left">
             <span class="version-tag">v1.5.2 → v1.6.3</span>
-            <span class="version-title"><span class="lang-en">Quality as a System</span><span class="lang-zh">把品質做成一套系統</span></span>
-            <span class="version-desc"><span class="lang-en">Word bank validation, two-model blind review, live answer data, cloud backup, and an honest App Store listing</span><span class="lang-zh">題庫驗證、雙模型盲測、線上作答數據、雲端備份，以及誠實的 App Store 頁面</span></span>
+            <span class="version-title"><span class="lang-en">Test the Reviewer Before You Trust It</span><span class="lang-zh">先測試評審，再信任它</span></span>
+            <span class="version-desc"><span class="lang-en">The first AI reviewer caught half the known problems. How I built a five-layer evaluation system for 640 AI-written questions, and what still got through.</span><span class="lang-zh">第一版 AI 評審只抓到一半的已知問題。我怎麼替 640 道 AI 產出的題目建立五層評測，以及還是漏掉了什麼。</span></span>
           </div>
           <span class="version-arrow">→</span>
         </a>
         <a class="version-card" style="opacity:0.4; pointer-events:none;">
           <div class="version-card-left">
-            <span class="version-tag">v1.7.0+</span>
+            <span class="version-tag">v1.6.4 → v1.8.0</span>
             <span class="version-title">Coming Soon</span>
             <span class="version-desc"><span class="lang-en">What's next for Nihongo Quiz King</span><span class="lang-zh">日文知識王的下一步</span></span>
           </div>
@@ -1260,67 +1260,73 @@ footer {
     <a class="article-back" onclick="showArticle('jpquiz')"><span class="lang-en">← Back to version list</span><span class="lang-zh">← 回到版本列表</span></a>
     <div class="article-header">
       <div class="article-category">日文知識王 — v1.5.2 → v1.6.3</div>
-      <h1 class="article-h1"><span class="lang-en">Quality as a System</span><span class="lang-zh">把品質做成一套系統</span></h1>
-      <div class="article-meta"><span>By Tim</span><span>2026</span><span><span class="lang-en">8 min read</span><span class="lang-zh">閱讀 8 分鐘</span></span></div>
+      <h1 class="article-h1"><span class="lang-en">Test the Reviewer Before You Trust It</span><span class="lang-zh">先測試評審，再信任它</span></h1>
+      <div class="article-meta"><span>By Tim</span><span>2026</span><span><span class="lang-en">7 min read</span><span class="lang-zh">閱讀 7 分鐘</span></span></div>
     </div>
     <div class="article-body">
       <span class="lang-en">
-      <h2>Overview</h2>
-      <p>Since v1.2, the app has loaded its question bank directly from the <code>main</code> branch on GitHub. That's what lets me fix questions without App Store review, but it also means <strong>merging into main is going live</strong>. A wrong question goes to every player within minutes. With more than 600 questions in two languages, re-reading them by hand every time wasn't going to work. This phase, from v1.5.2 to v1.6.3, turned "I checked it" into a pipeline: automated checks, a blind review by two AI models, and data from real players. It also added cloud backup, fixed a bug that had been there since v1.0, and rewrote the App Store listing to be honest.</p>
-      <h2>Writing Down What a Good Question Is</h2>
-      <p>The first step wasn't code. It was a spec (<code>docs/wordbank-spec.md</code>) that defines a valid question. The key rule comes from the kana-only design: <em>looking only at the kana, exactly one of the four options must be correct.</em> That rule turned out to be stricter than it sounds, because a distractor is also wrong if it is:</p>
-      <p>• a synonym or near-synonym of the answer;<br>• the meaning of another word with the same reading. The card shows かう, which can be 買う (to buy) or 飼う (to keep a pet), so "to keep a pet" can't be a distractor for "to buy";<br>• another valid meaning of the same word;<br>• a broader category that contains the answer ("animal" as a distractor for "living thing").</p>
-      <p>Under this definition, many existing questions had more than one correct answer. A full rewrite of the N2 and N3 distractors followed, plus fixes for N4 homophone traps like なく (泣く "to cry" vs 鳴く "to sing, of birds") and かえる (変える / 帰る / 換える).</p>
-      <h2>Five Levels of Checking</h2>
-      <p><strong>L1 — Validator.</strong> <code>validate_wordbank.py</code> checks every entry in both languages: missing fields, duplicate IDs, a distractor that equals or contains the answer, kana or Japanese-only characters in Chinese options, Chinese characters in English options. It runs as a pre-commit hook on my machine and as a GitHub Actions check on every pull request, and branch protection is meant to block merging until it passes. Later it learned one more check: every kanji in the Japanese field must be readable as the kana shown (using readings from KANJIDIC2). This caught Chinese written into the Japanese field, such as 口罩 instead of マスク, which would have been shown to players as if it were Japanese.</p>
-      <p><strong>L2 — Homophone check.</strong> A script looks up every kana reading in JMdict, a Japanese dictionary database, and flags English distractors that match the meaning of another word with the same reading. It found three right away: 泣く with "to sing", 広告 (advertisement) with "complaint" (抗告), and 紹介 (introduction) with "explanation" (詳解).</p>
-      <p><strong>L3 — Two-model blind review.</strong> This was the most interesting part. Two different Claude models act as test-takers. Each one sees only what a player sees, the kana and four options, picks an answer, and flags any question where more than one option could be right. Before trusting the reviewers, I tested the reviewer prompt on a "canary set" of questions I already knew were bad. The first prompt caught only 27–53% of them. A rewritten prompt that asks the model to score each option separately caught 59 of 60. Only then did I run it on all 640 words in both languages.</p>
-      <p><strong>L4 — Fix loop.</strong> If either reviewer flags a question, the distractor is replaced and the question is tested again. It took three rounds for every question to pass, and nothing needed a human decision. The findings were subtle: 発表 with "release" (also a valid meaning), transitive/intransitive pairs like 見つかる / 見つける that read the same in Chinese, and about 25 other near-synonyms.</p>
-      <p><strong>L5 — Live data (v1.5.2).</strong> After each match, the app now sends the five answers to Supabase anonymously: which word, which options were shown, what the player picked, and how long it took. A database view lists "suspicious distractors", any wrong option chosen by 30% or more of players over at least 20 attempts, which usually means it's actually a correct answer. Players can also tap a flag next to any question on the result screen and choose a reason, such as "more than one answer is right".</p>
-      <h2>A Bug From v1.0</h2>
-      <p>v1.5.2 also fixed a bug that had been in the game since the very first release. From question 2 onward, when the timer ran out, nothing happened. The question froze at zero until the player tapped, and that late tap still scored points. The cause was a classic React mistake: the timer callback was created when the question started, so it saw an old "phase" value left over from the previous question and returned early. The fix keeps the current phase in a ref. It went unnoticed for seven months, probably because most players answer before the time runs out.</p>
-      <h2>v1.6.0 — Cloud Backup Without a Login</h2>
-      <p>All player progress (level, score, win rate) was stored only on the device. v1.6.0 backs it up to the cloud without asking anyone to create an account. On launch, the app signs in anonymously with Supabase and compares the device copy with the cloud copy. <strong>Whichever copy has more games played wins</strong>, so progress never goes backwards. After each match the new data is uploaded. Everything is best-effort: offline play works exactly as before, and failed uploads retry later. Row-level security makes sure each anonymous user can only read and write their own row, which I verified with two test users.</p>
-      <p>The limit is clear: an anonymous account doesn't survive reinstalling the app or switching phones. That needs Sign in with Apple to link accounts, which is planned for a later version.</p>
-      <h2>v1.6.1 — An Honest Listing</h2>
-      <p>When I rewrote the App Store description, I noticed the old copy said you battle "other players". You don't. The opponents and the leaderboard players are AI. The new description says so directly. The English description also still said "200 N4 words", which had been wrong for months. v1.6.1 also added a review prompt that asks for a rating right after a <em>win</em>, at 3, 10, and 25 games played, when players are most likely to feel good about the app.</p>
-      <p>The screenshots were redone twice. The first version used a bold red background; feedback said it felt intimidating. The final version uses a different soft pastel color for each screen (sakura, mint, butter, lavender, sky) with floating kana bubbles. All screenshots are generated by a Python script from simulator captures, in Chinese and English, at three iPhone sizes, because App Store Connect rejected the first export size for the 6.3" slot.</p>
-      <h2>v1.6.2 and v1.6.3 — Levels and Small Things</h2>
-      <p>v1.6.2 cleaned up the levels. A script compared every word against the Waller JLPT lists, a widely used reference, and found 62 duplicates (the same word in two levels; N3 alone contained 48 N4 words) plus words in the wrong level. The rule is now written in the spec: levels follow the Waller list unless the list is clearly wrong. It also fixed a bug where "Play Again" forgot the level you had picked. v1.6.3 fixed the same problem in another place: going back to the home screen reset the level picker to "All". The level is now saved on the device.</p>
-      <h2>What's Next</h2>
-      <p>Two changes are already merged for the next version, and both came from looking at real behavior. First, real new players with around 50% accuracy won only 1 of 8 matches against the normal AI and never came back. The AI now starts weaker for new players and reaches full strength by their 10th match. Second, the result screen will show furigana (small kana above the kanji), so players connect the kana they answered with the kanji they'll see in real Japanese.</p>
-      <h2>Reflections</h2>
-      <p>The biggest change in this phase wasn't a feature. It was how I trust the content. Before, the question bank was correct if I had read it carefully. Now a question is correct if it passed a written spec, an automated validator, a dictionary check, and two independent AI reviewers, and real player data keeps checking it after release.</p>
-      <p>The blind review taught me the most. Using AI to check AI-written content only works if you first check the checker. A reviewer prompt that catches half the known problems gives you false confidence, which is worse than none. Testing it against a canary set of known-bad questions turned "the AI said it's fine" into a number I could trust.</p>
+      <p><em>Short on time? Read the first section and the last one. If you're hiring for an AI product role, the middle is an evaluation setup you can reuse.</em></p>
+      <h2>The AI Reviewer That Missed Half the Problems</h2>
+      <p>My quiz app loads its question bank straight from GitHub, so merging a change means shipping it to every player. By v1.5 the bank had 640 words in two languages, and most of the content had been drafted with AI. I couldn't keep re-reading all of it by hand, so I wanted AI to review it.</p>
+      <p>Before trusting the reviewer, I tested it. I gave it a set of questions I already knew were broken and counted how many it caught. The first prompt caught only 27% to 53% of them. If I had skipped that step, I would have shipped a review process that missed around half the known problems and reported that everything was fine.</p>
+      <p>I rewrote the prompt so the reviewer scored each answer option on its own instead of judging the question as a whole. With the same models, it caught 59 of 60. The models hadn't changed, only the instructions, and I only knew which version to use because I had measured both.</p>
+      <p>The rest of this article is about the system around that reviewer: what each layer checks, why some layers are plain code and others are AI, and what still got through.</p>
+      <h2>Start With One Rule</h2>
+      <p>Each question shows a Japanese word in kana only, with four meanings to choose from. Before building any checks, I wrote down what makes a question valid. The core rule: <strong>looking only at the kana, exactly one option can be correct.</strong></p>
+      <p>That rule turned out to be stricter than it sounds. A wrong option is also invalid if it is a near-synonym of the answer, another meaning of the same word, a broader category that includes the answer, or the meaning of a different word with the same reading. The card shows かう, which can be 買う (to buy) or 飼う (to keep a pet), so "to keep a pet" can't be a wrong option for "to buy".</p>
+      <p>Writing the rule down did more than any tool that came after it. It turned "this question feels off" into something a script or a reviewer could actually check.</p>
+      <h2>Code for Facts, AI for Judgment</h2>
+      <p>Some checks have one right answer: is a field missing, does an English option contain Chinese characters, does a dictionary list two words with this reading. Others need judgment: could a learner reasonably pick this option as correct? I used plain code for the first kind and AI only for the second, and treated the AI checks as something that needs its own evaluation.</p>
+      <p style="font-family:var(--font-mono); font-size:0.85rem; color:var(--text-secondary); background:var(--bg-card); padding:1.2rem 1.5rem; border:1px solid var(--border-subtle); margin:1.5rem 0; line-height:1.8;">L1 Validator · code · format errors, duplicates, wrong script, kanji that can't be read as the kana<br>L2 Dictionary check · code + JMdict · wrong options that match a same-reading word<br>L3 Blind review · 2 AI models, calibrated · options a learner could reasonably defend<br>L4 Fix loop · AI + me · replace, re-test, escalate only on disagreement<br>L5 Live data · real players · options that players keep choosing, and in-app reports</p>
+      <p><strong>L1 and L2 are deterministic.</strong> The validator runs before every commit and on every pull request, so broken entries get caught before they reach the main branch. One of its checks reads every kanji against the kana using a kanji dictionary, which caught Chinese written into the Japanese field, such as 口罩 instead of マスク. The dictionary check looks up every reading in JMdict and found three wrong options that were actually correct meanings of a same-sounding word, for example "to sing" on 泣く (to cry), which is 鳴く.</p>
+      <p><strong>L3 is judgment, so it needed calibration.</strong> Two different models act as test-takers. Each sees only what a player sees, the kana and four options, picks an answer, and flags any question where more than one option could be right. This is not AI grading its own work: the reviewers never see the intended answer or how the question was written. They have to get it right the way a player would. The canary set described above is what told me which prompt to trust.</p>
+      <p><strong>L4 leans strict on purpose.</strong> If either reviewer flags a question, the wrong option gets replaced and the question is tested again. That sometimes throws out an option that was probably fine, but an ambiguous question costs a player a point they deserved, which is worse than losing a decent distractor. It took three rounds for every question to pass, and none needed my decision.</p>
+      <p><strong>L5 sends real failures back.</strong> After each match, the app anonymously logs which options players chose. A database view lists any wrong option picked by at least 30% of players over 20 or more attempts, which usually means it isn't really wrong. Players can also flag a question from the result screen and pick a reason, such as "more than one answer is right".</p>
+      <h2>What Still Got Through</h2>
+      <p>The system isn't finished, and the gaps are the most useful part.</p>
+      <p><strong>A cultural association no checker saw.</strong> One N3 question, かわり (a substitute), passed all four earlier layers. One of its wrong options was "addition". For anyone who has eaten in Japan, that sounds like おかわり, a second helping, so it reads as a plausible answer. I caught it myself: playing my own game, I picked "addition", then reported the question through the in-app flag as "more than one answer is right", and the option was replaced. The dictionary had no reason to flag it, and neither AI reviewer did either. It took someone who actually uses the language, in a real game.</p>
+      <p><strong>A rule I hadn't written.</strong> When I later added a check against a standard JLPT word list, it found 62 duplicate entries across levels. The N3 set alone contained 48 N4 words. None of the earlier layers looked at levels, because the spec didn't say anything about them. Each layer catches exactly what it has a rule for.</p>
+      <p><strong>A bug outside the content.</strong> In the same period I found that, from the second question onward, running out of time did nothing: the question froze at zero until the player tapped, and the late tap still scored. It had been there since v1.0, about seven months, and no content check could have seen it. Most players simply answer before time runs out.</p>
+      <h2>Also in These Versions</h2>
+      <p>v1.6.0 added cloud backup without a login. The app signs in anonymously and keeps whichever copy of the player's progress has more games played, so progress never goes backwards. v1.6.1 rewrote the App Store description, which had said players battle "other players": the opponents and the leaderboard are AI, and the listing now says so.</p>
+      <h2>If You're Building With AI-Generated Content</h2>
+      <p>Four things I'd do first, at any scale:</p>
+      <p><strong>1. Write a one-sentence rule for a valid output</strong> before building any checker. If you can't write it, no reviewer can enforce it.</p>
+      <p><strong>2. Use code for anything with one right answer.</strong> Keep AI judgment for the questions that actually need judgment.</p>
+      <p><strong>3. Test an AI reviewer before trusting it.</strong> Give it outputs you already know are bad and count what it catches. If it catches half, it isn't a reviewer yet.</p>
+      <p><strong>4. Send every real complaint back into that test set.</strong> Your first set will be missing the problems you haven't imagined yet. Users will find them for you.</p>
       </span>
       <span class="lang-zh">
-      <h2>概覽</h2>
-      <p>從 v1.2 開始，App 直接從 GitHub 的 <code>main</code> 分支讀取題庫。這讓我不用送審就能修題目，但也代表<strong>合併進 main 就是上線</strong>。一題錯的題目，幾分鐘內就會送到每個玩家手上。超過 600 題、兩種語言，每次都靠人工重讀是行不通的。這個階段（v1.5.2 到 v1.6.3）把「我檢查過了」變成一條管線：自動檢查、兩個 AI 模型的盲測，以及真實玩家的數據。同時也加入雲端備份、修好一個從 v1.0 就存在的 bug，並把 App Store 頁面改寫成誠實的版本。</p>
-      <h2>先寫下什麼是好題目</h2>
-      <p>第一步不是寫程式，而是一份規格（<code>docs/wordbank-spec.md</code>），定義什麼是合格的題目。最關鍵的規則來自只顯示假名的設計：<em>只看假名時，四個選項恰好只有一個是對的。</em>這條規則比聽起來嚴格，因為干擾選項如果是以下任何一種，也算錯：</p>
-      <p>• 正解的同義詞或近義詞；<br>• 同讀音其他單字的意思。題目卡顯示かう，可能是買う（買）也可能是飼う（飼養），所以「飼養」不能當「買」的干擾選項；<br>• 這個單字的其他正確意思；<br>• 包含正解的上位概念（「生物」的選項不能是「動物」）。</p>
-      <p>用這個定義來看，很多現有題目其實不只一個正解。接著是 N2 和 N3 干擾選項的全面重寫，以及修正 N4 的同音陷阱，例如なく（泣く「哭」與鳴く「鳥叫」）和かえる（変える／帰る／換える）。</p>
-      <h2>五層檢查</h2>
-      <p><strong>L1 — 自動驗證。</strong><code>validate_wordbank.py</code> 檢查每一題的中英兩套內容：缺欄位、重複 ID、干擾選項等於或包含正解、中文選項出現假名或日文專用字、英文選項出現漢字。它在我的電腦上是 pre-commit hook，在每個 pull request 上是 GitHub Actions 檢查，而 branch protection 的設定就是要讓它沒通過就不能合併。後來又多了一項檢查：日文欄位的每個漢字，讀音都要能對上顯示的假名（讀音資料來自 KANJIDIC2）。這擋下了把中文寫進日文欄位的錯誤，例如寫成「口罩」而不是マスク，否則玩家會以為那是日文。</p>
-      <p><strong>L2 — 同音詞檢查。</strong>一支腳本在日文辭典資料庫 JMdict 裡查每個假名讀音，標出和其他同讀音單字意思相符的英文干擾選項。它馬上找到三個：泣く配「to sing」、広告（廣告）配「complaint」（抗告）、紹介（介紹）配「explanation」（詳解）。</p>
-      <p><strong>L3 — 雙模型盲測。</strong>這是最有意思的部分。兩個不同的 Claude 模型扮演考生，各自只看到玩家看到的東西：假名和四個選項。它們選出答案，並標出任何可能不只一個正解的題目。在相信評審之前，我先用一組已知有問題的「金絲雀題目」測試評審的 prompt。第一版 prompt 只抓到 27–53%。改寫成要求模型逐一替每個選項評分之後，60 題抓到 59 題。到這時我才把它跑在全部 640 個單字的中英兩個版本上。</p>
-      <p><strong>L4 — 修正迴圈。</strong>只要任一個評審標記某題，就換掉干擾選項再重測。跑了三輪才全部通過，沒有任何一題需要人工裁決。抓到的問題都很細微：発表配「發行」（也是正確意思）、像見つかる／見つける這種在中文裡讀起來一樣的自他動詞，以及大約 25 個其他近義詞。</p>
-      <p><strong>L5 — 線上數據（v1.5.2）。</strong>每場對戰結束後，App 會匿名把五題作答送到 Supabase：哪個單字、出現了哪些選項、玩家選了什麼、花了多久。資料庫裡有一個「可疑干擾選項」的 view，列出在至少 20 次作答中被 30% 以上玩家選中的錯誤選項，這通常代表它其實也是對的。玩家也可以在結算畫面點題目旁的旗子，選擇回報原因，例如「不只一個答案是對的」。</p>
-      <h2>一個從 v1.0 就存在的 bug</h2>
-      <p>1.5.2 版也修好了一個從第一版就存在的 bug。從第 2 題開始，時間到了卻什麼都沒發生。題目停在 0 秒，直到玩家點下去，而這個遲到的點擊還會得分。原因是典型的 React 錯誤：計時器的 callback 在題目開始時建立，所以它看到的是上一題留下來的舊「階段」值，就提早 return 了。修法是把目前的階段存在 ref 裡。它七個月來都沒被發現，大概是因為大部分玩家都會在時間到之前作答。</p>
-      <h2>v1.6.0 — 不用登入的雲端備份</h2>
-      <p>玩家的進度（等級、分數、勝率）原本只存在裝置上。1.6.0 版把它備份到雲端，而且不需要任何人註冊帳號。App 啟動時用 Supabase 匿名登入，比對裝置和雲端的資料。<strong>玩過場數比較多的那份勝出</strong>，所以進度永遠不會倒退。每場對戰結束後上傳新資料。一切都是盡力而為：離線遊玩完全不受影響，上傳失敗會稍後重試。Row-level security 確保每個匿名使用者只能讀寫自己那一筆，我用兩個測試使用者驗證過。</p>
-      <p>限制也很清楚：匿名帳號在重裝 App 或換手機後就無法保留。這需要用「透過 Apple 登入」來連結帳號，規劃在之後的版本。</p>
-      <h2>v1.6.1 — 誠實的商店頁面</h2>
-      <p>改寫 App Store 描述時，我發現舊文案說你是和「其他玩家」對戰。其實不是，對手和排行榜上的玩家都是 AI。新的描述直接這樣寫。英文描述也還寫著「200 個 N4 單字」，這已經錯了好幾個月。1.6.1 版也加入評分邀請：在玩到第 3、10、25 場、而且剛好<em>贏了</em>的時候請玩家評分，這是玩家對 App 感覺最好的時候。</p>
-      <p>截圖重做了兩次。第一版用大面積的紅色背景，回饋說感覺有壓迫感。最終版每個畫面用一種柔和的粉彩色（櫻花、薄荷、奶油、薰衣草、天空），加上漂浮的假名泡泡。所有截圖都是用 Python 腳本從模擬器畫面生成的，中英兩版、三種 iPhone 尺寸，因為 App Store Connect 的 6.3 吋欄位拒收了第一次輸出的尺寸。</p>
-      <h2>v1.6.2 與 v1.6.3 — 難度分級與小地方</h2>
-      <p>1.6.2 版整理了難度分級。一支腳本把每個單字和常用的參考資料 Waller JLPT 單字表比對，找到 62 個重複（同一個字出現在兩個難度；光 N3 就有 48 個 N4 單字），以及放錯難度的字。規則現在寫進了規格：分級以 Waller 單字表為準，除非表明顯有錯。同時修好「再玩一次」會忘記所選難度的 bug。1.6.3 版修了另一個地方的同樣問題：回到首頁時難度選擇會重置成「全部」。現在選擇的難度會存在裝置上。</p>
-      <h2>接下來</h2>
-      <p>下一版已經合併了兩個改動，兩個都來自觀察真實行為。第一，真實的新玩家（正確率約 50%）對上一般 AI，8 場只贏 1 場，之後就沒再回來。現在 AI 對新玩家會先弱一點，到第 10 場才達到完整強度。第二，結算畫面會顯示振假名（漢字上方的小假名），讓玩家把作答時看到的假名，和真實日文中會看到的漢字連結起來。</p>
-      <h2>反思</h2>
-      <p>這個階段最大的改變不是功能，而是我怎麼信任內容。以前，題庫正確是因為我仔細讀過。現在，一題正確是因為它通過了書面規格、自動驗證、辭典比對和兩個獨立的 AI 評審，而且上線後還有真實玩家的數據持續檢查。</p>
-      <p>盲測教會我最多。用 AI 檢查 AI 寫的內容，只有在你先檢查過檢查者時才有用。一個只抓到一半已知問題的評審 prompt 會給你錯誤的信心，這比沒有評審更糟。用一組已知有問題的金絲雀題目測試它，才把「AI 說沒問題」變成一個我能相信的數字。</p>
+      <p><em>時間不多的話，讀第一節和最後一節就好。如果你在找 AI 產品相關的人才，中間是一套可以直接拿去用的評測做法。</em></p>
+      <h2>只抓到一半問題的 AI 評審</h2>
+      <p>我的答題 App 直接從 GitHub 讀取題庫，所以合併一次修改，就等於推送給所有玩家。到了 v1.5，題庫已經有 640 個單字、兩種語言，大部分內容是和 AI 一起產出的。我沒辦法每次都人工重讀，所以想讓 AI 來審查。</p>
+      <p>在相信評審之前，我先測試它。我拿一組已經知道有問題的題目給它看，數它抓到幾題。第一版 prompt 只抓到 27% 到 53%。如果我跳過這一步，上線的就會是一個漏掉大約一半已知問題、還回報「一切正常」的審查流程。</p>
+      <p>我把 prompt 改成讓評審逐一替每個選項評分，而不是對整題下判斷。同樣的模型，60 題抓到 59 題。模型沒變，變的只有指令；而我會知道該用哪一版，是因為兩版都量過。</p>
+      <p>這篇文章接下來講的是圍繞這個評審的整套系統：每一層檢查什麼、為什麼有些層用程式、有些層用 AI，以及還是漏掉了什麼。</p>
+      <h2>先寫下一條規則</h2>
+      <p>每一題只顯示日文單字的假名，加上四個字義選項。在做任何檢查之前，我先寫下什麼是合格的題目。最核心的規則是：<strong>只看假名時，四個選項恰好只有一個是對的。</strong></p>
+      <p>這條規則比聽起來嚴格。錯誤選項如果是正解的近義詞、同一個字的其他意思、包含正解的上位概念，或是同讀音另一個字的意思，都不合格。題目卡顯示かう，可能是買う（買）也可能是飼う（飼養），所以「飼養」不能當「買」的錯誤選項。</p>
+      <p>寫下這條規則，比後面任何一個工具都有用。它把「這題怪怪的」變成一件腳本或評審真的能檢查的事。</p>
+      <h2>事實交給程式，判斷交給 AI</h2>
+      <p>有些檢查只有一個正確答案：欄位有沒有缺、英文選項有沒有漢字、辭典裡是不是有兩個字讀音相同。有些需要判斷：學習者會不會合理地認為這個選項也對？第一種我用程式，只有第二種用 AI，而且把 AI 檢查本身當成需要被評測的東西。</p>
+      <p style="font-family:var(--font-mono); font-size:0.85rem; color:var(--text-secondary); background:var(--bg-card); padding:1.2rem 1.5rem; border:1px solid var(--border-subtle); margin:1.5rem 0; line-height:1.8;">L1 自動驗證 · 程式 · 格式錯誤、重複、文字種類錯誤、讀不成假名的漢字<br>L2 辭典比對 · 程式＋JMdict · 和同讀音單字意思相符的錯誤選項<br>L3 盲測 · 兩個 AI 模型，先校準 · 學習者可以合理主張也對的選項<br>L4 修正迴圈 · AI＋我 · 替換、重測，意見分歧才交給人<br>L5 線上數據 · 真實玩家 · 玩家一直選的選項，以及 App 內回報</p>
+      <p><strong>L1 和 L2 是確定性的。</strong>驗證程式在每次 commit 前和每個 pull request 上執行，壞掉的題目在進入主分支前就會被擋下。其中一項檢查用漢字辭典把每個漢字對照假名讀音，擋下了把中文寫進日文欄位的錯誤，例如寫成「口罩」而不是マスク。辭典比對則在 JMdict 裡查每個讀音，找到三個錯誤選項其實是同音字的正確意思，例如泣く（哭）的選項「to sing」，那是鳴く。</p>
+      <p><strong>L3 是判斷，所以需要校準。</strong>兩個不同的模型扮演考生，各自只看到玩家看到的東西：假名和四個選項。它們選出答案，並標出任何可能不只一個正解的題目。這不是讓 AI 替自己打分數：評審看不到預設答案，也不知道題目是怎麼寫出來的，它們必須像玩家一樣答對。告訴我該信任哪一版 prompt 的，就是前面那組已知有問題的題目。</p>
+      <p><strong>L4 刻意從嚴。</strong>只要任一個評審標記某題，就換掉那個錯誤選項再重測。這有時會丟掉一個其實沒問題的選項，但一題有歧義的題目會讓玩家失去應得的分數，這比少一個不錯的干擾選項更糟。跑了三輪才全部通過，沒有一題需要我來裁決。</p>
+      <p><strong>L5 把真實的失敗送回來。</strong>每場對戰結束後，App 會匿名記錄玩家選了哪些選項。資料庫裡有一個 view，列出在 20 次以上作答中被至少 30% 玩家選中的錯誤選項，這通常代表它其實不算錯。玩家也可以在結算畫面標記題目，並選擇原因，例如「不只一個答案是對的」。</p>
+      <h2>還是漏掉的東西</h2>
+      <p>這套系統還沒完成，而它的缺口是最有價值的部分。</p>
+      <p><strong>沒有任何檢查看得到的文化聯想。</strong>一題 N3 的かわり（代替），通過了前面四層。它的其中一個錯誤選項是「追加」。在日本吃過飯的人會聯想到おかわり（再來一份），所以這個選項讀起來也說得通。抓到它的是我自己：玩自己的遊戲時，我選了「追加」，接著用 App 內的回報功能標記「不只一個答案是對的」，那個選項後來被換掉了。辭典沒有理由標記它，兩個 AI 評審也都沒有。要真正在用這個語言的人，在真實的對戰裡，才抓得到。</p>
+      <p><strong>一條我沒寫的規則。</strong>後來我加入一項和標準 JLPT 單字表比對的檢查，找到 62 個跨難度重複的題目，光 N3 就有 48 個 N4 單字。前面幾層都沒檢查難度，因為規格裡根本沒寫到難度。每一層只抓得到它有規則的東西。</p>
+      <p><strong>內容以外的 bug。</strong>同一段時間，我發現從第 2 題開始，時間到了卻什麼都沒發生：題目停在 0 秒，直到玩家點下去，而且遲到的點擊還會得分。它從 v1.0 就存在，大約七個月，任何內容檢查都不可能看到它。大部分玩家都會在時間到之前作答。</p>
+      <h2>這幾個版本的其他改動</h2>
+      <p>v1.6.0 加入不用登入的雲端備份。App 會匿名登入，並保留玩過場數比較多的那份進度，所以進度永遠不會倒退。v1.6.1 改寫了 App Store 描述：舊的文案說玩家是和「其他玩家」對戰，但對手和排行榜都是 AI，現在的頁面直接這樣寫。</p>
+      <h2>如果你也在用 AI 產出內容</h2>
+      <p>不管規模大小，我會先做這四件事：</p>
+      <p><strong>1. 用一句話寫下什麼是合格的產出</strong>，再開始做任何檢查。如果你寫不出來，也沒有任何評審能替你把關。</p>
+      <p><strong>2. 只有一個正確答案的事，交給程式。</strong>AI 的判斷留給真正需要判斷的問題。</p>
+      <p><strong>3. 先測試 AI 評審，再信任它。</strong>拿你已經知道有問題的產出給它看，數它抓到多少。如果只抓到一半，它還不能算是評審。</p>
+      <p><strong>4. 把每一個真實的抱怨送回那組測試題。</strong>你的第一組測試題，一定缺少你還沒想到的問題。使用者會幫你找到它們。</p>
       </span>
     </div>
   </div>
