@@ -937,7 +937,7 @@ footer {
       <p><em>Short on time? Read the first section and the last one. The launch-day story in between is the most useful part if you build with AI.</em></p>
       <h2>"It Feels Too Hard" Fixes Nothing</h2>
       <p>I built this game for Lunar New Year 2026 entirely in conversation with Claude, without writing any code myself. My job was to play it on my phone and describe what was wrong. That turned out to be the hard part. "It feels too hard" gave Claude nothing to work with. "I keep hitting Retry right after I win" told it exactly what to change.</p>
-      <p>When AI can rebuild a stage in minutes, the slowest part of the loop is no longer the code. It's the quality of the feedback. This article is about how I learned to give better feedback, and about launch day, when fixing one bug nearly deleted more than half the game.</p>
+      <p>When AI can rebuild a stage in minutes, the slowest part of the loop is no longer the code. It's the quality of the feedback. This article is about how I learned to give better feedback, and about launch day, when a small bug came back as a rewritten game.</p>
       <div style="margin:2rem 0; max-width:360px;"><img class="article-img" src="cny-cover.png" alt="Lunar New Year Challenge — Start Screen"></div>
       <h2>The Game</h2>
       <p>Lunar New Year Challenge (新春大作戰) is a three-stage mobile web game made to share with family and friends over the holiday. Each stage turns a holiday tradition into a different kind of game: catching red envelopes while dodging obstacles (action), remembering six lottery numbers and collecting them (memory), and surviving waves of firecrackers (survival). It runs as one HTML file in any phone browser, with nothing to install.</p>
@@ -949,22 +949,22 @@ footer {
       <p><strong>Vague:</strong> "The explosions are boring."<br><strong>Useful:</strong> "The explosions look great for a few seconds, then they all look the same after about 30 seconds."<br><strong>Fix:</strong> several explosion styles and particle variations. Same mechanic, much more engaging.</p>
       <p><strong>Vague:</strong> "It's too hard."<br><strong>Useful:</strong> "The red envelopes fall too fast; my thumb can't get across the screen in time."<br><strong>Fix:</strong> small changes to spawn rates, played again each time, until it felt "consistently tense but never hopeless". Difficulty curves can't be designed on paper.</p>
       <p>This is the same skill as writing a good bug report or giving design feedback to a team: what you did, what happened, what you expected. Working with AI just makes the loop so short that weak feedback becomes the bottleneck.</p>
-      <h2>Launch Day: The Fix That Deleted the Game</h2>
+      <h2>Launch Day: The Fix That Rewrote the Game</h2>
       <p>I published the game on February 18, the day after Lunar New Year. On phones, the buttons didn't respond. You couldn't even start the game.</p>
-      <p>The first fix came back as a file of 747 lines. The original had 1,820. More than half the game was gone, including the animation of lottery balls flying out during the number reveal. I rolled it back. The second attempt did the same thing, and I rolled that back too.</p>
+      <p>The first fix came back as a rewritten file: 747 lines instead of 1,820. All three stages were still there, but parts were missing, including the animation of lottery balls flying out during the number reveal. I rolled it back. The second attempt did the same thing, and I rolled that back too. All of this happened within about an hour, close to midnight.</p>
       <p>The fix that worked changed 18 lines. The game listened for touches across the whole screen and cancelled every one of them, so it could control the player character. That also cancelled taps on the buttons. The fix was to cancel touches only while a stage is being played.</p>
       <p>The lesson wasn't about touch events. A tap bug shouldn't need a thousand changed lines. When a fix is much bigger than the problem, something else changed, and you need to find out what before you ship it. Being able to roll back in one step is what made it safe to try twice.</p>
       <h2>If You Build With AI and Don't Read the Code</h2>
       <p><strong>1. Describe the moment, not the fix.</strong> What you did, what happened, what you expected. Let the AI propose the change.</p>
       <p><strong>2. Turn every "feels" into something you can observe.</strong> A mistake you keep making, a point where you give up, a number of seconds.</p>
-      <p><strong>3. Check the size of every fix.</strong> You don't need to read the code to notice that a one-line problem came back as a thousand-line change.</p>
+      <p><strong>3. Check the size of every fix.</strong> You don't need to read the code to notice that a small problem came back as a thousand-line change.</p>
       <p><strong>4. Keep the last working version one step away.</strong> Rolling back is what lets you experiment without fear.</p>
       </span>
       <span class="lang-zh">
       <p><em>時間不多的話，讀第一節和最後一節就好。如果你也在用 AI 做東西，中間上線當天的故事最有用。</em></p>
       <h2>「感覺太難了」什麼都修不了</h2>
       <p>這個遊戲是我在 2026 年農曆新年，完全透過和 Claude 對話做出來的，我自己一行程式碼都沒寫。我的工作是用手機玩，然後說出哪裡不對。結果這才是最難的部分。「感覺太難了」讓 Claude 無從下手；「我贏了之後一直按到重來」則清楚告訴它要改什麼。</p>
-      <p>當 AI 幾分鐘就能重做一關，整個迴圈裡最慢的就不再是程式，而是回饋的品質。這篇文章講我怎麼學會給出更好的回饋，以及上線當天，修一個 bug 差點刪掉半個以上的遊戲。</p>
+      <p>當 AI 幾分鐘就能重做一關，整個迴圈裡最慢的就不再是程式，而是回饋的品質。這篇文章講我怎麼學會給出更好的回饋，以及上線當天，一個小 bug 換回來的卻是一份被改寫的遊戲。</p>
       <div style="margin:2rem 0; max-width:360px;"><img class="article-img" src="cny-cover.png" alt="新春大作戰——開始畫面"></div>
       <h2>這個遊戲</h2>
       <p>新春大作戰是一款三關的手機網頁遊戲，做來在過年期間分享給家人朋友。每一關把一個過年習俗變成不同類型的遊戲：一邊閃避障礙一邊接紅包（動作）、記住六個樂透號碼再把它們收集起來（記憶）、在一波波爆竹中存活下來（生存）。整個遊戲是一個 HTML 檔案，任何手機瀏覽器都能玩，不用安裝。</p>
@@ -976,15 +976,15 @@ footer {
       <p><strong>模糊：</strong>「爆炸很無聊。」<br><strong>有用：</strong>「爆炸前幾秒很好看，大概 30 秒之後就全部長得一樣了。」<br><strong>修法：</strong>多種爆炸樣式和粒子變化。同樣的機制，好玩很多。</p>
       <p><strong>模糊：</strong>「太難了。」<br><strong>有用：</strong>「紅包掉太快，我的拇指來不及移過去。」<br><strong>修法：</strong>每次小幅調整生成頻率，每次都重玩一遍，直到感覺「一直很緊張，但從不絕望」。難度曲線沒辦法在紙上設計。</p>
       <p>這和寫一份好的 bug 回報、或是給團隊設計回饋是同一種能力：你做了什麼、發生了什麼、你預期什麼。和 AI 協作只是讓迴圈短到，模糊的回饋變成了瓶頸。</p>
-      <h2>上線當天：一個把遊戲刪掉的修法</h2>
+      <h2>上線當天：一個把遊戲改寫掉的修法</h2>
       <p>我在 2 月 18 日、農曆新年隔天把遊戲發布出去。在手機上，按鈕完全沒有反應，連遊戲都進不去。</p>
-      <p>第一次修法回來的檔案只有 747 行，原本有 1,820 行。超過一半的遊戲不見了，包括開獎時樂透球飛出來的動畫。我把它退回。第二次嘗試也一樣，我又退回了一次。</p>
+      <p>第一次修法回來的是一份被改寫的檔案：只有 747 行，原本有 1,820 行。三個關卡都還在，但有些部分不見了，包括開獎時樂透球飛出來的動畫。我把它退回。第二次嘗試也一樣，我又退回了一次。這一切都發生在午夜前後大約一個小時內。</p>
       <p>真正有效的修法只改了 18 行。遊戲在整個畫面上監聽觸控，並且取消每一次觸控，好用來控制角色。這也連帶取消了對按鈕的點擊。修法是只在關卡進行中才取消觸控。</p>
       <p>教訓不在觸控事件。一個點擊的 bug，不應該需要改一千行。當修法比問題大得多，一定有別的東西被改掉了，上線前你得先搞清楚是什麼。而能一步退回上一個可用版本，才讓我敢試第二次。</p>
       <h2>如果你用 AI 做東西，但不讀程式碼</h2>
       <p><strong>1. 描述當下，而不是解法。</strong>你做了什麼、發生了什麼、你預期什麼。讓 AI 提出修法。</p>
       <p><strong>2. 把每一個「感覺」變成觀察得到的東西。</strong>一個你一直犯的錯、一個你放棄的時間點、幾秒鐘。</p>
-      <p><strong>3. 檢查每一次修改的大小。</strong>你不用讀程式碼，也看得出一個一行的問題，回來變成一千行的修改。</p>
+      <p><strong>3. 檢查每一次修改的大小。</strong>你不用讀程式碼，也看得出一個小問題，回來變成一千行的修改。</p>
       <p><strong>4. 讓上一個可用版本永遠只差一步。</strong>能退回，你才能放心實驗。</p>
       </span>
     </div>
