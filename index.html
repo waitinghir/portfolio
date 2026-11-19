@@ -1186,7 +1186,7 @@ footer {
     <div class="article-header">
       <div class="article-category">Project 03 — Interactive Storytelling × AI</div>
       <h1 class="article-h1"><span class="lang-en">Memories of Flight</span><span class="lang-zh">飛行的回憶</span><br><span style="color:var(--accent-cyan)">飛行的回憶</span></h1>
-      <div class="article-meta"><span>By Tim</span><span>2026</span><span><span class="lang-en">9 min read</span><span class="lang-zh">閱讀 9 分鐘</span></span></div>
+      <div class="article-meta"><span>By Tim</span><span>2026</span><span><span class="lang-en">6 min read</span><span class="lang-zh">閱讀 6 分鐘</span></span></div>
     </div>
     <div class="article-links">
       <a class="article-link primary" href="https://waitinghir.github.io/flight-of-memories/" target="_blank"><span class="lang-en">▶ Play in Browser</span><span class="lang-zh">▶ 在瀏覽器遊玩</span></a>
@@ -1194,6 +1194,7 @@ footer {
     </div>
     <div class="article-body">
       <span class="lang-en">
+      <p><em>Short on time? Read "Mechanics as Metaphor" and "Two Kinds of Pain". That's where the idea lives.</em></p>
       <h2>Overview</h2>
       <p>Memories of Flight (飛行的回憶) is not a game you play to win. It's a game you play to feel something. Built as a single HTML file using Canvas and vanilla JavaScript, it's a narrative experience about loss, regret, and the slow work of reconciliation — told not through cutscenes, but through the act of dodging and catching words as they fall from the sky.</p>
       <p>The premise is simple: you control a glowing soul drifting upward through six chapters. White text fragments are memories to catch. Red text fragments are pain to avoid. But the mechanics carry a deeper logic — and the way the screen responds to damage tells you more about the story than any dialogue could.</p>
@@ -1210,31 +1211,27 @@ footer {
       <p>The game's two main chapters use identical core mechanics but completely different damage aesthetics. This was a deliberate design decision rooted in a simple insight: not all pain looks the same.</p>
       <p><strong>Chapter 1 — "One Month Ago":</strong> The palette is blue-purple. When red text hits you, the screen flashes red and shakes violently. The words shatter into individual character fragments that rain down like debris. This is acute trauma — sharp, loud, impossible to ignore.</p>
       <p><strong>Chapter 2 — "Three Months Ago":</strong> The palette goes darker, colder. When red text hits, the screen doesn't shake — it slowly loses color, fading toward grayscale. Long sentences crack in half mid-flight and plummet at accelerated speed. This is a different kind of pain: the quiet erosion of a relationship. Words that break off before they finish. The feeling of something draining away rather than exploding.</p>
-      <p>The technical implementation behind each is distinct: Chapter 1 uses CSS-style screen flash and particle burst effects; Chapter 2 uses <code>getImageData</code> pixel manipulation to progressively desaturate the entire canvas. Same engine, completely different emotional register.</p>
+      <p>Same engine, completely different emotional register.</p>
       <h2>Narrative Structure</h2>
-      <p>The game is organized through a state machine: HOME → STORY → CHAPTER_TITLE → GAMEPLAY → RECAP, cycling through six chapters across two timelines. Between gameplay segments, chapter recaps display three illustrated scenes with typewriter-style text that fades in line by line. At the end of each recap, the scene shatters into particles before transitioning to the next chapter — a visual metaphor for memories fragmenting.</p>
+      <p>The game cycles through six chapters across two timelines. Between chapters, a recap shows three illustrated scenes with text that fades in line by line. At the end of each recap, the scene shatters into particles before the next chapter begins — a visual metaphor for memories fragmenting.</p>
       <p>The text content — both the white fragments you catch ("that Friday afternoon," "the text message you sent," "a small shoe rolling across the floor") and the red phrases you dodge ("you only ever loved your work," "I regret everything") — was all written to carry narrative weight. They're not random vocabulary. They're pieces of a story the player assembles through play.</p>
       <h2>How AI Was Used</h2>
       <p>Claude's role in this project went beyond code generation into something closer to creative collaboration. When I described abstract emotional goals — "I want the pain in Chapter 2 to feel <em>muffled</em>, not loud" — Claude translated that into a concrete technical proposal: replace the screen shake with progressive desaturation. When I said "the sentence should feel like it was cut short, like someone who stopped talking mid-thought," Claude implemented a text-splitting mechanic triggered at 20% of screen height, with the broken halves accelerating at 2.5x speed.</p>
       <p>The codebase still carries traces of our debugging conversations: console logs tagged with emoji (<code>🎯 生成紅字...</code>, <code>💥 碰撞!...</code>, <code>📊 統計...</code>) that we used to trace why certain red texts weren't shattering correctly, or why the sentence-split timing was off in Chapter 2. These aren't cleaned up — they're artifacts of a working process.</p>
-      <p>Claude also handled the deployment pipeline: setting up the GitHub repository, configuring jsdelivr CDN for image assets (<code>https://cdn.jsdelivr.net/gh/{user}/{repo}@main/{path}</code> with <code>crossOrigin = 'anonymous'</code>), and walking through GitHub Pages setup.</p>
       <h2>Key Design Decisions</h2>
       <p><strong>Canvas over DOM.</strong> Particle systems, real-time pixel manipulation (the grayscale filter), radial glow effects, and screen shake all perform far better on Canvas than with DOM elements. The trade-off is losing built-in accessibility — every UI element had to be drawn manually. For a game that's fundamentally about visual and kinesthetic experience, Canvas was the right medium.</p>
       <p><strong>Subtraction as a design principle.</strong> Mid-development, the UI had accumulated score displays, timers, hint text, and health indicators. I deliberately removed most of them, keeping only a minimal health bar and a memory score. The reasoning: any element that reminds the player "this is a game" breaks the emotional immersion. In an era where AI can generate infinite content, knowing when to <em>stop adding</em> is the harder skill.</p>
       <p><strong>Player size reduction.</strong> The player avatar shrank from 50px to 35px during iteration. Smaller meant more precise dodging, which meant each near-miss felt more personal. When you barely escape a red phrase by a few pixels, the relief is visceral in a way a 50px hitbox can't deliver.</p>
       <p><strong>Split point at 20%, not 50%.</strong> Chapter 2's sentence-breaking mechanic initially triggered at the midpoint of the screen. But at that height, fast-falling text often passed the trigger without being detected. Moving it to 20% gave the split more screen time — players could actually see the sentence crack apart and accelerate — and gave them more (but not enough) reaction time.</p>
-      <h2>Technical Challenges</h2>
-      <p><strong>Sentence split timing.</strong> The hardest bug to fix. Text was flying past the split trigger point between frame checks, so sentences that should have broken in half just fell through intact. The solution involved tightening the detection window and adding safety logs to confirm splits were firing. A timing problem disguised as a rendering problem.</p>
-      <p><strong>Cross-origin image loading.</strong> Local image paths broke on GitHub Pages. The fix required hosting images via jsdelivr's GitHub CDN and adding <code>crossOrigin = 'anonymous'</code> to every image load — without it, Canvas <code>getImageData</code> (used for the grayscale effect) throws a security error because the canvas becomes "tainted."</p>
-      <p><strong>Cross-device scaling.</strong> A single scale factor (<code>Math.min(W / 375, H / 667)</code>) applied to all game elements — player size, text size, spawn positions, collision radii — kept the experience consistent across phones and desktops. Both mouse and touch inputs are supported, with <code>touch-action: none</code> preventing accidental zoom on mobile.</p>
       <h2>What Shipped</h2>
-      <p>A complete, playable narrative game in a single 996-line HTML file. Six chapters across two timelines, each with three illustrated recap scenes. A full visual effects system: particle bursts, screen shake, progressive grayscale, radial glow, static noise, tunnel vision. Cross-device support via dynamic scaling and dual input handling. Deployed on GitHub Pages with CDN-hosted assets. A modular architecture where adding new chapters means extending arrays, not rewriting systems.</p>
+      <p>A complete, playable narrative game in a single HTML file: six chapters across two timelines, each with three illustrated recap scenes, playable on phones and desktops.</p>
       <h2>Reflections</h2>
       <p>This project was my test of something I believed: game mechanics can carry emotional weight without a single line of traditional dialogue. When the screen slowly loses color in Chapter 2, what I wanted was for players to feel what's happening without a narrator explaining it. The mechanic <em>is</em> the message.</p>
       <p>The collaboration model with Claude worked especially well for this kind of project, where the gap between creative intent and technical implementation is wide. I could say "the pain should feel like it's being swallowed, not screamed" and get back a concrete implementation using pixel-level desaturation instead of screen flash. That translation layer — from emotion to code — is where AI collaboration adds the most value in creative work.</p>
       <p>If I were to build on this, I'd add an ambient soundtrack that shifts with the chapter mood, and explore whether the finale could use the accumulated memories (the white texts the player caught) to generate a personalized ending. The architecture supports it. The emotional logic demands it.</p>
       </span>
       <span class="lang-zh">
+      <p><em>時間不多的話，讀「機制即隱喻」和「兩種不同的痛」就好，核心的想法都在那裡。</em></p>
       <h2>概覽</h2>
       <p>飛行的回憶不是一款讓你玩來贏的遊戲。它是一款讓你玩來感受的遊戲。以單一 HTML 檔案、Canvas 和原生 JavaScript 打造，它是一段關於失去、悔恨與和解的敘事體驗——不是透過過場動畫來訴說，而是透過閃避和接住從天而降的文字這個動作本身。</p>
       <p>前提很簡單：你操控一個發光的靈魂，緩緩穿越六個章節。白色文字碎片是要接住的回憶。紅色文字碎片是要閃避的傷痛。但機制承載著更深的邏輯——畫面對傷害的反應方式，比任何對白都更能說明這個故事。</p>
@@ -1251,25 +1248,20 @@ footer {
       <p>遊戲的兩個主要章節使用相同的核心機制，但完全不同的傷害美學。這是一個刻意的設計決策，根植於一個簡單的洞察：不是所有的痛看起來都一樣。</p>
       <p><strong>第一章——「一個月前」：</strong>色調偏藍紫。當紅字擊中你時，畫面紅光閃爍並劇烈震動。文字碎裂成單字碎片如雨般落下。這是急性創傷——尖銳、響亮、無法忽視。</p>
       <p><strong>第二章——「三個月前」：</strong>色調更暗、更冷。紅字擊中時畫面不會震動——而是慢慢失去色彩，逐漸褪向黑白。長句子在飛行途中斷裂成兩半，加速墜落。這是不同的痛：一段關係的靜默侵蝕。話說到一半就斷了。某種東西在流逝而非爆炸的感覺。</p>
-      <p>背後的技術實作各有不同：第一章用 CSS 風格的螢幕閃光和粒子爆發效果；第二章用 <code>getImageData</code> 像素操作，逐步去飽和整個畫布。同一個引擎，完全不同的情緒調性。</p>
+      <p>同一個引擎，完全不同的情緒調性。</p>
       <h2>敘事結構</h2>
-      <p>遊戲透過狀態機組織：HOME → STORY → CHAPTER_TITLE → GAMEPLAY → RECAP，在兩條時間線的六個章節中循環。在遊戲環節之間，章節回顧顯示三幕插畫場景，搭配逐行淡入的打字機風格文字。每段回顧結束時，場景碎裂成粒子後轉場到下一章——一個記憶碎裂的視覺隱喻。</p>
+      <p>遊戲在兩條時間線的六個章節之間循環。章節之間的回顧會顯示三幕插畫場景，文字逐行淡入。每段回顧結束時，場景碎裂成粒子，再進入下一章——一個記憶碎裂的視覺隱喻。</p>
       <p>文字內容——無論是你接住的白色碎片（「那個週五下午」、「妳傳來簡訊」、「滾落的小球鞋」）還是閃避的紅色語句（「你只愛工作」、「我好後悔」）——都是帶著敘事份量寫的。它們不是隨機詞彙，而是玩家透過遊玩拼湊出的故事碎片。</p>
       <h2>AI 如何參與</h2>
       <p>Claude 在這個專案中的角色超越了程式碼生成，更接近創意協作。當我描述抽象的情緒目標——「我希望第二章的痛感覺是<em>悶住的</em>，不是大聲的」——Claude 把它翻譯成具體的技術方案：用漸進式去飽和取代螢幕震動。當我說「句子應該感覺像是被截斷了，像某個人說到一半就不說了」，Claude 實作了一個在螢幕高度 20% 處觸發的文字斷裂機制，斷裂的兩半以 2.5 倍速加速。</p>
       <p>程式碼裡至今留著我們除錯對話的痕跡：帶 emoji 標記的 console log（<code>🎯 生成紅字...</code>、<code>💥 碰撞!...</code>、<code>📊 統計...</code>），我們用來追蹤為什麼某些紅字沒有正確碎裂，或者第二章的句子斷裂時機為什麼不對。這些沒被清理——它們是工作過程的遺跡。</p>
-      <p>Claude 也負責了部署流程：建立 GitHub 倉庫、設定 jsdelivr CDN 託管圖片資源（<code>https://cdn.jsdelivr.net/gh/{user}/{repo}@main/{path}</code> 搭配 <code>crossOrigin = 'anonymous'</code>），以及引導 GitHub Pages 設定。</p>
       <h2>關鍵設計決策</h2>
       <p><strong>Canvas 勝過 DOM。</strong>粒子系統、即時像素操作（灰階濾鏡）、徑向發光效果和螢幕震動，在 Canvas 上的表現遠優於 DOM 元素。代價是失去內建的無障礙性——每個 UI 元素都需要手動繪製。對於一款本質上關乎視覺與動覺體驗的遊戲，Canvas 是正確的媒介。</p>
       <p><strong>減法作為設計原則。</strong>開發中期，UI 累積了分數顯示、計時器、提示文字和血量指示器。我刻意移除了大部分，只留最精簡的血條和記憶分數。理由：任何讓玩家「想起這是個遊戲」的元素，都會打斷情緒沉浸。在 AI 能無限產出內容的時代，知道何時<em>停止添加</em>才是更難的技藝。</p>
       <p><strong>縮小玩家尺寸。</strong>玩家角色在迭代中從 50px 縮小到 35px。更小意味著更精準的閃避，這讓每次險險避開都更加私人化。當你僅以幾個像素之差逃過一段紅色語句時，那種如釋重負是 50px 判定框無法給予的。</p>
       <p><strong>斷裂點在 20%，不是 50%。</strong>第二章的句子斷裂機制最初在螢幕中點觸發。但在那個高度，快速下落的文字經常在幀檢查之間越過觸發點。移到 20% 讓斷裂有更多螢幕時間——玩家真的可以看到句子裂開並加速——也給了他們更多（但仍不夠）的反應時間。</p>
-      <h2>技術挑戰</h2>
-      <p><strong>句子斷裂的時序。</strong>最難修的 bug。文字在幀檢查之間飛過斷裂觸發點，本該斷成兩半的句子原封不動地飛過去了。解法是收緊偵測窗口，並加上安全日誌確認斷裂有在觸發。一個偽裝成渲染問題的時序問題。</p>
-      <p><strong>跨域圖片載入。</strong>本地圖片路徑在 GitHub Pages 上失效。修復需要透過 jsdelivr 的 GitHub CDN 託管圖片，並在每次圖片載入時加上 <code>crossOrigin = 'anonymous'</code>——否則 Canvas 的 <code>getImageData</code>（用於灰階效果）會因為畫布被「污染」而拋出安全錯誤。</p>
-      <p><strong>跨裝置縮放。</strong>一個單一縮放因子（<code>Math.min(W / 375, H / 667)</code>）套用到所有遊戲元素——玩家大小、文字大小、生成位置、碰撞半徑——讓手機和桌機的體驗保持一致。同時支援滑鼠和觸控輸入，以 <code>touch-action: none</code> 防止手機上的意外縮放。</p>
       <h2>交付成果</h2>
-      <p>一個完整可玩的敘事遊戲，濃縮在 996 行的單一 HTML 檔案裡。兩條時間線的六個章節，每章三幕插畫回顧場景。完整的視覺特效系統：粒子爆發、螢幕震動、漸進式灰階、徑向發光、靜態雜訊、隧道視野。透過動態縮放和雙輸入處理支援跨裝置。部署在 GitHub Pages，圖片資源由 CDN 託管。模組化架構——新增章節只需擴充陣列，不需重寫系統。</p>
+      <p>一個完整可玩的敘事遊戲，濃縮在單一 HTML 檔案裡：兩條時間線的六個章節，每章三幕插畫回顧場景，手機和桌機都能玩。</p>
       <h2>反思</h2>
       <p>這個專案是我在驗證一件我一直相信的事：遊戲機制可以承載情緒重量，不需要一行傳統對白。第二章畫面慢慢失去顏色時，我想要的是：玩家不需要旁白解釋發生了什麼，就能感受到。機制<em>就是</em>訊息。</p>
       <p>和 Claude 的協作模式在這類專案中特別有效，因為創意意圖和技術實作之間的落差很大。我可以說「痛應該感覺像是被吞下去的，不是被吼出來的」，然後得到一個用像素級去飽和取代螢幕閃光的具體實作。那個翻譯層——從情緒到程式碼——是 AI 協作在創意工作中最能增值的地方。</p>
