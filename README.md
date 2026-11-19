@@ -16,6 +16,7 @@ Personal portfolio showcasing AI projects built through human-AI collaboration.
 2. **日文知識王** (Nihongo Quiz King) — 1v1 Japanese vocabulary quiz app, shipped to the App Store
    - v1.0 → v1.5.1: From zero to an app people use — five decisions
    - v1.5.2 → v1.6.3: Test the reviewer before you trust it
+   - v1.6.4 → v1.7.0: Scale needs a process first
 3. **飛行的回憶** (Memories of Flight) — Narrative game where mechanics are metaphors for loss and memory
 4. **用 AI 把這個網站雙語化** (Bilingual-izing This Site with AI) — A meta case study
 5. **那個騙了我 27 天的求職監控系統** (The Job Monitor That Lied for 27 Days) — A debugging detective story
