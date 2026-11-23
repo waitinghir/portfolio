@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>From Zero to an App People Use: Five Decisions — Tim</title>
+<meta name="description" content="A Week Lost to One String The most expensive bug in this app&#x27;s first months took 30 seconds to fix and a week to find. App Store review rejected version 1.0 because the app name in one config file di">
+<meta property="og:title" content="From Zero to an App People Use: Five Decisions — Tim">
+<meta property="og:description" content="A Week Lost to One String The most expensive bug in this app&#x27;s first months took 30 seconds to fix and a week to find. App Store review rejected version 1.0 because the app name in one config file di">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600&family=Roboto:wght@400;500&family=Roboto+Mono:wght@500&family=Noto+Sans+TC:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../assets/site.css">
+<script src="../../../assets/site.js"></script>
+</head>
+<body>
+<header class="appbar"><div class="wrap">
+  <a class="brand" href="../../../">Tim</a>
+  <nav class="nav" aria-label="Main">
+    <a href="../../../#projects"><span class="lang-en">Projects</span><span class="lang-zh">專案</span></a>
+    <a href="../../../#about"><span class="lang-en">About</span><span class="lang-zh">關於</span></a>
+    <a href="#contact"><span class="lang-en">Contact</span><span class="lang-zh">聯絡</span></a>
+  </nav>
+  <button class="chipbtn" id="lang-toggle" type="button"><span class="lang-en">中文</span><span class="lang-zh">EN</span></button>
+</div></header>
+<main class="wrap">
+<nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="../../../"><span class="lang-en">Home</span><span class="lang-zh">首頁</span></a></li><li><a href="../"><span class="lang-en">Nihongo Quiz King</span><span class="lang-zh">日文知識王</span></a></li><li><span aria-current="page"><span class="lang-en">From Zero to an App People Use: Five Decisions</span><span class="lang-zh">從零到有人在用的 App：五個決定</span></span></li></ol></nav>
+<article class="article">
+    <div class="page-head">
+      <h1><span class="lang-en">From Zero to an App People Use: Five Decisions</span><span class="lang-zh">從零到有人在用的 App：五個決定</span></h1>
+      <div class="meta"><span>v1.0.0 → v1.5.1</span><span><span class="lang-en">8 min read</span><span class="lang-zh">閱讀 8 分鐘</span></span></div>
+      
+    </div>
+    <div class="article-body">
+<span class="lang-en">
+<p class="note"><em>Short on time? Read the first section and the last one. Each decision in between stands on its own.</em></p>
+<h2>A Week Lost to One String</h2>
+<p>The most expensive bug in this app's first months took 30 seconds to fix and a week to find. App Store review rejected version 1.0 because the app name in one config file didn't exactly match the name in App Store Connect. Meanwhile, the decision that mattered most for the product cost no code at all: hiding information from the player.</p>
+<p>Nihongo Quiz King is a 1v1 Japanese vocabulary game. You and an opponent answer the same five questions, ten seconds each, and faster correct answers score more. I built it alone with AI, starting from an empty folder: I'm not an iOS developer. Version 1.0 shipped in March 2026 with 200 words. By July, version 1.5.1 had 640 words across four levels, an adaptive opponent, a weekly leaderboard and its first backend.</p>
+<p>This article covers those first five months, organized by the five decisions that shaped the product rather than by version number.</p>
+<h2>1. Hide the Kanji</h2>
+<p>Each question shows a Japanese word in kana only, never in kanji. That looks like a display choice, but it decides what the game actually tests. Japanese kanji overlap heavily with Chinese characters. If the question showed 食べる, any Chinese speaker would know it's about eating without knowing any Japanese. Showing only たべる forces real recall.</p>
+<p>For my first audience, Chinese speakers learning Japanese, showing kanji would have made the game feel easy and taught them nothing. Removing information made it a real test. That same rule later became the foundation of the app's whole quality system: looking only at the kana, exactly one option can be correct.</p>
+<h2>2. A Rival Without a Server</h2>
+<p>I wanted the tension of competition, but real-time multiplayer needs a server, matchmaking, and enough players online at the same moment. A new app has none of that. So the opponent is AI, and it has to feel like a person.</p>
+<p>In v1.0 the AI's accuracy was random, between 70% and 90%. In v1.4 it started reacting to the player: after two straight losses it eases off, after two straight wins it gets harder. The player never sees a difficulty setting; matches just tend to stay close. v1.4 also added a weekly leaderboard filled with generated players whose scores grow through the week, so there's a reason to come back on Wednesday.</p>
+<h2>3. Start Simple, and Know What Will Break It</h2>
+<p>At first, the questions were bundled inside the app, so fixing a typo meant a new build and another App Store review. In v1.2 I moved the question bank to GitHub and had the app fetch it, with a fallback: try GitHub, then the last cached copy, then the copy bundled in the app. It took about half a day and worked well.</p>
+<p>It broke in v1.3, the moment I added a second file for a new level. The fallback treated the question bank as a single unit: if either file failed to load, the app fell back to the bundled copy, which only had the original words. The new level silently showed zero questions. The fix was to give each file its own fallback chain.</p>
+<p>The simple design was the right first step. Its weakness was an assumption nobody wrote down: there will only ever be one file. Writing that assumption down is what tells you when it's time to upgrade.</p>
+<h2>4. The Platform's Process Is Part of the Product</h2>
+<p>Two of the most frustrating delays in this project had nothing to do with my code. Version 1.0 was rejected over the name mismatch above. Version 1.5.1 was rejected because the audio library adds a microphone permission by default, with placeholder text that Apple's reviewers check, even though the app only plays sounds.</p>
+<p>Both fixes were one line. Both causes were defaults or conventions I didn't know existed. As a first-time submitter, I didn't have the pattern recognition to narrow it down quickly. What I do now: budget time for the platform's process, and write each rejection down where I'll see it next time. The App Store listing notes now say the app name must match the config file, and the microphone permission is switched off in the config.</p>
+<h2>5. Give the AI a Memory</h2>
+<p>Claude worked on almost every layer of the app: the code, the first 200-word question bank with its wrong options in two languages, Python scripts that generated the icons and all six sound effects, and the App Store copy. That only worked across dozens of separate conversations because of one file, MEMORY.md, that Claude and I kept updated with the project's structure, decisions and lessons.</p>
+<p>Without it, every new conversation started from zero, and I re-explained the stack, the decisions already made, and the mistakes already fixed. With it, Claude picked up where we left off. Of everything in this project, it was the habit with the best return for the least effort. This portfolio site runs on the same practice.</p>
+<h2>The Mistake That Set Up the Next Phase</h2>
+<p>While adding real JLPT word lists in v1.5, I found that many of the Chinese answer options weren't Chinese. They were Japanese words or Japanese character forms, such as 卒業 and 予報, sitting next to one Chinese answer. A Chinese speaker could pick the right option without knowing the word. It affected about 79 question sets in the original N4 bank, which had been live since v1.0, and almost all of the newly drafted N3 and N2 sets.</p>
+<p>Nothing crashed. The app ran normally for months while some of its questions gave away the answer. Content errors are more dangerous than code errors for exactly that reason, and that's what led to the evaluation system in <a href="../test-the-reviewer/">the next article</a>.</p>
+<h2>If You're Shipping Your First Product With AI</h2>
+<p><strong>1. Decide what your product actually measures, then remove anything that undermines it.</strong> Sometimes the best feature is information you don't show.</p>
+<p><strong>2. Write down the assumption behind every simple design.</strong> It's the trigger for your next refactor.</p>
+<p><strong>3. Write each rejection down where you'll see it next time.</strong> The platform's process is part of shipping, and its rules are rarely where you'd look for them.</p>
+<p><strong>4. Give your AI collaborator a memory file.</strong> It costs minutes and saves the same explanation in every conversation.</p>
+</span>
+<span class="lang-zh">
+<p class="note"><em>時間不多的話，讀第一節和最後一節就好。中間每一個決定都可以單獨讀。</em></p>
+<h2>一個字串，賠上一週</h2>
+<p>這個 App 前幾個月最貴的 bug，修只花 30 秒，找卻花了一週。App Store 審查退回 1.0 版，原因是一個設定檔裡的 App 名稱，和 App Store Connect 裡的名稱不完全一致。而對產品影響最大的決定，反而一行程式碼都不用寫：把資訊藏起來，不給玩家看。</p>
+<p>日文知識王是一款 1v1 的日文單字對戰遊戲。你和對手回答同樣的五題，每題 10 秒，答對越快分數越高。我一個人和 AI 一起從空資料夾做起，而我不是 iOS 開發者。1.0 版在 2026 年 3 月上架，有 200 個單字。到了 7 月，1.5.1 版已經有四個難度共 640 個單字、會隨戰績調整的對手、週排行榜，以及第一個後端。</p>
+<p>這篇文章記錄前五個月，不按版本，而是按塑造這個產品的五個決定來寫。</p>
+<h2>1. 把漢字藏起來</h2>
+<p>每一題只顯示日文單字的假名，從不顯示漢字。這看起來是顯示方式的選擇，其實決定了這個遊戲到底在考什麼。日文漢字和中文字高度重疊。如果題目顯示「食べる」，任何中文母語者不懂日文也知道跟吃有關。只顯示「たべる」，才能逼出真正的記憶。</p>
+<p>對我的第一批使用者，也就是學日文的中文母語者，顯示漢字會讓遊戲感覺很簡單，卻什麼都沒學到。把資訊拿掉，它才變成真正的測驗。這條規則後來也成了整套品質系統的基礎：只看假名時，四個選項恰好只有一個是對的。</p>
+<h2>2. 不需要伺服器的對手</h2>
+<p>我想要競爭的緊張感，但即時多人對戰需要伺服器、配對機制，還要同一時間有足夠的玩家在線上。一個新 App 這些都沒有。所以對手是 AI，而且要讓人覺得像真人。</p>
+<p>1.0 版的 AI 正確率是隨機的，介於 70% 到 90%。1.4 版開始讓它對玩家有反應：玩家連輸兩場，它就放水；連贏兩場，它就變強。玩家看不到任何難度設定，只是比賽通常會比較膠著。1.4 版也加入了週排行榜，上面是生成的玩家，分數會隨著一週慢慢成長，讓玩家到了週三還有理由回來。</p>
+<h2>3. 先做簡單的，並且知道什麼會讓它壞掉</h2>
+<p>一開始，題目打包在 App 裡，修一個錯字就要重新建置、再走一次 App Store 審查。1.2 版我把題庫移到 GitHub，讓 App 自己去拉，並加上 fallback：先試 GitHub，失敗就用上次的快取，再不行就用 App 內建的那份。實作花了大約半天，運作得很好。</p>
+<p>它在 1.3 版壞掉了，就在我為新難度加入第二個檔案的那一刻。fallback 把整個題庫當成一個單位：任一個檔案載入失敗，App 就退回內建的那份，而內建的只有原本的單字。新難度就這樣安靜地顯示零題。修法是讓每個檔案各自有一條 fallback。</p>
+<p>簡單的設計是正確的第一步。它的弱點是一個沒人寫下來的假設：永遠只會有一個檔案。把這個假設寫下來，就是在告訴自己什麼時候該升級。</p>
+<h2>4. 平台的流程也是產品的一部分</h2>
+<p>這個專案最讓人挫折的兩次延誤，都跟我的程式碼無關。1.0 版因為上面那個名稱不一致被退回。1.5.1 版被退回，是因為音訊套件預設會加上麥克風權限，而且說明文字是佔位文字，Apple 審查員會檢查這段文字，即使 App 只會播放音效。</p>
+<p>兩次修法都只有一行。兩次的原因，都是我不知道存在的預設值或慣例。第一次送審，我沒有足夠的經驗快速縮小範圍。我現在的做法是：替平台的流程預留時間，並把每一次退審寫在下次一定會看到的地方。App Store 頁面的筆記裡現在寫著 App 名稱必須和設定檔一致，麥克風權限也在設定裡關掉了。</p>
+<h2>5. 給 AI 一份記憶</h2>
+<p>Claude 參與了這個 App 幾乎每一層：程式碼、第一批 200 字題庫和中英兩套錯誤選項、生成 icon 和六種音效的 Python 腳本，還有 App Store 文案。這能在幾十次獨立的對話裡持續運作，靠的是一個檔案：MEMORY.md。我和 Claude 一起更新它，記錄專案結構、做過的決定和學到的教訓。</p>
+<p>沒有它，每次新對話都從零開始，我得重新解釋技術棧、已經做過的決定、已經修過的錯。有了它，Claude 可以從上次停下的地方接手。在整個專案裡，這是投入最少、回報最高的習慣。這個作品集網站也用同樣的做法在維護。</p>
+<h2>為下一個階段埋下伏筆的錯誤</h2>
+<p>在 1.5 版加入真正的 JLPT 單字表時，我發現很多中文答案選項根本不是中文，而是日文單字或日文字形，例如「卒業」「予報」，和一個中文正解放在一起。中文母語者不認識這個字也能選對。受影響的包括從 1.0 版就上線的 N4 題庫裡約 79 組題目，以及剛產出的 N3、N2 幾乎全部。</p>
+<p>什麼都沒有當掉。App 正常跑了好幾個月，而一部分題目一直在送分。正因為如此，內容錯誤比程式錯誤更危險，這也直接引出了<a href="../test-the-reviewer/">下一篇文章</a>的評測系統。</p>
+<h2>如果你也在用 AI 做第一個產品</h2>
+<p><strong>1. 先決定你的產品到底在衡量什麼，再拿掉所有削弱它的東西。</strong>有時候最好的功能，是你不顯示的資訊。</p>
+<p><strong>2. 每一個簡單的設計，都寫下它背後的假設。</strong>那就是你下一次重構的觸發條件。</p>
+<p><strong>3. 把每一次退審寫在下次一定會看到的地方。</strong>平台的流程也是上線的一部分，而它的規則很少出現在你會去找的地方。</p>
+<p><strong>4. 給你的 AI 協作者一份記憶檔。</strong>只要花幾分鐘，就省下每次對話都要重講一遍的時間。</p>
+</span>
+
+    </div>
+    <nav class="next" aria-label="More articles"><a class="to-next" href="../test-the-reviewer/"><small><span class="lang-en">Next</span><span class="lang-zh">下一篇</span></small><span class="lang-en">Test the Reviewer Before You Trust It</span><span class="lang-zh">先測試評審，再信任它</span></a></nav>
+  </article>
+</main>
+<footer id="contact"><div class="wrap">
+  <span>© 2026 Tim</span>
+  <span class="footer-links"><a href="https://www.linkedin.com/in/weitim/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/waitinghir" target="_blank" rel="noopener">GitHub</a><a href="mailto:waitinghir@gmail.com">Email</a></span>
+</div></footer>
+</body>
+</html>

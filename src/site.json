@@ -1,0 +1,396 @@
+{
+ "articles": {
+  "cny": {
+   "project": "game-feel",
+   "slug": null,
+   "category": "Project 03 — Gamification × AI",
+   "title": {
+    "en": "Game Feel Is a Spec",
+    "zh": "手感也是規格"
+   },
+   "read": {
+    "en": "4 min read",
+    "zh": "閱讀 4 分鐘"
+   },
+   "links": [
+    {
+     "href": "https://waitinghir.github.io/Lunar-New-Year-game/",
+     "label": {
+      "en": "▶ Play the Game",
+      "zh": "▶ 開始遊戲"
+     }
+    },
+    {
+     "href": "https://github.com/waitinghir/Lunar-New-Year-game",
+     "label": {
+      "en": "⟨/⟩ GitHub",
+      "zh": "⟨/⟩ GitHub"
+     }
+    }
+   ]
+  },
+  "jpquiz-v1": {
+   "project": "nihongo-quiz-king",
+   "slug": "five-decisions",
+   "category": "日文知識王 — v1.0.0 → v1.5.1",
+   "title": {
+    "en": "From Zero to an App People Use: Five Decisions",
+    "zh": "從零到有人在用的 App：五個決定"
+   },
+   "read": {
+    "en": "8 min read",
+    "zh": "閱讀 8 分鐘"
+   },
+   "links": []
+  },
+  "jpquiz-v4": {
+   "project": "nihongo-quiz-king",
+   "slug": "test-the-reviewer",
+   "category": "日文知識王 — v1.5.2 → v1.6.3",
+   "title": {
+    "en": "Test the Reviewer Before You Trust It",
+    "zh": "先測試評審，再信任它"
+   },
+   "read": {
+    "en": "7 min read",
+    "zh": "閱讀 7 分鐘"
+   },
+   "links": []
+  },
+  "jpquiz-v5": {
+   "project": "nihongo-quiz-king",
+   "slug": "scale-needs-a-process",
+   "category": "日文知識王 — v1.6.4 → v1.7.0",
+   "title": {
+    "en": "Scale Needs a Process First",
+    "zh": "要規模化，先有流程"
+   },
+   "read": {
+    "en": "4 min read",
+    "zh": "閱讀 4 分鐘"
+   },
+   "links": []
+  },
+  "jpquiz-v6": {
+   "project": "nihongo-quiz-king",
+   "slug": "it-was-the-clock",
+   "category": "日文知識王 — v1.6.4 → v1.8.0",
+   "title": {
+    "en": "It Wasn't the AI. It Was the Clock.",
+    "zh": "問題不在 AI，在時間"
+   },
+   "read": {
+    "en": "6 min read",
+    "zh": "閱讀 6 分鐘"
+   },
+   "links": []
+  },
+  "flight": {
+   "project": "memories-of-flight",
+   "slug": null,
+   "category": "Project 04 — Interactive Storytelling × AI",
+   "title": {
+    "en": "Memories of Flight",
+    "zh": "飛行的回憶"
+   },
+   "read": {
+    "en": "6 min read",
+    "zh": "閱讀 6 分鐘"
+   },
+   "links": [
+    {
+     "href": "https://waitinghir.github.io/flight-of-memories/",
+     "label": {
+      "en": "▶ Play in Browser",
+      "zh": "▶ 在瀏覽器遊玩"
+     }
+    },
+    {
+     "href": "https://github.com/waitinghir/flight-of-memories",
+     "label": {
+      "en": "⟨/⟩ GitHub",
+      "zh": "⟨/⟩ GitHub"
+     }
+    }
+   ]
+  },
+  "i18n": {
+   "project": "how-this-portfolio-gets-written",
+   "slug": null,
+   "category": "Project 05 — Meta × AI",
+   "title": {
+    "en": "How This Portfolio Gets Written",
+    "zh": "這個作品集是怎麼寫出來的"
+   },
+   "read": {
+    "en": "5 min read",
+    "zh": "閱讀 5 分鐘"
+   },
+   "links": []
+  },
+  "jobmonitor": {
+   "project": "job-monitor",
+   "slug": null,
+   "category": "Project 02 — Automation × AI",
+   "title": {
+    "en": "The Job Monitor That Lied for 27 Days",
+    "zh": "那個騙了我 27 天的求職監控系統"
+   },
+   "read": {
+    "en": "8 min read",
+    "zh": "閱讀 8 分鐘"
+   },
+   "links": []
+  }
+ },
+ "cards": [
+  {
+   "id": "jpquiz",
+   "title": {
+    "en": "Japanese Knowledge King",
+    "zh": "Japanese Knowledge King"
+   },
+   "subtitle": {
+    "en": "日文知識王",
+    "zh": "日文知識王"
+   },
+   "desc": {
+    "en": "A 1v1 quiz game for learning Japanese vocabulary — built with Expo/React Native and shipped to the App Store. Currently on v1.8.0.",
+    "zh": "一款 1v1 日文單字對戰遊戲，使用 Expo/React Native 開發並上架 App Store。目前版本 v1.8.0。"
+   },
+   "tags": [
+    {
+     "en": "AI",
+     "zh": "AI"
+    },
+    {
+     "en": "React Native",
+     "zh": "React Native"
+    },
+    {
+     "en": "App Store",
+     "zh": "App Store"
+    }
+   ]
+  },
+  {
+   "id": "jobmonitor",
+   "title": {
+    "en": "The Job Monitor That Lied for 27 Days",
+    "zh": "那個騙了我 27 天的求職監控系統"
+   },
+   "subtitle": {
+    "en": "A debugging detective story",
+    "zh": "一場除錯偵探故事"
+   },
+   "desc": {
+    "en": "An AI-built daily job-search monitor that ran green on GitHub Actions for nearly a month while quietly catching nothing — and the three-act bug hunt that found out why.",
+    "zh": "一個用 AI 打造的每日求職監控系統，在 GitHub Actions 上連續綠燈跑了將近一個月卻什麼都沒抓到——以及找出真相的三幕除錯偵探故事。"
+   },
+   "tags": [
+    {
+     "en": "AI",
+     "zh": "AI"
+    },
+    {
+     "en": "GitHub Actions",
+     "zh": "GitHub Actions"
+    },
+    {
+     "en": "Debugging",
+     "zh": "除錯"
+    }
+   ]
+  },
+  {
+   "id": "cny",
+   "title": {
+    "en": "Lunar New Year Challenge",
+    "zh": "Lunar New Year Challenge"
+   },
+   "subtitle": {
+    "en": "新春大作戰",
+    "zh": "新春大作戰"
+   },
+   "desc": {
+    "en": "A three-stage mobile game I built for Lunar New Year without writing code, and what it taught me about turning \"it feels wrong\" into feedback AI can act on.",
+    "zh": "一款我沒寫一行程式碼、為農曆新年做的三關手機遊戲，以及它教會我的事：怎麼把「感覺不對」變成 AI 修得了的回饋。"
+   },
+   "tags": [
+    {
+     "en": "AI",
+     "zh": "AI"
+    },
+    {
+     "en": "Gamification",
+     "zh": "遊戲化"
+    },
+    {
+     "en": "Seasonal",
+     "zh": "節慶"
+    }
+   ]
+  },
+  {
+   "id": "flight",
+   "title": {
+    "en": "Memories of Flight",
+    "zh": "Memories of Flight"
+   },
+   "subtitle": {
+    "en": "飛行的回憶",
+    "zh": "飛行的回憶"
+   },
+   "desc": {
+    "en": "A narrative game where mechanics are metaphors — catch memories, dodge pain, and feel a story about loss unfold through your fingertips.",
+    "zh": "一款以機制作為隱喻的敘事遊戲——接住回憶、閃避傷痛，用指尖感受一段關於失去的故事。"
+   },
+   "tags": [
+    {
+     "en": "AI",
+     "zh": "AI"
+    },
+    {
+     "en": "Canvas",
+     "zh": "Canvas"
+    },
+    {
+     "en": "Narrative",
+     "zh": "敘事"
+    }
+   ]
+  },
+  {
+   "id": "i18n",
+   "title": {
+    "en": "How This Portfolio Gets Written",
+    "zh": "這個作品集是怎麼寫出來的"
+   },
+   "subtitle": {
+    "en": "A meta case study",
+    "zh": "一個 meta 的案例研究"
+   },
+   "desc": {
+    "en": "AI drafts, I own the judgment: the same quality system I built for AI-written quiz questions, applied to writing this site, and the lesson the AI wrote that wasn't mine.",
+    "zh": "AI 起草，判斷由我負責：把我替答題 App 建立的品質系統用在寫這個網站上，以及 AI 替我寫出、但不屬於我的那個教訓。"
+   },
+   "tags": [
+    {
+     "en": "AI",
+     "zh": "AI"
+    },
+    {
+     "en": "Writing",
+     "zh": "寫作"
+    },
+    {
+     "en": "Meta",
+     "zh": "Meta"
+    }
+   ]
+  }
+ ],
+ "about": {
+  "en": "<p>I've spent 8+ years in product and growth on consumer apps, leading international expansion across Japan, Taiwan, Hong Kong and Southeast Asia. At a community platform, I led the product repositioning for the Japan market, which improved long-term retention by 300%, and built the moderator and creator ecosystem from zero to one — growing posts by 36% and engagement time by 30% through a mix of product and ops incentives.</p>\n<p>I also led analytics instrumentation for ML-driven recommendation and search at 20M+ MAU: defining the events and schemas, and working with data engineers and data scientists to validate data quality before it fed experiments and model iterations.</p>\n<p>The projects here are where I bring the same habits to building with AI. Nihongo Quiz King's word bank gets the treatment I'd give a data pipeline: a written spec, automated checks, and reviewers that are calibrated before anyone trusts them. The job monitor taught me, again, that a green dashboard isn't a healthy system. Each article is about one judgment call you can take into your own work.</p>",
+  "zh": "<p>我在消費型 App 做了 8 年以上的產品與成長，負責過日本、台灣、香港和東南亞的海外擴張。在一個社群平台，我主導日本市場的產品重新定位，讓長期留存提升 300%；也從零建立版主與創作者生態，用產品加營運誘因，讓發文數成長 36%、使用時間成長 30%。</p>\n<p>我也主導過月活 2,000 萬以上規模的推薦與搜尋埋點：定義事件和資料結構，並和資料工程師、資料科學家一起驗證資料品質，再拿這些資料做實驗和模型迭代。</p>\n<p>這裡的專案，是我把同樣的習慣帶進 AI 開發的地方。日文知識王的題庫，我用對待資料管線的方式對待它：先寫規格、再做自動檢查，AI 評審也要先校準過才能信任。求職監控則再一次提醒我：儀表板全綠，不代表系統健康。每篇文章都在講一個判斷，你可以帶回自己的工作裡用。</p>",
+  "stats": [
+   {
+    "value": "8+",
+    "label": {
+     "en": "Years in product & growth",
+     "zh": "年產品與成長經驗"
+    }
+   },
+   {
+    "value": "+300%",
+    "label": {
+     "en": "Long-term retention, Japan market",
+     "zh": "日本市場長期留存"
+    }
+   },
+   {
+    "value": "20M+",
+    "label": {
+     "en": "MAU instrumented for ML recommendation & search",
+     "zh": "月活規模的推薦與搜尋埋點"
+    }
+   },
+   {
+    "value": "4",
+    "label": {
+     "en": "Markets: JP / TW / HK / SEA",
+     "zh": "市場：日本、台灣、香港、東南亞"
+    }
+   }
+  ]
+ },
+ "hero": {
+  "tag": "// Product & Growth × AI Builder",
+  "title": {
+   "en": "Building things that matter with AI",
+   "zh": "用 AI 打造 真正有意義的產品"
+  },
+  "subtitle": {
+   "en": "I'm Tim — a product and growth leader with 8+ years building consumer apps across Japan, Taiwan, Hong Kong and Southeast Asia. Here, I build and ship my own products with AI, and write up the judgment calls behind them — including the ones I got wrong.",
+   "zh": "我是 Tim，在消費型 App 做了 8 年以上的產品與成長，負責過日本、台灣、香港和東南亞市場。在這裡，我用 AI 打造並上線自己的產品，也把背後的判斷寫下來，包括我做錯的那些。"
+  }
+ },
+ "jpquiz": {
+  "intro": "<span class=\"lang-en\">Nihongo Quiz King is a 1v1 quiz game for learning Japanese vocabulary, built with Expo/React Native and shipped to the App Store. This is an ongoing project — each article below documents a phase of its evolution.</span><span class=\"lang-zh\">日文知識王是一款 1v1 日文單字對戰遊戲，使用 Expo/React Native 開發並上架 App Store。這是一個持續進行的專案——以下每篇文章記錄一個演進階段。</span>",
+  "gallery": "<div class=\"lang-en\"><img alt=\"Nihongo Quiz King App Store header\" class=\"article-img\" src=\"images/jpquiz-header-en.jpg\" style=\"margin-top:2rem;\"/><div class=\"screenshot-row\"><img alt=\"Home screen with swipeable level picker\" class=\"article-img\" loading=\"lazy\" src=\"images/jpquiz-home-en.jpg\"/><img alt=\"Today tab with daily missions\" class=\"article-img\" loading=\"lazy\" src=\"images/jpquiz-today-en.jpg\"/><img alt=\"Result screen with readings\" class=\"article-img\" loading=\"lazy\" src=\"images/jpquiz-result-en.jpg\"/></div></div><div class=\"lang-zh\"><img alt=\"日文知識王 App Store 橫幅\" class=\"article-img\" src=\"images/jpquiz-header-zh.jpg\" style=\"margin-top:2rem;\"/><div class=\"screenshot-row\"><img alt=\"首頁與難度選擇\" class=\"article-img\" loading=\"lazy\" src=\"images/jpquiz-home-zh.jpg\"/><img alt=\"今日分頁與每日任務\" class=\"article-img\" loading=\"lazy\" src=\"images/jpquiz-today-zh.jpg\"/><img alt=\"結算畫面與讀音\" class=\"article-img\" loading=\"lazy\" src=\"images/jpquiz-result-zh.jpg\"/></div></div>",
+  "versions": [
+   {
+    "id": "jpquiz-v1",
+    "tag": "v1.0.0 → v1.5.1",
+    "title": {
+     "en": "From Zero to an App People Use: Five Decisions",
+     "zh": "從零到有人在用的 App：五個決定"
+    },
+    "desc": {
+     "en": "Hiding the kanji, a rival without a server, simple designs and the assumptions behind them, App Store review, and giving the AI a memory",
+     "zh": "把漢字藏起來、不需要伺服器的對手、簡單設計背後的假設、App Store 審查，以及給 AI 一份記憶"
+    }
+   },
+   {
+    "id": "jpquiz-v4",
+    "tag": "v1.5.2 → v1.6.3",
+    "title": {
+     "en": "Test the Reviewer Before You Trust It",
+     "zh": "先測試評審，再信任它"
+    },
+    "desc": {
+     "en": "The first AI reviewer caught half the known problems. How I built a five-layer evaluation system for 640 AI-written questions, and what still got through.",
+     "zh": "第一版 AI 評審只抓到一半的已知問題。我怎麼替 640 道 AI 產出的題目建立五層評測，以及還是漏掉了什麼。"
+    }
+   },
+   {
+    "id": "jpquiz-v5",
+    "tag": "v1.6.4 → v1.7.0",
+    "title": {
+     "en": "Scale Needs a Process First",
+     "zh": "要規模化，先有流程"
+    },
+    "desc": {
+     "en": "Adding kana mode and a 314-word N5 level: an evening of checking became a few minutes, and organic downloads doubled",
+     "zh": "加入假名模式和 314 字的 N5：原本一個晚上的檢查變成幾分鐘，自然下載翻倍"
+    }
+   },
+   {
+    "id": "jpquiz-v6",
+    "tag": "v1.6.4 → v1.8.0",
+    "title": {
+     "en": "It Wasn't the AI. It Was the Clock.",
+     "zh": "問題不在 AI，在時間"
+    },
+    "desc": {
+     "en": "New players kept losing. I made the AI easier; the data said they were answering too slowly. Plus the daily loop built for retention. Work in progress.",
+     "zh": "新玩家一直輸，我讓 AI 變簡單；數據說問題是他們答得太慢。以及為了留存做的每日循環。持續更新中。"
+    }
+   }
+  ],
+  "meta_version": {
+   "en": "目前 v1.8.0",
+   "zh": "目前 v1.8.0"
+  }
+ }
+}
