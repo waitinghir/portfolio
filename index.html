@@ -855,15 +855,15 @@ footer {
         <!-- Project 05 -->
         <a class="project-card fade-in" data-accent="cyan" onclick="showArticle('i18n')" style="grid-column: 1 / -1;">
           <div class="project-number">PROJECT 05</div>
-          <h3 class="project-title"><span class="lang-en">Bilingual-izing This Site with AI</span><span class="lang-zh">用 AI 把這個網站雙語化</span></h3>
+          <h3 class="project-title"><span class="lang-en">How This Portfolio Gets Written</span><span class="lang-zh">這個作品集是怎麼寫出來的</span></h3>
           <div class="project-subtitle"><span class="lang-en">A meta case study</span><span class="lang-zh">一個 meta 的案例研究</span></div>
           <p class="project-desc">
-            <span class="lang-en">How I used Claude to add full EN/ZH bilingual support to a 1,300-line static site — including the part where it crashed trying to do it all at once.</span>
-            <span class="lang-zh">我如何用 Claude 為一個 1,300 行的靜態網站加入完整的英文/中文雙語支援——包括它試圖一次改完然後當掉的部分。</span>
+            <span class="lang-en">AI drafts, I own the judgment: the same quality system I built for AI-written quiz questions, applied to writing this site, and the two lessons the AI wrote that weren't mine.</span>
+            <span class="lang-zh">AI 起草，判斷由我負責：把我替答題 App 建立的品質系統用在寫這個網站上，以及 AI 替我寫出、但不屬於我的兩個教訓。</span>
           </p>
           <div class="project-tags">
             <span class="tag">AI</span>
-            <span class="tag">i18n</span>
+            <span class="tag"><span class="lang-en">Writing</span><span class="lang-zh">寫作</span></span>
             <span class="tag">Meta</span>
           </div>
           <div class="project-arrow">↗</div>
@@ -1329,75 +1329,53 @@ footer {
     <a class="article-back" onclick="showHome()"><span class="lang-en">← Back to all projects</span><span class="lang-zh">← 回到所有專案</span></a>
     <div class="article-header">
       <div class="article-category">Project 05 — Meta × AI</div>
-      <h1 class="article-h1"><span class="lang-en">Bilingual-izing This Site with AI</span><span class="lang-zh">用 AI 把這個網站雙語化</span></h1>
+      <h1 class="article-h1"><span class="lang-en">How This Portfolio Gets Written</span><span class="lang-zh">這個作品集是怎麼寫出來的</span></h1>
       <div class="article-meta"><span>By Tim</span><span>2026</span><span><span class="lang-en">5 min read</span><span class="lang-zh">閱讀 5 分鐘</span></span></div>
     </div>
     <div class="article-body">
       <span class="lang-en">
-      <h2>Overview</h2>
-      <p>This article is about itself — or rather, about the process of making it readable in two languages. This portfolio site started as an English-only, 1,200-line static HTML file. I wanted to add full Traditional Chinese support with a one-click toggle, and I used Claude to do it. The process was instructive not because it was hard, but because of <em>how</em> it failed before it succeeded.</p>
-
-      <h2>The Goal</h2>
-      <p>Add bilingual EN/ZH support to every piece of text on the site: navigation, hero section, project cards, about section, footer, and four full-length project articles. The user clicks a button in the top-right corner, and everything switches instantly. Their preference persists across page reloads via localStorage.</p>
-
-      <h2>The Approach That Didn't Work</h2>
-      <p>The first attempt was straightforward: rewrite the entire file with bilingual markup in one shot. Claude would take the 1,200-line HTML file, wrap every text element with <code>&lt;span class="lang-en"&gt;</code> and <code>&lt;span class="lang-zh"&gt;</code> tags, add the CSS toggle rules, insert the JavaScript, and output a complete new file.</p>
-      <p>It failed. Repeatedly. The file was too large for a single coherent rewrite — Claude would lose track of the structure partway through, producing truncated or malformed output. This happened multiple times before I (the human) called it out: "you keep failing, you need to change your approach."</p>
-      <p>In hindsight, the failure makes sense. A 1,200-line file with deeply nested HTML, long-form article content in English that needs Chinese equivalents, plus new CSS and JavaScript — that's a lot of moving parts to hold in context simultaneously. The task isn't intellectually hard, but it's <em>volumetrically</em> hard. There's a difference.</p>
-
-      <h2>The Approach That Worked</h2>
-      <p>The fix was to decompose the work into sequential, verifiable steps:</p>
-      <p><strong>Step 1 — Infrastructure:</strong> Add the CSS language toggle rules (<code>[lang="en"] .lang-zh { display: none }</code> and vice versa), the nav toggle button, and the JavaScript switching function. Don't touch any content yet. Verify the button appears and the CSS logic works.</p>
-      <p><strong>Step 2 — Homepage:</strong> Translate the hero, project cards, about section, and footer. Checkpoint: download, preview, confirm the toggle switches all homepage text correctly.</p>
-      <p><strong>Step 3 — Articles, one at a time:</strong> Wrap each article's English content in <code>&lt;span class="lang-en"&gt;</code>, write the full Chinese translation in <code>&lt;span class="lang-zh"&gt;</code>, and add it to the file. Checkpoint after each article.</p>
-      <p>Each step produced a working, downloadable file. If something broke, the blast radius was one article, not the entire site. The checkpoints weren't just nice-to-have — they were the mechanism that made the whole process reliable.</p>
-
-      <h2>Technical Implementation</h2>
-      <p>The i18n system is deliberately minimal. No framework, no JSON translation files, no build step. Just CSS and HTML:</p>
-      <p>The <code>&lt;html lang="en"&gt;</code> attribute controls which language is visible. CSS rules hide the non-active language: <code>[lang="en"] .lang-zh { display: none !important }</code>. A JavaScript function toggles the <code>lang</code> attribute and saves the preference to localStorage. On page load, it checks localStorage and applies the saved language.</p>
-      <p>Every translatable element contains both versions inline: <code>&lt;span class="lang-en"&gt;Projects&lt;/span&gt;&lt;span class="lang-zh"&gt;專案&lt;/span&gt;</code>. For long article content, the entire body is wrapped in two sibling spans — one per language. This means the HTML file is roughly twice its original size, but for a static site with no build process, the simplicity is worth the payload.</p>
-
-      <h2>What I Learned</h2>
-      <p><strong>Volume is a different kind of complexity.</strong> Bilingual-izing a website isn't conceptually difficult. It's wrapping text in spans and writing translations. But when the file is 1,200+ lines with four long-form articles, the sheer volume overwhelms a single-pass approach. The lesson applies beyond i18n: any large-scale transformation of existing content is better done incrementally than all at once, especially with AI.</p>
-      <p><strong>Checkpoints are infrastructure, not overhead.</strong> Every step ended with "download this, verify it works." That discipline caught issues early and kept the working version intact. Without it, a single bad edit deep in the file could have corrupted hours of work with no easy rollback.</p>
-      <p><strong>The human's job is strategy, not content.</strong> I didn't write any of the Chinese translations — Claude did all of that. What I contributed was the decision to stop the failing approach, the decomposition into steps, and the verification at each checkpoint. In AI collaboration, knowing <em>when to change the plan</em> is more valuable than knowing how to execute the plan.</p>
-      <p><strong>Simple beats clever for static sites.</strong> There are elegant i18n solutions — JSON translation files, framework-level routing, compile-time generation. For a single-file static site on GitHub Pages, inline spans with CSS toggles are the right level of complexity. It's not scalable to 50 languages, but it doesn't need to be. It needs to work for two, today, with zero dependencies.</p>
-
-      <h2>The Meta Observation</h2>
-      <p>This article exists because the process of building it was interesting enough to document. The portfolio site was built by AI, the articles were written by AI, and the bilingual system was implemented by AI. But the decisions — what to build, when to change strategy, what quality bar to set — were all human. That division of labor is, in miniature, the thesis of this entire portfolio.</p>
+      <p><em>Short on time? Read the first section and the last one.</em></p>
+      <h2>AI Drafts, I Own the Judgment</h2>
+      <p>Most of the words on this site were drafted by AI. Claude reads the commit history of each project, checks the facts against the code, and writes a first version. That part works well. What it can't do is decide what I actually learned. Twice, it wrote a lesson I had never taken away, and the only reason they're gone is that I read the article and said so.</p>
+      <p>So the way this portfolio gets written looks a lot like the quality system I built for my quiz app's AI-written questions: a written rule for what counts as good, checks for the facts, an AI reviewer that has to prove itself before I trust it, and a human who makes the final call.</p>
+      <h2>A Rule Before Any Writing</h2>
+      <p>The site exists to help me find my next role, so I first wrote down who reads it and what a good article must do. The readers are people hiring product managers. The core rule: <strong>every article has to leave the reader with a judgment they didn't have before and can use, and it has to be true.</strong></p>
+      <p>The spec also lists what fails: an article that reads like a changelog, adjectives instead of evidence, technical detail that doesn't support a decision, a generic AI voice, and the best line buried at the end. Every article on the site was rewritten or trimmed against that list.</p>
+      <h2>Facts Can Be Checked. Lessons Can't.</h2>
+      <p>Claude is good at the factual side. It checks each claim against the repositories, and that check caught real problems: every article on the site was dated 2025, while every project was built in 2026. It also caught one of its own mistakes. One article said a broken fix had removed "more than half" of a game. A closer look at the files showed all three stages were still there, and the article was corrected.</p>
+      <p>Lessons are different. In one draft, Claude reconstructed a launch-day story from a game's commit history and concluded that you should "check the size of every fix". The facts were right, but I didn't remember any of it, and that wasn't something I learned. The section came out. Another draft framed an outdated App Store description as a confession about honesty. It pulled attention from the actual product decision, so that came out too.</p>
+      <p>Since then, the rule is that Claude asks me what I took away before writing, and marks anything it inferred so I can confirm or delete it. No reviewer, human or AI, can verify that a lesson belongs to me. Only I can.</p>
+      <h2>Testing the Reviewer, Again</h2>
+      <p>To see how the English pieces land with the intended reader, two AI reviewers on different models read them as a hiring manager at a multinational company would. Before trusting their opinions, we calibrated them the same way as the quiz reviewers: three older drafts we already knew were weak went into the stack under random labels. Both reviewers scored the old drafts at or below their rewrites, and the old About section, all adjectives and no evidence, came last for both.</p>
+      <p>Once they'd passed that test, their verdicts were worth acting on. Both ranked the article about calibrating an AI reviewer first. Both said the biggest thing missing across the portfolio was outcome data, real numbers on what the products did for users. The project order on the home page changed because of that review, and the gap they named is what the next article about the quiz app will address.</p>
+      <h2>Where It Started: One Request That Was Too Big</h2>
+      <p>The first time I used AI on this site, I asked it to make the whole 1,200-line page bilingual in one pass. It failed repeatedly, losing track of the structure partway through, until I told it to change approach. What worked was splitting the job into steps that could each be checked: first the language toggle, then the home page, then one article at a time, with a working version saved after each step. That lesson stuck, and every change since has been made in small, checked pieces.</p>
+      <h2>If You Write With AI</h2>
+      <p><strong>Let AI check the facts, and keep the lessons for yourself.</strong> It can verify a claim against a source. It can't verify that you learned something.</p>
+      <p><strong>Write down what good looks like before the first draft.</strong> A one-sentence rule turns "this feels off" into something you and the AI can both check.</p>
+      <p><strong>Test any AI reviewer on work you already know is weak.</strong> If it can't tell the old draft from the rewrite, its opinion of the rest isn't worth much.</p>
       </span>
       <span class="lang-zh">
-      <h2>概覽</h2>
-      <p>這篇文章講的是它自己——或者更精確地說，是讓它能被兩種語言閱讀的過程。這個作品集網站最初是一個純英文、1,200 行的靜態 HTML 檔案。我想加入完整的正體中文支援，按一個鍵就能切換，並用 Claude 來實作。這個過程很有啟發性，不是因為它很難，而是因為它<em>怎麼失敗</em>然後才成功的。</p>
-
-      <h2>目標</h2>
-      <p>為網站上的每一段文字加入雙語 EN/ZH 支援：導航列、首頁大標、專案卡片、關於區塊、頁尾，以及四篇完整的專案文章。使用者點一下右上角的按鈕，所有內容立即切換。偏好設定透過 localStorage 在重新載入頁面後保留。</p>
-
-      <h2>行不通的做法</h2>
-      <p>第一個嘗試很直接：一次重寫整個檔案，加入雙語標記。Claude 會拿到 1,200 行的 HTML 檔案，在每個文字元素外包上 <code>&lt;span class="lang-en"&gt;</code> 和 <code>&lt;span class="lang-zh"&gt;</code> 標籤，加入 CSS 切換規則，插入 JavaScript，然後輸出一個完整的新檔案。</p>
-      <p>失敗了。而且重複失敗。檔案太大，無法在一次通過中保持連貫——Claude 寫到一半就會失去對結構的掌控，產出截斷或格式錯誤的輸出。這發生了好幾次，直到我（人類）指出：「你一直失敗，你得換個做法。」</p>
-      <p>事後看來，失敗是合理的。一個 1,200 行、深度巢狀的 HTML 檔案，加上需要中文對應的長篇英文文章內容，再加上新的 CSS 和 JavaScript——這是同時要在上下文中維持的大量移動部件。這個任務在智識上不難，但在<em>體量上</em>很難。兩者是不同的。</p>
-
-      <h2>行得通的做法</h2>
-      <p>修正方法是把工作分解為循序的、可驗證的步驟：</p>
-      <p><strong>步驟一——基礎架構：</strong>加入 CSS 語言切換規則（<code>[lang="en"] .lang-zh { display: none }</code> 及反向規則）、導航列的切換按鈕，以及 JavaScript 切換函式。不碰任何內容。驗證按鈕出現且 CSS 邏輯運作。</p>
-      <p><strong>步驟二——首頁：</strong>翻譯 Hero 區塊、專案卡片、關於區塊和頁尾。存檔點：下載、預覽、確認切換能正確切換所有首頁文字。</p>
-      <p><strong>步驟三——文章逐篇處理：</strong>把每篇文章的英文內容包在 <code>&lt;span class="lang-en"&gt;</code> 裡，寫完整的中文翻譯放在 <code>&lt;span class="lang-zh"&gt;</code> 裡，加入檔案。每篇文章後設存檔點。</p>
-      <p>每一步都產出一個可運作、可下載的檔案。如果出問題，爆炸半徑是一篇文章，不是整個網站。存檔點不只是「有也不錯」——它們是讓整個過程可靠的機制。</p>
-
-      <h2>技術實作</h2>
-      <p>i18n 系統刻意保持精簡。沒有框架、沒有 JSON 翻譯檔、沒有建置步驟。只有 CSS 和 HTML：</p>
-      <p><code>&lt;html lang="en"&gt;</code> 屬性控制哪個語言可見。CSS 規則隱藏非啟用的語言：<code>[lang="en"] .lang-zh { display: none !important }</code>。一個 JavaScript 函式切換 <code>lang</code> 屬性並把偏好存到 localStorage。頁面載入時檢查 localStorage 並套用儲存的語言。</p>
-      <p>每個可翻譯的元素都包含兩個版本：<code>&lt;span class="lang-en"&gt;Projects&lt;/span&gt;&lt;span class="lang-zh"&gt;專案&lt;/span&gt;</code>。對於長篇文章內容，整個 body 包在兩個並列的 span 裡——每個語言一個。這意味著 HTML 檔案大約是原來的兩倍大，但對於一個沒有建置流程的靜態網站來說，簡單性值得這個代價。</p>
-
-      <h2>我學到的</h2>
-      <p><strong>體量是一種不同的複雜性。</strong>把網站雙語化在概念上不難。就是在文字外面包 span 然後寫翻譯。但當檔案超過 1,200 行、有四篇長文章時，純粹的體量就會壓垮一次通過的做法。這個教訓不只適用於 i18n：任何對現有內容的大規模轉換，用漸進式做比一次全改更好，特別是和 AI 協作時。</p>
-      <p><strong>存檔點是基礎設施，不是額外負擔。</strong>每一步都以「下載這個，驗證它能動」結束。這個紀律在早期就能抓到問題，並保持工作版本完整。沒有它，一個藏在檔案深處的錯誤編輯可能毀掉數小時的工作，而且沒有簡單的回退方式。</p>
-      <p><strong>人類的工作是策略，不是內容。</strong>我沒有寫任何一行中文翻譯——全部是 Claude 做的。我貢獻的是決定停止失敗的做法、把工作分解成步驟、以及在每個存檔點進行驗證。在 AI 協作中，知道<em>何時該改變計劃</em>比知道如何執行計劃更有價值。</p>
-      <p><strong>對靜態網站來說，簡單勝過精巧。</strong>有很多優雅的 i18n 方案——JSON 翻譯檔、框架層級的路由、編譯時生成。對於一個放在 GitHub Pages 上的單檔靜態網站，用 inline span 加 CSS 切換是正確的複雜度層級。它無法擴展到 50 種語言，但它也不需要。它只需要今天能為兩種語言工作，零相依套件。</p>
-
-      <h2>Meta 觀察</h2>
-      <p>這篇文章之所以存在，是因為建造它的過程本身有趣到值得記錄。作品集網站是 AI 建的，文章是 AI 寫的，雙語系統是 AI 實作的。但決策——做什麼、何時改變策略、設定什麼品質標準——全部是人類做的。這種分工，就是整個作品集的論點的縮影。</p>
+      <p><em>時間不多的話，讀第一節和最後一節就好。</em></p>
+      <h2>AI 起草，判斷由我負責</h2>
+      <p>這個網站上大部分的文字是 AI 起草的。Claude 會讀每個專案的 commit 紀錄，對照程式碼確認事實，寫出第一版。這部分做得很好。它做不到的，是判斷我到底學到了什麼。它有兩次寫出了我從來沒有的體會，而那兩段之所以消失，只是因為我讀了文章、說了出來。</p>
+      <p>所以這個作品集的寫法，很像我替答題 App 裡 AI 產出的題目建立的品質系統：一條寫下來的「什麼算好」的規則、確認事實的檢查、一個要先證明自己才被信任的 AI 評審，以及最後拍板的人。</p>
+      <h2>先有規則，再開始寫</h2>
+      <p>這個網站是為了幫我找下一份工作，所以我先寫下誰會讀它、一篇好文章必須做到什麼。讀者是正在找產品經理的人。核心規則是：<strong>每篇文章都要讓讀者帶走一個他原本不知道、而且用得上的判斷，而且必須是真的。</strong></p>
+      <p>規格也列出什麼是不合格的：讀起來像 changelog、用形容詞代替證據、不支撐任何決定的技術細節、AI 通用語氣，以及把最好的一句話埋在最後。網站上每一篇文章，都照著這份清單重寫或刪減過。</p>
+      <h2>事實可以檢查，教訓不行</h2>
+      <p>Claude 很擅長事實這一面。它會拿每一個說法去對照 repo，而這個檢查抓到了真正的問題：網站上每篇文章都標著 2025，但每個專案其實都是 2026 年做的。它也抓到了自己的錯：有一篇文章說，一次失敗的修法讓遊戲「超過一半」不見了；仔細比對檔案後發現三個關卡其實都還在，文章也跟著改正了。</p>
+      <p>教訓就不一樣了。有一版草稿裡，Claude 從一個遊戲的 commit 紀錄拼出一段上線當天的故事，結論是「檢查每一次修改的大小」。事實沒錯，但我完全沒有印象，那也不是我學到的東西。那一節被刪掉了。另一版草稿把一段過時的 App Store 描述寫成了關於誠實的反省，搶走了真正那個產品決定的焦點，所以也刪了。</p>
+      <p>從那之後的規則是：Claude 動筆前先問我學到什麼，並標出它自己推論的部分，讓我確認或刪掉。沒有任何評審，不管是人還是 AI，能驗證一個教訓是不是屬於我。只有我自己可以。</p>
+      <h2>再一次，先測試評審</h2>
+      <p>為了知道英文版在目標讀者眼中是什麼樣子，兩個不同模型的 AI 評審扮演外商的用人主管來讀。在相信它們的意見之前，我們用校準答題 App 評審的同一種方法校準它們：把三篇已知比較弱的舊版草稿，用隨機代號混進去。兩位評審給舊版的分數都不高於改寫版；只有形容詞、沒有證據的舊 About，在兩位評審那裡都排最後。</p>
+      <p>通過這個測試之後，它們的評語才值得採納。兩位都把「校準 AI 評審」那篇排第一；兩位也都說，整個作品集最缺的是成果數據，也就是這些產品實際為使用者帶來了什麼。首頁的專案順序因為這次審查而調整，而它們點出的缺口，就是下一篇答題 App 文章要回答的事。</p>
+      <h2>一切的起點：一個太大的要求</h2>
+      <p>我第一次在這個網站上用 AI，是要它一次把整個 1,200 行的頁面改成雙語。它一再失敗，改到一半就搞丟結構，直到我叫它換個做法。後來成功的方式，是把工作拆成一個個可以檢查的步驟：先做語言切換，再做首頁，然後一次一篇文章，每一步都留下一個可用的版本。這個教訓留了下來，之後每一次修改，都是拆成小塊、逐一檢查完成的。</p>
+      <h2>如果你也用 AI 寫東西</h2>
+      <p><strong>事實交給 AI 檢查，教訓留給自己。</strong>它可以拿一個說法去對照來源，但沒辦法驗證你是不是真的學到了。</p>
+      <p><strong>在第一版草稿之前，先寫下什麼叫好。</strong>一句話的規則，能把「感覺怪怪的」變成你和 AI 都能檢查的東西。</p>
+      <p><strong>拿你已經知道比較弱的作品，先測試任何 AI 評審。</strong>如果它分不出舊版和改寫版，它對其他作品的意見也就不太值得參考。</p>
       </span>
     </div>
   </div>
