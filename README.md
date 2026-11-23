@@ -19,7 +19,7 @@ Personal portfolio showcasing AI projects built through human-AI collaboration.
 2. **那個騙了我 27 天的求職監控系統** (The Job Monitor That Lied for 27 Days) — A debugging detective story
 3. **新春大作戰** (Lunar New Year Challenge) — Game feel is a spec: turning "it feels wrong" into feedback AI can act on
 4. **飛行的回憶** (Memories of Flight) — Narrative game where mechanics are metaphors for loss and memory
-5. **用 AI 把這個網站雙語化** (Bilingual-izing This Site with AI) — A meta case study
+5. **這個作品集是怎麼寫出來的** (How This Portfolio Gets Written) — AI drafts, I own the judgment
 
 ## Tech
 
