@@ -1017,15 +1017,15 @@ footer {
           <div class="version-card-left">
             <span class="version-tag">v1.6.4 → v1.7.0</span>
             <span class="version-title"><span class="lang-en">Scale Needs a Process First</span><span class="lang-zh">要規模化，先有流程</span></span>
-            <span class="version-desc"><span class="lang-en">Adding kana mode and a 314-word N5 level: an evening of checking became a few minutes</span><span class="lang-zh">加入假名模式和 314 字的 N5：原本一個晚上的檢查，變成幾分鐘</span></span>
+            <span class="version-desc"><span class="lang-en">Adding kana mode and a 314-word N5 level: an evening of checking became a few minutes, and organic downloads doubled</span><span class="lang-zh">加入假名模式和 314 字的 N5：原本一個晚上的檢查變成幾分鐘，自然下載翻倍</span></span>
           </div>
           <span class="version-arrow">→</span>
         </a>
-        <a class="version-card" style="opacity:0.4; pointer-events:none;">
+        <a class="version-card" onclick="showArticle('jpquiz-v6')">
           <div class="version-card-left">
-            <span class="version-tag">v1.6.4 / v1.8.0</span>
-            <span class="version-title">Coming Soon</span>
-            <span class="version-desc"><span class="lang-en">Getting players to come back: the new-player AI and the daily loop, written once there's data</span><span class="lang-zh">讓玩家回來：新手 AI 與每日循環，等數據夠了再寫</span></span>
+            <span class="version-tag">v1.6.4 → v1.8.0</span>
+            <span class="version-title"><span class="lang-en">It Wasn't the AI. It Was the Clock.</span><span class="lang-zh">問題不在 AI，在時間</span></span>
+            <span class="version-desc"><span class="lang-en">New players kept losing. I made the AI easier; the data said they were answering too slowly. Plus the daily loop built for retention. Work in progress.</span><span class="lang-zh">新玩家一直輸，我讓 AI 變簡單；數據說問題是他們答得太慢。以及為了留存做的每日循環。持續更新中。</span></span>
           </div>
           <span class="version-arrow">→</span>
         </a>
@@ -1202,12 +1202,13 @@ footer {
       <p>The easiest level in the app was N4. Some players told me it was too hard to get started.</p>
       <p>So v1.7.0 added two lower steps. <strong>Kana mode</strong> covers 101 hiragana and 101 katakana, including voiced sounds and combinations. Each question randomly asks either kana to romaji or romaji to kana, and the wrong options are characters that look or sound alike. <strong>N5</strong> adds 314 words from a standard JLPT word list, skipping any word already in the app. The home screen became a swipeable level picker that runs from あ and ア through N5 to N2, so the new levels didn't crowd the screen.</p>
       <p>The goal was to widen the circle and serve more people.</p>
+      <p>In the four weeks after these changes, organic downloads more than doubled: 24 first downloads, against 11 in the four weeks before, with no paid promotion. The share of App Store visitors who downloaded rose from 11% to about 20%. The same weeks also brought a new store page and subtitle, so I can't credit the new levels alone. But new players now almost all start at N5 or hiragana, two levels that didn't exist before.</p>
       <h2>What the Process Did</h2>
       <p>Every new word went through the same checks as the existing bank: the validator, the dictionary check for same-sounding words, the level check against the JLPT list, and the two-model blind review in both Chinese and English. Words whose kana had a common homophone were skipped up front, because the card only shows kana and a second meaning would make a second option correct.</p>
       <p>For N5, the blind review flagged 7 wrong options. They were replaced and reviewed again, and came back clean. In the same release I topped up N4 and N3 to 200 words each. There, 4 Chinese questions were flagged by only one reviewer, and each flag pointed at an option that clearly didn't fit: that reviewer rated "leather" as a possible meaning of きぬ (silk). Normally a flag means the option gets replaced, but replacing an option because the reviewer misjudged it fixes nothing. So these 4 were escalated instead. The other reviewer and the English review had them clean, so they were judged reviewer slips and kept.</p>
       <p>That second case is the process working as designed: most questions pass on their own, and only real disagreements reach a person. The same validator now also checks the kana file, and in v1.8.0 it was extended to the daily themes and the reminder messages. Each new kind of content plugs into a check that already exists.</p>
       <h2>What I'm Still Not Sure About</h2>
-      <p>The content side scaled. The interface is a different question. I'm not sure yet whether the new home screen and level picker help or hurt how many people start playing and keep playing. That's something to answer with data rather than taste, and it's part of what the next article will cover.</p>
+      <p>The content side scaled. The interface is a different question. I'm not sure yet whether the new home screen and level picker help or hurt how many people start playing and keep playing. That's something to answer with data rather than taste, and the weekly data review is where I'll look for it.</p>
       <h2>Takeaway</h2>
       <p><strong>Build the process while the content is still small.</strong> It feels like overhead when you have 200 items. When you need to add hundreds more, it turns an evening of work into a few minutes.</p>
       </span>
@@ -1219,14 +1220,77 @@ footer {
       <p>App 裡最簡單的難度原本是 N4。有玩家跟我說，太難開始。</p>
       <p>所以 v1.7.0 加了兩個更低的台階。<strong>假名模式</strong>涵蓋 101 個平假名和 101 個片假名，包含濁音和拗音。每題隨機考假名選羅馬拼音、或羅馬拼音選假名，錯誤選項是長得像或聽起來像的字。<strong>N5</strong> 從標準 JLPT 單字表加入 314 個字，跳過 App 裡已經有的字。首頁改成可以左右滑動的難度選擇，從あ、ア一路到 N5、N2，新難度才不會把畫面擠滿。</p>
       <p>目標是擴圈，服務更多使用者。</p>
+      <p>這些改動之後的四週，自然下載翻了一倍以上：首次下載 24 次，前四週是 11 次，沒有任何付費推廣。看了 App Store 頁面之後下載的比例，從 11% 升到約 20%。同一段時間我也改了商店頁和副標題，所以不能全歸功於新難度。但現在的新玩家，幾乎都從 N5 或平假名開始，而這兩個難度以前並不存在。</p>
       <h2>流程做了什麼</h2>
       <p>每個新字都走過和原本題庫一樣的檢查：自動驗證、同音字的辭典比對、對照 JLPT 單字表的難度檢查，以及中英兩種語言的雙模型盲測。假名有常見同音字的單字，一開始就跳過，因為題目卡只顯示假名，第二個意思會讓第二個選項也變成正確答案。</p>
       <p>N5 的盲測標出 7 個錯誤選項，換掉之後重測，全部通過。同一個版本我也把 N4 和 N3 各補到 200 字。那批有 4 題中文題目只被一個評審標記，而且標記的都是明顯不相干的選項：那位評審認為「皮革」可能是きぬ（絲）的意思。通常被標記的選項會被換掉，但因為評審自己判斷錯就換掉選項，什麼問題也沒解決。所以這 4 題改為交給人裁決。另一個評審和英文版都沒問題，最後判斷是評審失誤，保留原題。</p>
       <p>第二種情況正是流程照設計在運作：大部分題目自己就通過，只有真正的分歧才需要人來看。同一支驗證程式現在也檢查假名檔，到了 v1.8.0 又延伸到每日主題和提醒文案。每一種新內容，都接上一個已經存在的檢查。</p>
       <h2>我還不確定的</h2>
-      <p>內容這一側規模化了，介面是另一個問題。新的首頁和難度選擇，到底會讓更多人開始玩、持續玩，還是反而有影響，我還不確定。這要用數據來回答，而不是靠感覺，也是下一篇文章會談的一部分。</p>
+      <p>內容這一側規模化了，介面是另一個問題。新的首頁和難度選擇，到底會讓更多人開始玩、持續玩，還是反而有影響，我還不確定。這要用數據來回答，而不是靠感覺，答案會從每週的數據檢查裡找。</p>
       <h2>帶得走的一件事</h2>
       <p><strong>趁內容還少的時候，就把流程建起來。</strong>只有 200 題的時候，它感覺像是額外負擔；等到要再加幾百題，它把一個晚上的工作變成幾分鐘。</p>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- JPQUIZ v1.6.4–v1.8.0 RETENTION ARTICLE -->
+<div id="article-jpquiz-v6" class="article-page">
+  <div class="container">
+    <a class="article-back" onclick="showArticle('jpquiz')"><span class="lang-en">← Back to version list</span><span class="lang-zh">← 回到版本列表</span></a>
+    <div class="article-header">
+      <div class="article-category">日文知識王 — v1.6.4 → v1.8.0</div>
+      <h1 class="article-h1"><span class="lang-en">It Wasn't the AI. It Was the Clock.</span><span class="lang-zh">問題不在 AI，在時間</span></h1>
+      <div class="article-meta"><span>By Tim</span><span>2026</span><span><span class="lang-en">6 min read</span><span class="lang-zh">閱讀 6 分鐘</span></span></div>
+    </div>
+    <div class="article-body">
+      <span class="lang-en">
+      <p><em>Short on time? Read the first section and the last one. This is a work in progress: I'll update it once the next fix has data.</em></p>
+      <h2>My First Fix Was a Hypothesis</h2>
+      <p>New players were losing almost every match and leaving after one session. I assumed the AI opponent was too strong, so I made it weaker for beginners. Early numbers looked good. Then the data showed something I hadn't considered: the players who kept losing weren't only answering wrong. They were answering slowly, and in this game speed matters about as much as accuracy.</p>
+      <p>That's the story of this article: a fix that was really a hypothesis, the data that corrected it, and the daily practice loop I built because, without retention, nothing else works.</p>
+      <h2>Why Retention First</h2>
+      <p>Whatever this app does next, whether that's growing its audience or making money, it won't work if players don't come back. Unless a product is a one-time purchase, retention comes first. My day job has been product growth, so I reached for the tools I know: reminders, game mechanics and daily missions that give people a reason to return.</p>
+      <p>Before changing anything, I needed a way to see what players actually do. Every week, a scheduled Claude session opens App Store Connect and the app's database in my browser and writes a read-only report. It first removes my own phone, the simulator and Apple's review devices, which it recognizes by an English interface on a build still in review. Then it checks a few thresholds, such as new players winning fewer than 30% of their first five matches, compares against the previous report's watch list, and recommends at most three actions. With only a handful of new players a week, removing those test devices is the difference between a signal and noise.</p>
+      <h2>Hypothesis: The AI Is Too Strong</h2>
+      <p>The first report found a new player who answered about half the questions correctly and won 1 of 8 matches against the original AI, then never came back. So in v1.6.4, the AI started weaker for new players and grew to full strength over ten matches, easing off after every loss. In simulation, a player with 50% accuracy went from winning roughly a quarter of matches to 38%.</p>
+      <p>Two weeks later, new players were winning 57% of their first five matches. It looked solved.</p>
+      <h2>The Case That Didn't Fit</h2>
+      <p>One new player lost five straight and left. Looking at every answer, they got 24% right, about what you'd get by guessing, and took over seven seconds on the ones they got right. The game scores speed: a correct answer at seven seconds earns about half what it earns at three. Even the weakest AI scored more per question than this player could.</p>
+      <p>A simulation made the point clearly. A player with 50% accuracy who answers in 3 seconds wins their first match 64% of the time. The same player answering in 7 seconds wins 25% of the time. I hadn't realized speed was a factor at all.</p>
+      <p>One case isn't a pattern, so I didn't change anything yet. The rule was written down instead: if two or more new players lose almost every early match within two weeks, act.</p>
+      <h2>The Pattern Arrived</h2>
+      <p>Within those two weeks, three more appeared, four in total. Two of them answered 40–60% correctly but needed 6 to 8 seconds per question. The AI wasn't too smart for them. It was too fast. The options now on the table are to slow the AI down during a player's first matches, guarantee an easier first opponent, or suggest switching to hiragana after two losses with low accuracy. The plan is to simulate the first option before shipping anything.</p>
+      <h2>The Daily Loop</h2>
+      <p>v1.8.0 adds the loop that's meant to bring players back. Each word tracks its own progress, and it only counts as mastered after correct answers on two different days. Words you got wrong come back in later matches. There are three daily missions and a monthly calendar to stamp, and a practice streak that forgives one missed day a week. Reminders are optional: the app asks first with its own card, and only shows the iPhone permission dialog after you pick a time.</p>
+      <p>It's too early to judge. In the first week, 3 of the 5 players asked agreed to reminders, and one new player came back the next day. One measurement detail mattered: a phone doesn't tell the app that a local reminder was delivered, so a delivery only gets logged when the player opens the app again. Players who never return never show up as "delivered". So the real measure is how many players who allowed reminders came back.</p>
+      <h2>What I'm Taking From This</h2>
+      <p><strong>Treat your first fix as a hypothesis.</strong> Making the AI easier was a reasonable guess, and the early numbers even agreed with it. The data still had something to teach me.</p>
+      <p><strong>Look at how people fail, not just whether they fail.</strong> Win rates told me new players were losing. Only answer-by-answer data showed me why.</p>
+      </span>
+      <span class="lang-zh">
+      <p><em>時間不多的話，讀第一節和最後一節就好。這篇還在進行中，下一個修正有數據之後我會回來更新。</em></p>
+      <h2>我的第一個修法，其實是一個假設</h2>
+      <p>新玩家幾乎每場都輸，玩完一個 session 就離開。我以為是 AI 對手太強，所以讓它對新手弱一點。一開始的數字看起來不錯。後來數據讓我看到一件我沒想過的事：一直輸的玩家不只是答錯，而是答得慢。在這個遊戲裡，速度的影響和正確率差不多大。</p>
+      <p>這篇文章講的就是這件事：一個其實是假設的修法、修正它的數據，以及我做的每日練習循環。因為留存不好，其他事都做不起來。</p>
+      <h2>為什麼先做留存</h2>
+      <p>這個 App 接下來不管是要擴大使用者，還是要變現，玩家不回來就都做不起來。除非產品是一次性購買，否則留存永遠排第一。我的本業就是產品成長，所以我用的是熟悉的工具：提醒、遊戲化，以及給人回來理由的每日任務。</p>
+      <p>在改任何東西之前，我需要先看見玩家實際在做什麼。每週，一個排程的 Claude session 會在我的瀏覽器裡打開 App Store Connect 和 App 的資料庫，寫出一份唯讀的報告。它會先排除我自己的手機、模擬器和 Apple 的審查裝置（用「英文介面＋還在審查中的版本」來辨識），再檢查幾個門檻，例如新玩家前五場勝率低於 30%，對照上一份報告的待觀察事項，最後提出最多三項建議。每週只有少數幾位新玩家，有沒有排除這些測試裝置，就是訊號和雜訊的差別。</p>
+      <h2>假設：AI 太強了</h2>
+      <p>第一份報告找到一位新玩家：大約一半的題目答對，對上原本的 AI 8 場只贏 1 場，之後再也沒回來。所以在 v1.6.4，AI 對新玩家一開始比較弱，在十場之內慢慢變強，每輸一場就放水一點。模擬結果，正確率 50% 的玩家，勝率從大約四分之一提升到 38%。</p>
+      <p>兩週後，新玩家前五場的勝率是 57%。看起來解決了。</p>
+      <h2>不符合假設的那個案例</h2>
+      <p>有一位新玩家連輸五場就離開了。逐題看，他只答對 24%，大概就是亂猜的程度，而且答對的題目平均要七秒以上。這個遊戲會算速度：七秒答對的分數，大約只有三秒答對的一半。就算是最弱的 AI，每題拿到的分數也比這位玩家多。</p>
+      <p>一次模擬把這件事講得很清楚。正確率 50% 的玩家，如果每題 3 秒作答，第一場有 64% 的機會贏；同一位玩家如果每題 7 秒，勝率只剩 25%。我之前完全沒意識到速度是一個因素。</p>
+      <p>一個案例還不算模式，所以我先不改，而是把規則寫下來：兩週內如果再出現兩位以上前幾場幾乎全輸的新玩家，就動手。</p>
+      <h2>模式出現了</h2>
+      <p>那兩週內又出現了三位，總共四位。其中兩位答對 40–60%，但每題要 6 到 8 秒。AI 對他們來說不是太聰明，是太快。現在考慮的做法有三個：玩家前幾場讓 AI 答慢一點、保證第一場的對手比較弱，或是連輸兩場而且正確率很低時，提示改玩平假名。計畫是先模擬第一個做法，再決定要不要上線。</p>
+      <h2>每日循環</h2>
+      <p>v1.8.0 加入了讓玩家回來的循環。每個單字各自記錄進度，要在兩個不同的日子答對，才算「已掌握」。答錯的字會在之後的對戰裡再出現。每天有三個任務和一個月曆可以蓋章，連續練習的天數每週可以漏一天。提醒是選擇性的：App 會先用自己的卡片詢問，等你選好時間，才跳出 iPhone 的權限視窗。</p>
+      <p>現在下結論還太早。第一週，被詢問的 5 位玩家裡有 3 位允許提醒，有一位新玩家隔天回來了。有一個量測上的細節很重要：手機不會告訴 App 本機提醒已經送達，所以只有玩家再次打開 App 時，送達才會被記錄下來。從此沒回來的玩家，永遠不會出現在「已送達」裡。所以真正該看的，是允許提醒的玩家裡，有多少人回來了。</p>
+      <h2>我從這裡帶走的</h2>
+      <p><strong>把第一個修法當成假設。</strong>讓 AI 變簡單是合理的猜測，一開始的數字甚至也支持它。但數據還有東西要教我。</p>
+      <p><strong>看使用者「怎麼」失敗，而不只是「有沒有」失敗。</strong>勝率告訴我新玩家在輸，只有逐題的數據才告訴我為什麼。</p>
       </span>
     </div>
   </div>
