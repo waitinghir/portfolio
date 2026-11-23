@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nihongo Quiz King — Tim</title>
+<meta name="description" content="A 1v1 Japanese vocabulary game built solo with AI and live on the App Store, and what building it taught me.">
+<meta property="og:title" content="Nihongo Quiz King — Tim">
+<meta property="og:description" content="A 1v1 Japanese vocabulary game built solo with AI and live on the App Store, and what building it taught me.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600&family=Roboto:wght@400;500&family=Roboto+Mono:wght@500&family=Noto+Sans+TC:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/site.css">
+<script src="../../assets/site.js"></script>
+</head>
+<body>
+<header class="appbar"><div class="wrap">
+  <a class="brand" href="../../">Tim</a>
+  <nav class="nav" aria-label="Main">
+    <a href="../../#projects"><span class="lang-en">Projects</span><span class="lang-zh">專案</span></a>
+    <a href="../../#about"><span class="lang-en">About</span><span class="lang-zh">關於</span></a>
+    <a href="#contact"><span class="lang-en">Contact</span><span class="lang-zh">聯絡</span></a>
+  </nav>
+  <button class="chipbtn" id="lang-toggle" type="button"><span class="lang-en">中文</span><span class="lang-zh">EN</span></button>
+</div></header>
+<main class="wrap">
+<nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="../../"><span class="lang-en">Home</span><span class="lang-zh">首頁</span></a></li><li><span aria-current="page"><span class="lang-en">Nihongo Quiz King</span><span class="lang-zh">日文知識王</span></span></li></ol></nav>
+<div class="page-head">
+    <h1><span class="lang-en">Nihongo Quiz King</span><span class="lang-zh">日文知識王</span></h1>
+    <p class="lead"><span class="lang-en">Nihongo Quiz King is a 1v1 quiz game for learning Japanese vocabulary, built with Expo/React Native and shipped to the App Store. This is an ongoing project — each article below documents a phase of its evolution.</span><span class="lang-zh">日文知識王是一款 1v1 日文單字對戰遊戲，使用 Expo/React Native 開發並上架 App Store。這是一個持續進行的專案——以下每篇文章記錄一個演進階段。</span></p>
+    <div class="meta"><span><span class="lang-en">Currently v1.8.0</span><span class="lang-zh">目前 v1.8.0</span></span></div>
+    <div class="btnrow"><a class="btn filled" href="https://apps.apple.com/app/id6759833560" target="_blank" rel="noopener">App Store</a><a class="btn tonal" href="https://github.com/waitinghir/jp-knowledge-king" target="_blank" rel="noopener">GitHub</a></div>
+  </div>
+  <div class="list"><a class="row" href="five-decisions/"><span class="ver">v1.0.0 → v1.5.1</span><div><h3><span class="lang-en">From Zero to an App People Use: Five Decisions</span><span class="lang-zh">從零到有人在用的 App：五個決定</span></h3><p><span class="lang-en">Hiding the kanji, a rival without a server, simple designs and the assumptions behind them, App Store review, and giving the AI a memory</span><span class="lang-zh">把漢字藏起來、不需要伺服器的對手、簡單設計背後的假設、App Store 審查，以及給 AI 一份記憶</span></p></div><span></span></a><a class="row" href="test-the-reviewer/"><span class="ver">v1.5.2 → v1.6.3</span><div><h3><span class="lang-en">Test the Reviewer Before You Trust It</span><span class="lang-zh">先測試評審，再信任它</span></h3><p><span class="lang-en">The first AI reviewer caught half the known problems. How I built a five-layer evaluation system for 640 AI-written questions, and what still got through.</span><span class="lang-zh">第一版 AI 評審只抓到一半的已知問題。我怎麼替 640 道 AI 產出的題目建立五層評測，以及還是漏掉了什麼。</span></p></div><span class="badge"><span class="lang-en">Start here</span><span class="lang-zh">從這篇開始</span></span></a><a class="row" href="scale-needs-a-process/"><span class="ver">v1.6.4 → v1.7.0</span><div><h3><span class="lang-en">Scale Needs a Process First</span><span class="lang-zh">要規模化，先有流程</span></h3><p><span class="lang-en">Adding kana mode and a 314-word N5 level: an evening of checking became a few minutes, and organic downloads doubled</span><span class="lang-zh">加入假名模式和 314 字的 N5：原本一個晚上的檢查變成幾分鐘，自然下載翻倍</span></p></div><span></span></a><a class="row" href="it-was-the-clock/"><span class="ver">v1.6.4 → v1.8.0</span><div><h3><span class="lang-en">It Wasn&#x27;t the AI. It Was the Clock.</span><span class="lang-zh">問題不在 AI，在時間</span></h3><p><span class="lang-en">New players kept losing. I made the AI easier; the data said they were answering too slowly. Plus the daily loop built for retention. Work in progress.</span><span class="lang-zh">新玩家一直輸，我讓 AI 變簡單；數據說問題是他們答得太慢。以及為了留存做的每日循環。持續更新中。</span></p></div><span class="badge"><span class="lang-en">In progress</span><span class="lang-zh">持續更新</span></span></a></div>
+  <div class="gallery"><div class="lang-en"><img alt="Nihongo Quiz King App Store header" class="article-img" src="../../images/jpquiz-header-en.jpg" style="margin-top:2rem;"/><div class="screenshot-row"><img alt="Home screen with swipeable level picker" class="article-img" loading="lazy" src="../../images/jpquiz-home-en.jpg"/><img alt="Today tab with daily missions" class="article-img" loading="lazy" src="../../images/jpquiz-today-en.jpg"/><img alt="Result screen with readings" class="article-img" loading="lazy" src="../../images/jpquiz-result-en.jpg"/></div></div><div class="lang-zh"><img alt="日文知識王 App Store 橫幅" class="article-img" src="../../images/jpquiz-header-zh.jpg" style="margin-top:2rem;"/><div class="screenshot-row"><img alt="首頁與難度選擇" class="article-img" loading="lazy" src="../../images/jpquiz-home-zh.jpg"/><img alt="今日分頁與每日任務" class="article-img" loading="lazy" src="../../images/jpquiz-today-zh.jpg"/><img alt="結算畫面與讀音" class="article-img" loading="lazy" src="../../images/jpquiz-result-zh.jpg"/></div></div></div>
+</main>
+<footer id="contact"><div class="wrap">
+  <span>© 2026 Tim</span>
+  <span class="footer-links"><a href="https://www.linkedin.com/in/weitim/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/waitinghir" target="_blank" rel="noopener">GitHub</a><a href="mailto:waitinghir@gmail.com">Email</a></span>
+</div></footer>
+</body>
+</html>

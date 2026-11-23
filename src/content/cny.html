@@ -1,0 +1,40 @@
+<span class="lang-en">
+<p><em>Short on time? Read the first section and the last one.</em></p>
+<h2>"It Feels Too Hard" Fixes Nothing</h2>
+<p>I built this game for Lunar New Year 2026 entirely in conversation with Claude, without writing any code myself. My job was to play it on my phone and describe what was wrong. That turned out to be the hard part. "It feels too hard" gave Claude nothing to work with. "I keep hitting Retry right after I win" told it exactly what to change.</p>
+<p>When AI can rebuild a stage in minutes, the slowest part of the loop is no longer the code. It's the quality of the feedback. This article is about how I learned to give better feedback.</p>
+<div style="margin:2rem 0; max-width:360px;"><img alt="Lunar New Year Challenge — Start Screen" class="article-img" src="cny-cover.png"/></div>
+<h2>The Game</h2>
+<p>Lunar New Year Challenge (新春大作戰) is a three-stage mobile web game made to share with family and friends over the holiday. Each stage turns a holiday tradition into a different kind of game: catching red envelopes while dodging obstacles (action), remembering six lottery numbers and collecting them (memory), and surviving waves of firecrackers (survival). It runs as one HTML file in any phone browser, with nothing to install.</p>
+<p>The theme did more than decorate the game. Red envelopes, lottery tickets and firecrackers each map naturally to a different genre, so the culture drove the variety instead of being a skin on top of it.</p>
+<h2>Describe the Moment, Not the Fix</h2>
+<p>Looking back at the feedback that worked, it always described a specific moment and what I did in it, not a solution. Claude was good at finding the fix once it knew what was actually happening:</p>
+<p><strong>Vague:</strong> "Stage 2 is too easy."<br/><strong>Useful:</strong> "The six numbers stay on screen the whole time, so I never have to remember anything."<br/><strong>Fix:</strong> show the numbers once, then hide them. A memory game needs real memory pressure.</p>
+<p><strong>Vague:</strong> "The end screen is confusing."<br/><strong>Useful:</strong> "After clearing a stage, I keep hitting Retry when I mean Next, because the two buttons look the same."<br/><strong>Fix:</strong> make Next visually dominant and Retry secondary. Turning a win into frustration is worse than any bug.</p>
+<p><strong>Vague:</strong> "The explosions are boring."<br/><strong>Useful:</strong> "The explosions look great for a few seconds, then they all look the same after about 30 seconds."<br/><strong>Fix:</strong> several explosion styles and particle variations. Same mechanic, much more engaging.</p>
+<p><strong>Vague:</strong> "It's too hard."<br/><strong>Useful:</strong> "The red envelopes fall too fast; my thumb can't get across the screen in time."<br/><strong>Fix:</strong> small changes to spawn rates, played again each time, until it felt "consistently tense but never hopeless". Difficulty curves can't be designed on paper.</p>
+<p>This is the same skill as writing a good bug report or giving design feedback to a team: what you did, what happened, what you expected. Working with AI just makes the loop so short that weak feedback becomes the bottleneck.</p>
+<h2>If You Build With AI</h2>
+<p><strong>Describe the moment, not the fix.</strong> What you did, what happened, what you expected. Let the AI propose the change.</p>
+<p><strong>Turn every "feels" into something you can observe.</strong> A mistake you keep making, a point where you give up, a number of seconds.</p>
+</span>
+<span class="lang-zh">
+<p><em>時間不多的話，讀第一節和最後一節就好。</em></p>
+<h2>「感覺太難了」什麼都修不了</h2>
+<p>這個遊戲是我在 2026 年農曆新年，完全透過和 Claude 對話做出來的，我自己一行程式碼都沒寫。我的工作是用手機玩，然後說出哪裡不對。結果這才是最難的部分。「感覺太難了」讓 Claude 無從下手；「我贏了之後一直按到重來」則清楚告訴它要改什麼。</p>
+<p>當 AI 幾分鐘就能重做一關，整個迴圈裡最慢的就不再是程式，而是回饋的品質。這篇文章講我怎麼學會給出更好的回饋。</p>
+<div style="margin:2rem 0; max-width:360px;"><img alt="新春大作戰——開始畫面" class="article-img" src="cny-cover.png"/></div>
+<h2>這個遊戲</h2>
+<p>新春大作戰是一款三關的手機網頁遊戲，做來在過年期間分享給家人朋友。每一關把一個過年習俗變成不同類型的遊戲：一邊閃避障礙一邊接紅包（動作）、記住六個樂透號碼再把它們收集起來（記憶）、在一波波爆竹中存活下來（生存）。整個遊戲是一個 HTML 檔案，任何手機瀏覽器都能玩，不用安裝。</p>
+<p>主題不只是裝飾。紅包、樂透、爆竹各自自然對應到一種遊戲類型，所以是文化本身帶出了玩法的多樣性，而不是一層貼在上面的皮。</p>
+<h2>描述當下，而不是解法</h2>
+<p>回頭看那些有用的回饋，它們都描述了一個具體的當下，以及我在那個當下做了什麼，而不是一個解法。只要 Claude 知道實際發生了什麼，它很擅長找出修法：</p>
+<p><strong>模糊：</strong>「第二關太簡單。」<br/><strong>有用：</strong>「六個號碼一直顯示在畫面上，我根本不用記。」<br/><strong>修法：</strong>號碼只顯示一次，然後藏起來。記憶遊戲需要真正的記憶壓力。</p>
+<p><strong>模糊：</strong>「結算畫面很混亂。」<br/><strong>有用：</strong>「過關之後，我一直按到重來，其實我想按下一關，因為兩個按鈕長得一樣。」<br/><strong>修法：</strong>讓「下一關」在視覺上明顯突出，「重來」降為次要。把勝利變成挫折，比任何 bug 都糟。</p>
+<p><strong>模糊：</strong>「爆炸很無聊。」<br/><strong>有用：</strong>「爆炸前幾秒很好看，大概 30 秒之後就全部長得一樣了。」<br/><strong>修法：</strong>多種爆炸樣式和粒子變化。同樣的機制，好玩很多。</p>
+<p><strong>模糊：</strong>「太難了。」<br/><strong>有用：</strong>「紅包掉太快，我的拇指來不及移過去。」<br/><strong>修法：</strong>每次小幅調整生成頻率，每次都重玩一遍，直到感覺「一直很緊張，但從不絕望」。難度曲線沒辦法在紙上設計。</p>
+<p>這和寫一份好的 bug 回報、或是給團隊設計回饋是同一種能力：你做了什麼、發生了什麼、你預期什麼。和 AI 協作只是讓迴圈短到，模糊的回饋變成了瓶頸。</p>
+<h2>如果你也用 AI 做東西</h2>
+<p><strong>描述當下，而不是解法。</strong>你做了什麼、發生了什麼、你預期什麼。讓 AI 提出修法。</p>
+<p><strong>把每一個「感覺」變成觀察得到的東西。</strong>一個你一直犯的錯、一個你放棄的時間點、幾秒鐘。</p>
+</span>

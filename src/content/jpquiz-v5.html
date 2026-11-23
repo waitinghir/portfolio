@@ -1,0 +1,36 @@
+<span class="lang-en">
+<h2>An Evening Became a Few Minutes</h2>
+<p>Adding a batch of new words to my quiz app used to take me a whole evening of checking questions one by one. In v1.7.0 I added an entire new level, 314 words, plus 202 kana questions. My part took a few minutes.</p>
+<p>Nothing about the content got simpler. What changed was that the checking had become a process: the five-layer review system I built a few versions earlier, described in <a onclick="showArticle('jpquiz-v4')" style="color:var(--accent-violet); cursor:pointer; text-decoration:underline;">the previous article</a>. It cost real effort to build when the question bank was small. This is the version where it paid that back.</p>
+<h2>Why Widen the Funnel</h2>
+<p>The easiest level in the app was N4. Some players told me it was too hard to get started.</p>
+<p>So v1.7.0 added two lower steps. <strong>Kana mode</strong> covers 101 hiragana and 101 katakana, including voiced sounds and combinations. Each question randomly asks either kana to romaji or romaji to kana, and the wrong options are characters that look or sound alike. <strong>N5</strong> adds 314 words from a standard JLPT word list, skipping any word already in the app. The home screen became a swipeable level picker that runs from あ and ア through N5 to N2, so the new levels didn't crowd the screen.</p>
+<p>The goal was to widen the circle and serve more people.</p>
+<p>In the four weeks after these changes, organic downloads more than doubled: 24 first downloads, against 11 in the four weeks before, with no paid promotion. The share of App Store visitors who downloaded rose from 11% to about 20%. The same weeks also brought a new store page and subtitle, so I can't credit the new levels alone. But new players now almost all start at N5 or hiragana, two levels that didn't exist before.</p>
+<h2>What the Process Did</h2>
+<p>Every new word went through the same checks as the existing bank: the validator, the dictionary check for same-sounding words, the level check against the JLPT list, and the two-model blind review in both Chinese and English. Words whose kana had a common homophone were skipped up front, because the card only shows kana and a second meaning would make a second option correct.</p>
+<p>For N5, the blind review flagged 7 wrong options. They were replaced and reviewed again, and came back clean. In the same release I topped up N4 and N3 to 200 words each. There, 4 Chinese questions were flagged by only one reviewer, and each flag pointed at an option that clearly didn't fit: that reviewer rated "leather" as a possible meaning of きぬ (silk). Normally a flag means the option gets replaced, but replacing an option because the reviewer misjudged it fixes nothing. So these 4 were escalated instead. The other reviewer and the English review had them clean, so they were judged reviewer slips and kept.</p>
+<p>That second case is the process working as designed: most questions pass on their own, and only real disagreements reach a person. The same validator now also checks the kana file, and in v1.8.0 it was extended to the daily themes and the reminder messages. Each new kind of content plugs into a check that already exists.</p>
+<h2>What I'm Still Not Sure About</h2>
+<p>The content side scaled. The interface is a different question. I'm not sure yet whether the new home screen and level picker help or hurt how many people start playing and keep playing. That's something to answer with data rather than taste, and the weekly data review is where I'll look for it.</p>
+<h2>Takeaway</h2>
+<p><strong>Build the process while the content is still small.</strong> It feels like overhead when you have 200 items. When you need to add hundreds more, it turns an evening of work into a few minutes.</p>
+</span>
+<span class="lang-zh">
+<h2>一個晚上，變成幾分鐘</h2>
+<p>以前替我的答題 App 新增一批單字，要花我一整個晚上逐題檢查。在 v1.7.0，我加了一整個新難度，314 個字，再加上 202 題假名。我花的時間只有幾分鐘。</p>
+<p>內容本身沒有變簡單。變的是檢查已經成了一套流程：我在幾個版本前建立的五層審查系統，寫在<a onclick="showArticle('jpquiz-v4')" style="color:var(--accent-violet); cursor:pointer; text-decoration:underline;">上一篇文章</a>裡。題庫還小的時候，建它花了不少力氣；這個版本，是它回本的時候。</p>
+<h2>為什麼要擴圈</h2>
+<p>App 裡最簡單的難度原本是 N4。有玩家跟我說，太難開始。</p>
+<p>所以 v1.7.0 加了兩個更低的台階。<strong>假名模式</strong>涵蓋 101 個平假名和 101 個片假名，包含濁音和拗音。每題隨機考假名選羅馬拼音、或羅馬拼音選假名，錯誤選項是長得像或聽起來像的字。<strong>N5</strong> 從標準 JLPT 單字表加入 314 個字，跳過 App 裡已經有的字。首頁改成可以左右滑動的難度選擇，從あ、ア一路到 N5、N2，新難度才不會把畫面擠滿。</p>
+<p>目標是擴圈，服務更多使用者。</p>
+<p>這些改動之後的四週，自然下載翻了一倍以上：首次下載 24 次，前四週是 11 次，沒有任何付費推廣。看了 App Store 頁面之後下載的比例，從 11% 升到約 20%。同一段時間我也改了商店頁和副標題，所以不能全歸功於新難度。但現在的新玩家，幾乎都從 N5 或平假名開始，而這兩個難度以前並不存在。</p>
+<h2>流程做了什麼</h2>
+<p>每個新字都走過和原本題庫一樣的檢查：自動驗證、同音字的辭典比對、對照 JLPT 單字表的難度檢查，以及中英兩種語言的雙模型盲測。假名有常見同音字的單字，一開始就跳過，因為題目卡只顯示假名，第二個意思會讓第二個選項也變成正確答案。</p>
+<p>N5 的盲測標出 7 個錯誤選項，換掉之後重測，全部通過。同一個版本我也把 N4 和 N3 各補到 200 字。那批有 4 題中文題目只被一個評審標記，而且標記的都是明顯不相干的選項：那位評審認為「皮革」可能是きぬ（絲）的意思。通常被標記的選項會被換掉，但因為評審自己判斷錯就換掉選項，什麼問題也沒解決。所以這 4 題改為交給人裁決。另一個評審和英文版都沒問題，最後判斷是評審失誤，保留原題。</p>
+<p>第二種情況正是流程照設計在運作：大部分題目自己就通過，只有真正的分歧才需要人來看。同一支驗證程式現在也檢查假名檔，到了 v1.8.0 又延伸到每日主題和提醒文案。每一種新內容，都接上一個已經存在的檢查。</p>
+<h2>我還不確定的</h2>
+<p>內容這一側規模化了，介面是另一個問題。新的首頁和難度選擇，到底會讓更多人開始玩、持續玩，還是反而有影響，我還不確定。這要用數據來回答，而不是靠感覺，答案會從每週的數據檢查裡找。</p>
+<h2>帶得走的一件事</h2>
+<p><strong>趁內容還少的時候，就把流程建起來。</strong>只有 200 題的時候，它感覺像是額外負擔；等到要再加幾百題，它把一個晚上的工作變成幾分鐘。</p>
+</span>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test the Reviewer Before You Trust It — Tim</title>
+<meta name="description" content="The AI Reviewer That Missed Half the Problems My quiz app loads its question bank straight from GitHub, so merging a change means shipping it to every player. By v1.5 the bank had 640 words in two la">
+<meta property="og:title" content="Test the Reviewer Before You Trust It — Tim">
+<meta property="og:description" content="The AI Reviewer That Missed Half the Problems My quiz app loads its question bank straight from GitHub, so merging a change means shipping it to every player. By v1.5 the bank had 640 words in two la">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600&family=Roboto:wght@400;500&family=Roboto+Mono:wght@500&family=Noto+Sans+TC:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../assets/site.css">
+<script src="../../../assets/site.js"></script>
+</head>
+<body>
+<header class="appbar"><div class="wrap">
+  <a class="brand" href="../../../">Tim</a>
+  <nav class="nav" aria-label="Main">
+    <a href="../../../#projects"><span class="lang-en">Projects</span><span class="lang-zh">專案</span></a>
+    <a href="../../../#about"><span class="lang-en">About</span><span class="lang-zh">關於</span></a>
+    <a href="#contact"><span class="lang-en">Contact</span><span class="lang-zh">聯絡</span></a>
+  </nav>
+  <button class="chipbtn" id="lang-toggle" type="button"><span class="lang-en">中文</span><span class="lang-zh">EN</span></button>
+</div></header>
+<main class="wrap">
+<nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="../../../"><span class="lang-en">Home</span><span class="lang-zh">首頁</span></a></li><li><a href="../"><span class="lang-en">Nihongo Quiz King</span><span class="lang-zh">日文知識王</span></a></li><li><span aria-current="page"><span class="lang-en">Test the Reviewer Before You Trust It</span><span class="lang-zh">先測試評審，再信任它</span></span></li></ol></nav>
+<article class="article">
+    <div class="page-head">
+      <h1><span class="lang-en">Test the Reviewer Before You Trust It</span><span class="lang-zh">先測試評審，再信任它</span></h1>
+      <div class="meta"><span>v1.5.2 → v1.6.3</span><span><span class="lang-en">7 min read</span><span class="lang-zh">閱讀 7 分鐘</span></span></div>
+      
+    </div>
+    <div class="article-body">
+<span class="lang-en">
+<p class="note"><em>Short on time? Read the first section and the last one. If you're hiring for an AI product role, the middle is an evaluation setup you can reuse.</em></p>
+<h2>The AI Reviewer That Missed Half the Problems</h2>
+<p>My quiz app loads its question bank straight from GitHub, so merging a change means shipping it to every player. By v1.5 the bank had 640 words in two languages, and most of the content had been drafted with AI. I couldn't keep re-reading all of it by hand, so I wanted AI to review it.</p>
+<p>Before trusting the reviewer, I tested it. I gave it a set of questions I already knew were broken and counted how many it caught. The first prompt caught only 27% to 53% of them. If I had skipped that step, I would have shipped a review process that missed around half the known problems and reported that everything was fine.</p>
+<p>I rewrote the prompt so the reviewer scored each answer option on its own instead of judging the question as a whole. With the same models, it caught 59 of 60. The models hadn't changed, only the instructions, and I only knew which version to use because I had measured both.</p>
+<p>The rest of this article is about the system around that reviewer: what each layer checks, why some layers are plain code and others are AI, and what still got through.</p>
+<h2>Start With One Rule</h2>
+<p>Each question shows a Japanese word in kana only, with four meanings to choose from. Before building any checks, I wrote down what makes a question valid. The core rule: <strong>looking only at the kana, exactly one option can be correct.</strong></p>
+<p>That rule turned out to be stricter than it sounds. A wrong option is also invalid if it is a near-synonym of the answer, another meaning of the same word, a broader category that includes the answer, or the meaning of a different word with the same reading. The card shows かう, which can be 買う (to buy) or 飼う (to keep a pet), so "to keep a pet" can't be a wrong option for "to buy".</p>
+<p>Writing the rule down did more than any tool that came after it. It turned "this question feels off" into something a script or a reviewer could actually check.</p>
+<h2>Code for Facts, AI for Judgment</h2>
+<p>Some checks have one right answer: is a field missing, does an English option contain Chinese characters, does a dictionary list two words with this reading. Others need judgment: could a learner reasonably pick this option as correct? I used plain code for the first kind and AI only for the second, and treated the AI checks as something that needs its own evaluation.</p>
+<p class="codeblock">L1 Validator · code · format errors, duplicates, wrong script, kanji that can't be read as the kana<br/>L2 Dictionary check · code + JMdict · wrong options that match a same-reading word<br/>L3 Blind review · 2 AI models, calibrated · options a learner could reasonably defend<br/>L4 Fix loop · AI + me · replace, re-test, escalate only on disagreement<br/>L5 Live data · real players · options that players keep choosing, and in-app reports</p>
+<p><strong>L1 and L2 are deterministic.</strong> The validator runs before every commit and on every pull request, so broken entries get caught before they reach the main branch. One of its checks reads every kanji against the kana using a kanji dictionary, which caught Chinese written into the Japanese field, such as 口罩 instead of マスク. The dictionary check looks up every reading in JMdict and found three wrong options that were actually correct meanings of a same-sounding word, for example "to sing" on 泣く (to cry), which is 鳴く.</p>
+<p><strong>L3 is judgment, so it needed calibration.</strong> Two different models act as test-takers. Each sees only what a player sees, the kana and four options, picks an answer, and flags any question where more than one option could be right. This is not AI grading its own work: the reviewers never see the intended answer or how the question was written. They have to get it right the way a player would. The canary set described above is what told me which prompt to trust.</p>
+<p><strong>L4 leans strict on purpose.</strong> If either reviewer flags a question, the wrong option gets replaced and the question is tested again. That sometimes throws out an option that was probably fine, but an ambiguous question costs a player a point they deserved, which is worse than losing a decent distractor. It took three rounds for every question to pass, and none needed my decision.</p>
+<p><strong>L5 sends real failures back.</strong> After each match, the app anonymously logs which options players chose. A database view lists any wrong option picked by at least 30% of players over 20 or more attempts, which usually means it isn't really wrong. Players can also flag a question from the result screen and pick a reason, such as "more than one answer is right".</p>
+<h2>What Still Got Through</h2>
+<p>The system isn't finished, and the gaps are the most useful part.</p>
+<p><strong>A cultural association no checker saw.</strong> One N3 question, かわり (a substitute), passed all four earlier layers. One of its wrong options was "addition". For anyone who has eaten in Japan, that sounds like おかわり, a second helping, so it reads as a plausible answer. I caught it myself: playing my own game, I picked "addition", then reported the question through the in-app flag as "more than one answer is right", and the option was replaced. The dictionary had no reason to flag it, and neither AI reviewer did either. It took someone who actually uses the language, in a real game.</p>
+<p><strong>A rule I hadn't written.</strong> When I later added a check against a standard JLPT word list, it found 62 duplicate entries across levels. The N3 set alone contained 48 N4 words. None of the earlier layers looked at levels, because the spec didn't say anything about them. Each layer catches exactly what it has a rule for.</p>
+<p><strong>A bug outside the content.</strong> In the same period I found that, from the second question onward, running out of time did nothing: the question froze at zero until the player tapped, and the late tap still scored. It had been there since v1.0, about seven months, and no content check could have seen it. Most players simply answer before time runs out.</p>
+<h2>If You're Building With AI-Generated Content</h2>
+<p>Four things I'd do first, at any scale:</p>
+<p><strong>1. Write a one-sentence rule for a valid output</strong> before building any checker. If you can't write it, no reviewer can enforce it.</p>
+<p><strong>2. Use code for anything with one right answer.</strong> Keep AI judgment for the questions that actually need judgment.</p>
+<p><strong>3. Test an AI reviewer before trusting it.</strong> Give it outputs you already know are bad and count what it catches. If it catches half, it isn't a reviewer yet.</p>
+<p><strong>4. Send every real complaint back into that test set.</strong> Your first set will be missing the problems you haven't imagined yet. Users will find them for you.</p>
+</span>
+<span class="lang-zh">
+<p class="note"><em>時間不多的話，讀第一節和最後一節就好。如果你在找 AI 產品相關的人才，中間是一套可以直接拿去用的評測做法。</em></p>
+<h2>只抓到一半問題的 AI 評審</h2>
+<p>我的答題 App 直接從 GitHub 讀取題庫，所以合併一次修改，就等於推送給所有玩家。到了 v1.5，題庫已經有 640 個單字、兩種語言，大部分內容是和 AI 一起產出的。我沒辦法每次都人工重讀，所以想讓 AI 來審查。</p>
+<p>在相信評審之前，我先測試它。我拿一組已經知道有問題的題目給它看，數它抓到幾題。第一版 prompt 只抓到 27% 到 53%。如果我跳過這一步，上線的就會是一個漏掉大約一半已知問題、還回報「一切正常」的審查流程。</p>
+<p>我把 prompt 改成讓評審逐一替每個選項評分，而不是對整題下判斷。同樣的模型，60 題抓到 59 題。模型沒變，變的只有指令；而我會知道該用哪一版，是因為兩版都量過。</p>
+<p>這篇文章接下來講的是圍繞這個評審的整套系統：每一層檢查什麼、為什麼有些層用程式、有些層用 AI，以及還是漏掉了什麼。</p>
+<h2>先寫下一條規則</h2>
+<p>每一題只顯示日文單字的假名，加上四個字義選項。在做任何檢查之前，我先寫下什麼是合格的題目。最核心的規則是：<strong>只看假名時，四個選項恰好只有一個是對的。</strong></p>
+<p>這條規則比聽起來嚴格。錯誤選項如果是正解的近義詞、同一個字的其他意思、包含正解的上位概念，或是同讀音另一個字的意思，都不合格。題目卡顯示かう，可能是買う（買）也可能是飼う（飼養），所以「飼養」不能當「買」的錯誤選項。</p>
+<p>寫下這條規則，比後面任何一個工具都有用。它把「這題怪怪的」變成一件腳本或評審真的能檢查的事。</p>
+<h2>事實交給程式，判斷交給 AI</h2>
+<p>有些檢查只有一個正確答案：欄位有沒有缺、英文選項有沒有漢字、辭典裡是不是有兩個字讀音相同。有些需要判斷：學習者會不會合理地認為這個選項也對？第一種我用程式，只有第二種用 AI，而且把 AI 檢查本身當成需要被評測的東西。</p>
+<p class="codeblock">L1 自動驗證 · 程式 · 格式錯誤、重複、文字種類錯誤、讀不成假名的漢字<br/>L2 辭典比對 · 程式＋JMdict · 和同讀音單字意思相符的錯誤選項<br/>L3 盲測 · 兩個 AI 模型，先校準 · 學習者可以合理主張也對的選項<br/>L4 修正迴圈 · AI＋我 · 替換、重測，意見分歧才交給人<br/>L5 線上數據 · 真實玩家 · 玩家一直選的選項，以及 App 內回報</p>
+<p><strong>L1 和 L2 是確定性的。</strong>驗證程式在每次 commit 前和每個 pull request 上執行，壞掉的題目在進入主分支前就會被擋下。其中一項檢查用漢字辭典把每個漢字對照假名讀音，擋下了把中文寫進日文欄位的錯誤，例如寫成「口罩」而不是マスク。辭典比對則在 JMdict 裡查每個讀音，找到三個錯誤選項其實是同音字的正確意思，例如泣く（哭）的選項「to sing」，那是鳴く。</p>
+<p><strong>L3 是判斷，所以需要校準。</strong>兩個不同的模型扮演考生，各自只看到玩家看到的東西：假名和四個選項。它們選出答案，並標出任何可能不只一個正解的題目。這不是讓 AI 替自己打分數：評審看不到預設答案，也不知道題目是怎麼寫出來的，它們必須像玩家一樣答對。告訴我該信任哪一版 prompt 的，就是前面那組已知有問題的題目。</p>
+<p><strong>L4 刻意從嚴。</strong>只要任一個評審標記某題，就換掉那個錯誤選項再重測。這有時會丟掉一個其實沒問題的選項，但一題有歧義的題目會讓玩家失去應得的分數，這比少一個不錯的干擾選項更糟。跑了三輪才全部通過，沒有一題需要我來裁決。</p>
+<p><strong>L5 把真實的失敗送回來。</strong>每場對戰結束後，App 會匿名記錄玩家選了哪些選項。資料庫裡有一個 view，列出在 20 次以上作答中被至少 30% 玩家選中的錯誤選項，這通常代表它其實不算錯。玩家也可以在結算畫面標記題目，並選擇原因，例如「不只一個答案是對的」。</p>
+<h2>還是漏掉的東西</h2>
+<p>這套系統還沒完成，而它的缺口是最有價值的部分。</p>
+<p><strong>沒有任何檢查看得到的文化聯想。</strong>一題 N3 的かわり（代替），通過了前面四層。它的其中一個錯誤選項是「追加」。在日本吃過飯的人會聯想到おかわり（再來一份），所以這個選項讀起來也說得通。抓到它的是我自己：玩自己的遊戲時，我選了「追加」，接著用 App 內的回報功能標記「不只一個答案是對的」，那個選項後來被換掉了。辭典沒有理由標記它，兩個 AI 評審也都沒有。要真正在用這個語言的人，在真實的對戰裡，才抓得到。</p>
+<p><strong>一條我沒寫的規則。</strong>後來我加入一項和標準 JLPT 單字表比對的檢查，找到 62 個跨難度重複的題目，光 N3 就有 48 個 N4 單字。前面幾層都沒檢查難度，因為規格裡根本沒寫到難度。每一層只抓得到它有規則的東西。</p>
+<p><strong>內容以外的 bug。</strong>同一段時間，我發現從第 2 題開始，時間到了卻什麼都沒發生：題目停在 0 秒，直到玩家點下去，而且遲到的點擊還會得分。它從 v1.0 就存在，大約七個月，任何內容檢查都不可能看到它。大部分玩家都會在時間到之前作答。</p>
+<h2>如果你也在用 AI 產出內容</h2>
+<p>不管規模大小，我會先做這四件事：</p>
+<p><strong>1. 用一句話寫下什麼是合格的產出</strong>，再開始做任何檢查。如果你寫不出來，也沒有任何評審能替你把關。</p>
+<p><strong>2. 只有一個正確答案的事，交給程式。</strong>AI 的判斷留給真正需要判斷的問題。</p>
+<p><strong>3. 先測試 AI 評審，再信任它。</strong>拿你已經知道有問題的產出給它看，數它抓到多少。如果只抓到一半，它還不能算是評審。</p>
+<p><strong>4. 把每一個真實的抱怨送回那組測試題。</strong>你的第一組測試題，一定缺少你還沒想到的問題。使用者會幫你找到它們。</p>
+</span>
+
+    </div>
+    <nav class="next" aria-label="More articles"><a href="../five-decisions/"><small><span class="lang-en">Previous</span><span class="lang-zh">上一篇</span></small><span class="lang-en">From Zero to an App People Use: Five Decisions</span><span class="lang-zh">從零到有人在用的 App：五個決定</span></a><a class="to-next" href="../scale-needs-a-process/"><small><span class="lang-en">Next</span><span class="lang-zh">下一篇</span></small><span class="lang-en">Scale Needs a Process First</span><span class="lang-zh">要規模化，先有流程</span></a></nav>
+  </article>
+</main>
+<footer id="contact"><div class="wrap">
+  <span>© 2026 Tim</span>
+  <span class="footer-links"><a href="https://www.linkedin.com/in/weitim/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/waitinghir" target="_blank" rel="noopener">GitHub</a><a href="mailto:waitinghir@gmail.com">Email</a></span>
+</div></footer>
+</body>
+</html>
