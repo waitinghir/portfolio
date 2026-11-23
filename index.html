@@ -858,8 +858,8 @@ footer {
           <h3 class="project-title"><span class="lang-en">How This Portfolio Gets Written</span><span class="lang-zh">這個作品集是怎麼寫出來的</span></h3>
           <div class="project-subtitle"><span class="lang-en">A meta case study</span><span class="lang-zh">一個 meta 的案例研究</span></div>
           <p class="project-desc">
-            <span class="lang-en">AI drafts, I own the judgment: the same quality system I built for AI-written quiz questions, applied to writing this site, and the two lessons the AI wrote that weren't mine.</span>
-            <span class="lang-zh">AI 起草，判斷由我負責：把我替答題 App 建立的品質系統用在寫這個網站上，以及 AI 替我寫出、但不屬於我的兩個教訓。</span>
+            <span class="lang-en">AI drafts, I own the judgment: the same quality system I built for AI-written quiz questions, applied to writing this site, and the lesson the AI wrote that wasn't mine.</span>
+            <span class="lang-zh">AI 起草，判斷由我負責：把我替答題 App 建立的品質系統用在寫這個網站上，以及 AI 替我寫出、但不屬於我的那個教訓。</span>
           </p>
           <div class="project-tags">
             <span class="tag">AI</span>
@@ -1336,14 +1336,14 @@ footer {
       <span class="lang-en">
       <p><em>Short on time? Read the first section and the last one.</em></p>
       <h2>AI Drafts, I Own the Judgment</h2>
-      <p>Most of the words on this site were drafted by AI. Claude reads the commit history of each project, checks the facts against the code, and writes a first version. That part works well. What it can't do is decide what I actually learned. Twice, it wrote a lesson I had never taken away, and the only reason they're gone is that I read the article and said so.</p>
+      <p>Most of the words on this site were drafted by AI. Claude reads the commit history of each project, checks the facts against the code, and writes a first version. That part works well. What it can't do is decide what I actually learned. Once, it wrote a lesson I had never taken away, and the only reason it's gone is that I read the article and said so.</p>
       <p>So the way this portfolio gets written looks a lot like the quality system I built for my quiz app's AI-written questions: a written rule for what counts as good, checks for the facts, an AI reviewer that has to prove itself before I trust it, and a human who makes the final call.</p>
       <h2>A Rule Before Any Writing</h2>
       <p>The site exists to help me find my next role, so I first wrote down who reads it and what a good article must do. The readers are people hiring product managers. The core rule: <strong>every article has to leave the reader with a judgment they didn't have before and can use, and it has to be true.</strong></p>
       <p>The spec also lists what fails: an article that reads like a changelog, adjectives instead of evidence, technical detail that doesn't support a decision, a generic AI voice, and the best line buried at the end. Every article on the site was rewritten or trimmed against that list.</p>
       <h2>Facts Can Be Checked. Lessons Can't.</h2>
       <p>Claude is good at the factual side. It checks each claim against the repositories, and that check caught real problems: every article on the site was dated 2025, while every project was built in 2026. It also caught one of its own mistakes. One article said a broken fix had removed "more than half" of a game. A closer look at the files showed all three stages were still there, and the article was corrected.</p>
-      <p>Lessons are different. In one draft, Claude reconstructed a launch-day story from a game's commit history and concluded that you should "check the size of every fix". The facts were right, but I didn't remember any of it, and that wasn't something I learned. The section came out. Another draft framed an outdated App Store description as a confession about honesty. It pulled attention from the actual product decision, so that came out too.</p>
+      <p>Lessons are different. In one draft, Claude reconstructed a launch-day story from a game's commit history and concluded that you should "check the size of every fix". The facts were right, but I didn't remember any of it, and that wasn't something I learned. The section came out.</p>
       <p>Since then, the rule is that Claude asks me what I took away before writing, and marks anything it inferred so I can confirm or delete it. No reviewer, human or AI, can verify that a lesson belongs to me. Only I can.</p>
       <h2>Testing the Reviewer, Again</h2>
       <p>To see how the English pieces land with the intended reader, two AI reviewers on different models read them as a hiring manager at a multinational company would. Before trusting their opinions, we calibrated them the same way as the quiz reviewers: three older drafts we already knew were weak went into the stack under random labels. Both reviewers scored the old drafts at or below their rewrites, and the old About section, all adjectives and no evidence, came last for both.</p>
@@ -1352,20 +1352,20 @@ footer {
       <p>The first time I used AI on this site, I asked it to make the whole 1,200-line page bilingual in one pass. It failed repeatedly, losing track of the structure partway through, until I told it to change approach. What worked was splitting the job into steps that could each be checked: first the language toggle, then the home page, then one article at a time, with a working version saved after each step. That lesson stuck, and every change since has been made in small, checked pieces.</p>
       <h2>If You Write With AI</h2>
       <p><strong>Let AI check the facts, and keep the lessons for yourself.</strong> It can verify a claim against a source. It can't verify that you learned something.</p>
-      <p><strong>Write down what good looks like before the first draft.</strong> A one-sentence rule turns "this feels off" into something you and the AI can both check.</p>
+      <p><strong>Write down what good looks like before the first draft.</strong> It's the same idea as an eval, and in AI work that idea matters enormously. A one-sentence rule turns "this feels off" into something you and the AI can both check.</p>
       <p><strong>Test any AI reviewer on work you already know is weak.</strong> If it can't tell the old draft from the rewrite, its opinion of the rest isn't worth much.</p>
       </span>
       <span class="lang-zh">
       <p><em>時間不多的話，讀第一節和最後一節就好。</em></p>
       <h2>AI 起草，判斷由我負責</h2>
-      <p>這個網站上大部分的文字是 AI 起草的。Claude 會讀每個專案的 commit 紀錄，對照程式碼確認事實，寫出第一版。這部分做得很好。它做不到的，是判斷我到底學到了什麼。它有兩次寫出了我從來沒有的體會，而那兩段之所以消失，只是因為我讀了文章、說了出來。</p>
+      <p>這個網站上大部分的文字是 AI 起草的。Claude 會讀每個專案的 commit 紀錄，對照程式碼確認事實，寫出第一版。這部分做得很好。它做不到的，是判斷我到底學到了什麼。它曾經寫出一個我從來沒有的體會，而那段之所以消失，只是因為我讀了文章、說了出來。</p>
       <p>所以這個作品集的寫法，很像我替答題 App 裡 AI 產出的題目建立的品質系統：一條寫下來的「什麼算好」的規則、確認事實的檢查、一個要先證明自己才被信任的 AI 評審，以及最後拍板的人。</p>
       <h2>先有規則，再開始寫</h2>
       <p>這個網站是為了幫我找下一份工作，所以我先寫下誰會讀它、一篇好文章必須做到什麼。讀者是正在找產品經理的人。核心規則是：<strong>每篇文章都要讓讀者帶走一個他原本不知道、而且用得上的判斷，而且必須是真的。</strong></p>
       <p>規格也列出什麼是不合格的：讀起來像 changelog、用形容詞代替證據、不支撐任何決定的技術細節、AI 通用語氣，以及把最好的一句話埋在最後。網站上每一篇文章，都照著這份清單重寫或刪減過。</p>
       <h2>事實可以檢查，教訓不行</h2>
       <p>Claude 很擅長事實這一面。它會拿每一個說法去對照 repo，而這個檢查抓到了真正的問題：網站上每篇文章都標著 2025，但每個專案其實都是 2026 年做的。它也抓到了自己的錯：有一篇文章說，一次失敗的修法讓遊戲「超過一半」不見了；仔細比對檔案後發現三個關卡其實都還在，文章也跟著改正了。</p>
-      <p>教訓就不一樣了。有一版草稿裡，Claude 從一個遊戲的 commit 紀錄拼出一段上線當天的故事，結論是「檢查每一次修改的大小」。事實沒錯，但我完全沒有印象，那也不是我學到的東西。那一節被刪掉了。另一版草稿把一段過時的 App Store 描述寫成了關於誠實的反省，搶走了真正那個產品決定的焦點，所以也刪了。</p>
+      <p>教訓就不一樣了。有一版草稿裡，Claude 從一個遊戲的 commit 紀錄拼出一段上線當天的故事，結論是「檢查每一次修改的大小」。事實沒錯，但我完全沒有印象，那也不是我學到的東西。那一節被刪掉了。</p>
       <p>從那之後的規則是：Claude 動筆前先問我學到什麼，並標出它自己推論的部分，讓我確認或刪掉。沒有任何評審，不管是人還是 AI，能驗證一個教訓是不是屬於我。只有我自己可以。</p>
       <h2>再一次，先測試評審</h2>
       <p>為了知道英文版在目標讀者眼中是什麼樣子，兩個不同模型的 AI 評審扮演外商的用人主管來讀。在相信它們的意見之前，我們用校準答題 App 評審的同一種方法校準它們：把三篇已知比較弱的舊版草稿，用隨機代號混進去。兩位評審給舊版的分數都不高於改寫版；只有形容詞、沒有證據的舊 About，在兩位評審那裡都排最後。</p>
@@ -1374,7 +1374,7 @@ footer {
       <p>我第一次在這個網站上用 AI，是要它一次把整個 1,200 行的頁面改成雙語。它一再失敗，改到一半就搞丟結構，直到我叫它換個做法。後來成功的方式，是把工作拆成一個個可以檢查的步驟：先做語言切換，再做首頁，然後一次一篇文章，每一步都留下一個可用的版本。這個教訓留了下來，之後每一次修改，都是拆成小塊、逐一檢查完成的。</p>
       <h2>如果你也用 AI 寫東西</h2>
       <p><strong>事實交給 AI 檢查，教訓留給自己。</strong>它可以拿一個說法去對照來源，但沒辦法驗證你是不是真的學到了。</p>
-      <p><strong>在第一版草稿之前，先寫下什麼叫好。</strong>一句話的規則，能把「感覺怪怪的」變成你和 AI 都能檢查的東西。</p>
+      <p><strong>在第一版草稿之前，先寫下什麼叫好。</strong>這就是 eval 的概念，在 AI 裡超重要。一句話的規則，能把「感覺怪怪的」變成你和 AI 都能檢查的東西。</p>
       <p><strong>拿你已經知道比較弱的作品，先測試任何 AI 評審。</strong>如果它分不出舊版和改寫版，它對其他作品的意見也就不太值得參考。</p>
       </span>
     </div>
