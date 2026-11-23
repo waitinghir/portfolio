@@ -16,6 +16,7 @@ Personal portfolio showcasing AI projects built through human-AI collaboration.
    - v1.0 → v1.5.1: From zero to an app people use — five decisions
    - v1.5.2 → v1.6.3: Test the reviewer before you trust it
    - v1.6.4 → v1.7.0: Scale needs a process first
+   - v1.6.4 → v1.8.0: It wasn't the AI, it was the clock (retention, work in progress)
 2. **那個騙了我 27 天的求職監控系統** (The Job Monitor That Lied for 27 Days) — A debugging detective story
 3. **新春大作戰** (Lunar New Year Challenge) — Game feel is a spec: turning "it feels wrong" into feedback AI can act on
 4. **飛行的回憶** (Memories of Flight) — Narrative game where mechanics are metaphors for loss and memory
