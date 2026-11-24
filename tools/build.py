@@ -25,6 +25,8 @@ JP_BADGE = {'jpquiz-v4': {'en': 'Start here', 'zh': '從這篇開始'}, 'jpquiz-
 DECK = ['jobmonitor', 'cny', 'flight', 'i18n']
 DECK_VIS = {}  # optional per-card visual (HTML); empty = text-only cards
 EMAIL = 'waitinghir@gmail.com'
+BASE = 'https://waitinghir.github.io/portfolio/'
+OG_IMAGE = BASE + 'assets/og.png'  # 1200x630, made by tools/og.py
 LINKS = [('LinkedIn', 'https://www.linkedin.com/in/weitim/'), ('GitHub', 'https://github.com/waitinghir')]
 FONTS = ('https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700;800'
          '&family=Shippori+Mincho+B1:wght@700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap')
@@ -100,6 +102,14 @@ def layout(d, title, desc, crumbs, main):
 <meta name="description" content="{esc(desc)}">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
+<meta property="og:type" content="{"website" if not d else "article"}">
+<meta property="og:url" content="{BASE}{d.replace(os.sep, "/") + "/" if d else ""}">
+<meta property="og:site_name" content="Tim Ho">
+<meta property="og:image" content="{OG_IMAGE}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Tim Ho: Product and growth, built with AI.">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{FONTS}">

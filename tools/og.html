@@ -1,0 +1,35 @@
+<!doctype html>
+<!-- Share card (1200x630) for Facebook/LinkedIn/X previews. Rendered to assets/og.png by tools/og.py. -->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800&family=Manrope:wght@600;700&family=Shippori+Mincho+B1:wght@800&display=swap">
+<style>
+*{box-sizing:border-box;margin:0}
+body{width:1200px;height:630px;background:#fff;font-family:Manrope,sans-serif;color:#0d0f1a;overflow:hidden;position:relative}
+canvas{position:absolute;left:0;top:0}
+.seal{position:absolute;left:64px;top:56px;width:64px;height:64px;border:4px solid #e3412b;border-radius:10px;color:#e3412b;font:800 22px/1 "Shippori Mincho B1",serif;display:grid;place-items:center;text-align:center;transform:rotate(-4deg);background:#fff}
+.name{position:absolute;left:150px;top:68px;font:800 36px/1 Unbounded,sans-serif;letter-spacing:-.02em}
+.name i{font-style:normal;color:#2f5bff}
+.h{position:absolute;left:64px;bottom:96px;font:800 58px/1.04 Unbounded,sans-serif;letter-spacing:-.035em;color:#2f5bff;background:#fff;padding:8px 12px 8px 0}
+.u{position:absolute;left:64px;bottom:48px;font:700 22px/1 Manrope,sans-serif;color:#5b6070}
+.v{position:absolute;right:64px;top:60px;writing-mode:vertical-rl;font:800 26px/1 "Shippori Mincho B1",serif;color:#2f5bff;letter-spacing:.1em}
+</style></head><body>
+<canvas id="c" width="1200" height="630"></canvas>
+<div class="seal">ティ<br>ム</div>
+<div class="name">Tim<i>.</i></div>
+<div class="v">AIで、つくる。</div>
+<div class="h">Product and growth,<br>built with AI.</div>
+<div class="u">waitinghir.github.io/portfolio</div>
+<script>
+// Same look as the home hero: the word drawn in kana, four colors.
+document.fonts.load('800 100px Unbounded').then(function(){
+  var W=1200,H=630,cv=document.getElementById('c'),ctx=cv.getContext('2d');
+  var off=document.createElement('canvas');off.width=W;off.height=H;var o=off.getContext('2d');
+  o.font='800 300px Unbounded';o.textAlign='right';o.textBaseline='middle';o.fillText('Tim.',W-120,H/2-40);
+  var d=o.getImageData(0,0,W,H).data,K='あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんアイウエオカキクケコサシスセソ',
+      C=['#2f5bff','#2f5bff','#2f5bff','#0d0f1a','#ff6b4a','#12b98f'],seed=7;
+  function r(){seed=(seed*16807)%2147483647;return seed/2147483647}
+  ctx.font='600 12px Manrope,"Hiragino Sans","Noto Sans JP",sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+  for(var y=0;y<H;y+=9)for(var x=0;x<W;x+=9)if(d[(y*W+x)*4+3]>128){ctx.fillStyle=C[r()*C.length|0];ctx.fillText(K[r()*K.length|0],x+(r()-.5)*2,y+(r()-.5)*2)}
+  document.body.dataset.ready='1';
+});
+</script></body></html>
