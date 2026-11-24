@@ -6,6 +6,9 @@ Writes index.html and projects/**/index.html. The generated HTML is committed,
 so GitHub Pages serves it with no build step. Edit src/ (article bodies in
 src/content/, everything else in src/site.json or the templates below), then
 run this script and commit both.
+
+Design: direction 10 (kana particle hero, Unbounded + Manrope, electric blue)
+with Japanese accents from direction 3 (seal, vertical section labels).
 """
 import html, json, os, re
 
@@ -15,12 +18,21 @@ site = json.load(open(os.path.join(SRC, 'site.json'), encoding='utf-8'))
 
 JP = 'nihongo-quiz-king'
 JP_NAME = {'en': 'Nihongo Quiz King', 'zh': '日文知識王'}
+JP_DESC = {'en': 'A 1v1 Japanese vocabulary game I built solo with AI. Four write-ups on testing AI-written content, scaling it, and finding out why new players leave.',
+           'zh': '一款我一個人和 AI 一起做的 1v1 日文單字對戰遊戲。四篇文章，寫怎麼檢驗 AI 產出的內容、讓它規模化，以及找出新玩家為什麼離開。'}
 JP_ORDER = ['jpquiz-v1', 'jpquiz-v4', 'jpquiz-v5', 'jpquiz-v6']
 JP_BADGE = {'jpquiz-v4': {'en': 'Start here', 'zh': '從這篇開始'}, 'jpquiz-v6': {'en': 'In progress', 'zh': '持續更新'}}
-HOME_ORDER = ['jpquiz', 'jobmonitor', 'cny', 'flight', 'i18n']
-CONTACT = [('LinkedIn', 'https://www.linkedin.com/in/weitim/'), ('GitHub', 'https://github.com/waitinghir'), ('Email', 'mailto:waitinghir@gmail.com')]
-HERO_TITLE = {'en': 'Product and growth, built with AI', 'zh': '產品與成長，用 AI 實作'}
-TOTAL = len(JP_ORDER)
+DECK = ['jobmonitor', 'cny', 'flight', 'i18n']
+DECK_VIS = {
+    'jobmonitor': '<div class="lg">✓ run 19 · 0 new<br>✓ run 20 · 0 new<br>✓ run 21 · 0 new<br>✓ run 22 · 0 new<br>… 27 days of green</div>',
+    'cny': '<img src="{pre}cny-cover.png" alt="" loading="lazy">',
+    'flight': '<img src="{pre}images/flight-level1.jpg" alt="" loading="lazy">',
+    'i18n': '<div class="q"><span class="lang-en">AI drafts.<br>I own the judgment.</span><span class="lang-zh">AI 起草，<br>判斷由我負責。</span></div>',
+}
+EMAIL = 'waitinghir@gmail.com'
+LINKS = [('LinkedIn', 'https://www.linkedin.com/in/weitim/'), ('GitHub', 'https://github.com/waitinghir')]
+FONTS = ('https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700;800'
+         '&family=Shippori+Mincho+B1:wght@700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap')
 
 
 def esc(s):
@@ -32,6 +44,10 @@ def bi(p, tag='span'):
     if p['en'] == p['zh']:
         return esc(p['en'])
     return f'<{tag} class="lang-en">{esc(p["en"])}</{tag}><{tag} class="lang-zh">{esc(p["zh"])}</{tag}>'
+
+
+def T(en, zh):
+    return bi({'en': en, 'zh': zh})
 
 
 def page_dir(aid):
@@ -64,6 +80,10 @@ def transform(body, d):
     return body
 
 
+def vlab(jp, en, zh=None):
+    return f'<div class="vlab" aria-hidden="true">{jp}<small>{en}</small></div>'
+
+
 def layout(d, title, desc, crumbs, main):
     pre = prefix(d)
     crumb_html = ''
@@ -75,8 +95,7 @@ def layout(d, title, desc, crumbs, main):
             else:
                 items.append(f'<li><a href="{rel(d, target)}">{label}</a></li>')
         crumb_html = f'<nav aria-label="Breadcrumb"><ol class="crumbs">{"".join(items)}</ol></nav>'
-    ext = ' target="_blank" rel="noopener"'
-    contact = ''.join('<a href="%s"%s>%s</a>' % (u, ext if u.startswith('http') else '', n) for n, u in CONTACT)
+    flinks = ''.join(f'<a href="{u}" target="_blank" rel="noopener">{n}</a>' for n, u in LINKS) + f'<a href="mailto:{EMAIL}">Email</a>'
     return f'''<!doctype html>
 <html lang="en" data-lang="en">
 <head>
@@ -88,28 +107,23 @@ def layout(d, title, desc, crumbs, main):
 <meta property="og:description" content="{esc(desc)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600&family=Roboto:wght@400;500&family=Roboto+Mono:wght@500&family=Noto+Sans+TC:wght@400;500&display=swap">
+<link rel="stylesheet" href="{FONTS}">
 <link rel="stylesheet" href="{pre}assets/site.css">
 <script src="{pre}assets/site.js"></script>
 </head>
 <body>
-<header class="appbar"><div class="wrap">
-  <a class="brand" href="{pre}">Tim</a>
-  <nav class="nav" aria-label="Main">
-    <a href="{pre}#projects"><span class="lang-en">Projects</span><span class="lang-zh">專案</span></a>
-    <a href="{pre}#about"><span class="lang-en">About</span><span class="lang-zh">關於</span></a>
-    <a href="#contact"><span class="lang-en">Contact</span><span class="lang-zh">聯絡</span></a>
-  </nav>
-  <button class="chipbtn" id="lang-toggle" type="button"><span class="lang-en">中文</span><span class="lang-zh">EN</span></button>
-</div></header>
-<main class="wrap">
+<div class="w">
+<header class="top">
+  <a class="seal" href="{pre}" aria-label="Home">ティ<br>ム</a>
+  <a class="brand" href="{pre}">Tim<b>.</b></a>
+  <a class="n" href="{pre}#work">{T("Work", "作品")}</a>
+  <a class="n" href="{pre}#about">{T("About", "關於")}</a>
+  <button class="lang" id="lang-toggle" type="button"><span class="lang-en">中文</span><span class="lang-zh">EN</span></button>
+</header>
 {crumb_html}
 {main}
-</main>
-<footer id="contact"><div class="wrap">
-  <span>© 2026 Tim</span>
-  <span class="footer-links">{contact}</span>
-</div></footer>
+<footer id="contact"><span>© 2026 Tim Ho</span><span class="flinks">{flinks}</span></footer>
+</div>
 </body>
 </html>
 '''
@@ -122,124 +136,159 @@ def write(d, content):
     return path
 
 
-def card_title(c):
-    if c['id'] == 'jpquiz':
-        return JP_NAME
-    t = c['title']
-    if t['en'] == t['zh'] and c['subtitle']['en'] != t['en']:
-        return {'en': t['en'], 'zh': c['subtitle']['zh']}
-    return t
+def arts_list(d):
+    out = []
+    for v in site['jpquiz']['versions']:
+        out.append(f'<a href="{rel(d, page_dir(v["id"]))}"><span><span class="v">{esc(v["tag"])}</span><span class="t">{bi(v["title"])}</span></span><span class="go" aria-hidden="true">→</span></a>')
+    return ''.join(out)
 
 
 def build_home():
+    d = ''
     cards = {c['id']: c for c in site['cards']}
-    out = []
-    for cid in HOME_ORDER:
-        c = cards[cid]
-        if cid == 'jpquiz':
-            href, kicker, cls = f'projects/{JP}/', {'en': f'App Store · {TOTAL} articles', 'zh': f'App Store · {TOTAL} 篇文章'}, 'card feature'
-        else:
-            a = site['articles'][cid]
-            href = page_dir(cid).replace(os.sep, '/') + '/'
-            cat = a['category'].split('—', 1)[-1].strip()
-            kicker, cls = {'en': cat, 'zh': cat}, 'card'
-        t = card_title(c)
-        sub = ''
-        if cid not in ('jpquiz',) and site['articles'][cid]['title']['en'] != c['title']['en']:
-            sub = f'<span class="sub">{bi(site["articles"][cid]["title"])}</span>'
-        tags = ''.join(f'<span class="tag">{bi(x)}</span>' for x in c['tags'])
-        out.append(f'''<a class="{cls}" href="{href}">
-      <span class="kicker">{bi(kicker)}</span>
-      <h3>{bi(t)}</h3>{sub}
-      <p>{bi(c["desc"])}</p>
-      <div class="tags">{tags}</div>
+    stats = site['about']['stats']
+    chips = ''.join(f'<span><b>{esc(s["value"])}</b>{bi(s["label"])}</span>' for s in stats)
+    shots = lambda l: ''.join(f'<img src="images/jpquiz-{n}-{l}.jpg" alt="" loading="lazy">' for n in ('home', 'today', 'result'))
+    deck = []
+    for i, aid in enumerate(DECK):
+        a, c = site['articles'][aid], cards[aid]
+        cat = a['category'].split('—', 1)[-1].strip()
+        deck.append(f'''<a class="cardx c{i}" href="{page_dir(aid).replace(os.sep, "/")}/" style="--i:{i}">
+      <div><span class="k">{esc(cat)}</span><h3>{bi(a["title"])}</h3><p>{bi(c["desc"])}</p><span class="cta">{T("Read", "閱讀")} →</span></div>
+      <div class="vis" aria-hidden="true">{DECK_VIS[aid].format(pre="")}</div>
     </a>''')
-    facts = ''.join(f'<span class="fact"><b>{esc(s["value"])}</b> {bi(s["label"])}</span>' for s in site['about']['stats'])
-    about = site['about']
-    main = f'''<section class="hero">
-    <h1>{bi(HERO_TITLE)}</h1>
-    <p>{bi(site["hero"]["subtitle"])}</p>
-    <div class="facts">{facts}</div>
-  </section>
-  <section id="projects">
-    <div class="section-head"><h2><span class="lang-en">Projects</span><span class="lang-zh">專案</span></h2></div>
-    <div class="grid">
-    {"".join(out)}
-    </div>
-  </section>
-  <section id="about">
-    <div class="section-head"><h2><span class="lang-en">About</span><span class="lang-zh">關於我</span></h2></div>
-    <div class="about"><div class="lang-en">{about["en"]}</div><div class="lang-zh">{about["zh"]}</div></div>
-  </section>'''
-    return write('', layout('', 'Tim — Product & Growth × AI', 'Product and growth leader building and shipping products with AI, and writing up the judgment calls behind them.', None, main))
+    facts = ''.join(f'<div><b>{esc(s["value"])}</b><span>{bi(s["label"])}</span></div>' for s in stats)
+    links = ''.join(f'<a href="{u}" target="_blank" rel="noopener">{n} ↗</a>' for n, u in LINKS)
+    main = f'''<div class="stage" id="stage" data-words="Product.|Growth.|AI.|Tim." aria-hidden="true"><canvas></canvas><span class="hint">{T("move here · tap to change", "滑過這裡 · 點一下換字")}</span></div>
+<section class="intro">
+  <div><h1 class="disp"><span class="lang-en">Product and growth, <span class="hl">built with AI.</span></span><span class="lang-zh">產品與成長，<span class="hl">用 AI 實作。</span></span></h1>
+  <div class="chips">{chips}</div></div>
+  <p>{bi(site["hero"]["subtitle"])}</p>
+  <div class="vtag" aria-hidden="true">AIで、つくる。</div>
+</section>
+<section class="sec" id="work">{vlab("作品", "WORK")}<div>
+  <h2 class="h2">{T("Selected work", "精選作品")}</h2>
+  <article class="feat">
+    <a href="projects/{JP}/" aria-label="{esc(JP_NAME["en"])}"><div class="tilt lang-en">{shots("en")}</div><div class="tilt lang-zh">{shots("zh")}</div></a>
+    <div><span class="kick">{T("Live on the App Store · 4 articles", "已上架 App Store · 4 篇文章")}</span>
+      <h3>{bi(JP_NAME)}</h3><p>{bi(JP_DESC)}</p>
+      <div class="arts">{arts_list(d)}</div>
+      <a class="more" href="projects/{JP}/">{T("Project page, with the data", "專案頁與數據")} →</a></div>
+  </article>
+</div></section>
+<section class="sec">{vlab("記録", "NOTES")}<div>
+  <h2 class="h2">{T("More projects", "其他專案")}</h2>
+  <div class="deck">{"".join(deck)}</div>
+</div></section>
+<section class="sec" id="about">{vlab("略歴", "ABOUT")}<div class="about">
+  <div class="txt"><h2 class="h2">{T("About", "關於我")}</h2><div class="lang-en">{site["about"]["en"]}</div><div class="lang-zh">{site["about"]["zh"]}</div></div>
+  <div><div class="facts">{facts}</div><a class="mag" href="mailto:{EMAIL}">{EMAIL} →</a><div class="links">{links}</div></div>
+</div></section>'''
+    return write(d, layout(d, 'Tim Ho — Product & Growth × AI', 'Product and growth leader building and shipping products with AI, and writing up the judgment calls behind them.', None, main))
+
+
+def chart_bars(data, mx, unit, lang):
+    W, H, bw = 300, 170, 64
+    gap = (W - len(data) * bw) / (len(data) + 1)
+    out = [f'<svg viewBox="0 0 {W} {H + 34}" role="img"><line x1="0" x2="{W}" y1="{H}" y2="{H}" stroke="#0d0f1a"/>']
+    for i, (lab, v, base) in enumerate(data):
+        h = v / mx * H * .85
+        x = gap + i * (bw + gap)
+        fill = '#2f5bff' if i == len(data) - 1 else ('#d9dde8' if base else '#b9c6f5')
+        out.append(f'<rect class="bar" style="animation-delay:{i * .15}s" x="{x:.1f}" y="{H - h:.1f}" width="{bw}" height="{h:.1f}" rx="8" fill="{fill}"/>'
+                   f'<text class="val" x="{x + bw / 2:.1f}" y="{H - h - 8:.1f}" text-anchor="middle">{v:g}{unit}</text>'
+                   f'<text x="{x + bw / 2:.1f}" y="{H + 20}" text-anchor="middle">{esc(lab[lang])}</text>')
+    out.append('</svg>')
+    return ''.join(out)
+
+
+def chart_speed(lang):
+    rows = [({'en': 'answers in 3 seconds', 'zh': '每題 3 秒作答'}, 64, '#2f5bff'), ({'en': 'answers in 7 seconds', 'zh': '每題 7 秒作答'}, 25, '#ff6b4a')]
+    out = ['<svg viewBox="0 0 300 150" role="img">']
+    for i, (lab, v, col) in enumerate(rows):
+        out.append(f'<text x="0" y="{26 + i * 62}">{esc(lab[lang])}</text><rect class="hbar" style="animation-delay:{i * .15}s" x="0" y="{34 + i * 62}" width="{v / 100 * 240:.1f}" height="22" rx="6" fill="{col}"/>'
+                   f'<text class="val" x="{v / 100 * 240 + 8:.1f}" y="{51 + i * 62}">{v}%</text>')
+    out.append('</svg>')
+    return ''.join(out)
+
+
+def bil_svg(fn):
+    return f'<div class="lang-en">{fn("en")}</div><div class="lang-zh">{fn("zh")}</div>'
+
+
+def build_jp_project():
+    d = os.path.join('projects', JP)
+    B, A, BASE = {'en': 'before', 'zh': '之前'}, {'en': 'after', 'zh': '之後'}, {'en': 'baseline', 'zh': '基準'}
+    charts = [
+        ({'en': 'ACQUISITION', 'zh': '獲取'}, {'en': 'Organic first downloads, 4 weeks', 'zh': '自然首次下載（四週）'},
+         bil_svg(lambda l: chart_bars([(B, 11, 0), (A, 24, 0)], 26, '', l)),
+         {'en': 'App Store Connect. After the kana and N5 levels and a new store page. No paid ads.', 'zh': 'App Store Connect。加入假名和 N5、換了商店頁之後。沒有付費推廣。'}),
+        ({'en': 'CONVERSION', 'zh': '轉換'}, {'en': 'Store page → download', 'zh': '商店頁 → 下載'},
+         bil_svg(lambda l: chart_bars([(B, 11.0, 0), (BASE, 14.2, 1), (A, 19.5, 0)], 21, '%', l)),
+         {'en': 'App Store Connect, 4 weeks before vs after.', 'zh': 'App Store Connect，前後各四週。'}),
+        ({'en': 'RETENTION', 'zh': '留存'}, {'en': 'First-match win rate, player at 50% accuracy', 'zh': '正確率 50% 的玩家，第一場勝率'},
+         bil_svg(chart_speed),
+         {'en': 'Simulation. Speed matters about as much as accuracy.', 'zh': '模擬結果。速度的影響和正確率差不多大。'}),
+    ]
+    ch = ''.join(f'<div class="ch"><span class="k">{bi(k)}</span><h3>{bi(t)}</h3>{svg}<div class="src">{bi(s)}</div></div>' for k, t, svg, s in charts)
+    rows = []
+    for v in site['jpquiz']['versions']:
+        badge = f'<span class="badge">{bi(JP_BADGE[v["id"]])}</span>' if v['id'] in JP_BADGE else '<span></span>'
+        rows.append(f'<a href="{rel(d, page_dir(v["id"]))}"><span class="v">{esc(v["tag"])}</span><div><h3>{bi(v["title"])}</h3><p>{bi(v["desc"])}</p></div>{badge}<span class="go" aria-hidden="true">→</span></a>')
+    main = f'''<section class="phead">
+  <div><span class="jp">日文知識王</span><h1 class="disp">{bi(JP_NAME)}</h1><p>{bi(JP_DESC)}</p>
+  <div class="btns"><a class="btn f" href="https://apps.apple.com/app/id6759833560" target="_blank" rel="noopener">App Store</a><a class="btn" href="https://github.com/waitinghir/jp-knowledge-king" target="_blank" rel="noopener">GitHub</a><span class="btn" style="background:transparent;padding-inline:4px">{T("Currently v1.8.0", "目前 v1.8.0")}</span></div></div>
+  <div class="vtag" aria-hidden="true">一人で、AIと。</div>
+</section>
+<section class="sec">{vlab("成果", "RESULTS")}<div>
+  <div class="charts">{ch}</div>
+  <p class="note">{T("Small numbers from a solo app: a handful of new players each week. They come from my own weekly data review, after removing my devices and App Store review devices.", "一人開發的小規模數據：每週只有幾位新玩家。來自我每週的數據檢查，已排除我自己和 App Store 審查員的裝置。")}</p>
+</div></section>
+<section class="sec">{vlab("記事", "ARTICLES")}<div class="rows">{"".join(rows)}</div></section>
+<section class="sec">{vlab("画面", "SCREENS")}<div class="screens">{transform(site["jpquiz"]["gallery"], d)}</div></section>'''
+    crumbs = [(T('Home', '首頁'), ''), (bi(JP_NAME), d)]
+    return write(d, layout(d, 'Nihongo Quiz King — Tim Ho', 'A 1v1 Japanese vocabulary game built solo with AI and live on the App Store, with results and four write-ups.', crumbs, main))
 
 
 def head_links(links):
     out = []
     for i, l in enumerate(links):
         lab = {'en': clean_label(l['label']['en']), 'zh': clean_label(l['label']['zh'])}
-        cls = 'btn filled' if i == 0 else 'btn tonal'
-        out.append(f'<a class="{cls}" href="{esc(l["href"])}" target="_blank" rel="noopener">{bi(lab)}</a>')
-    return f'<div class="btnrow">{"".join(out)}</div>' if out else ''
-
-
-def build_jp_project():
-    d = os.path.join('projects', JP)
-    rows = []
-    for v in site['jpquiz']['versions']:
-        badge = f'<span class="badge">{bi(JP_BADGE[v["id"]])}</span>' if v['id'] in JP_BADGE else '<span></span>'
-        rows.append(f'''<a class="row" href="{rel(d, page_dir(v["id"]))}"><span class="ver">{esc(v["tag"])}</span><div><h3>{bi(v["title"])}</h3><p>{bi(v["desc"])}</p></div>{badge}</a>''')
-    links = [{'href': 'https://apps.apple.com/app/id6759833560', 'label': {'en': 'App Store', 'zh': 'App Store'}},
-             {'href': 'https://github.com/waitinghir/jp-knowledge-king', 'label': {'en': 'GitHub', 'zh': 'GitHub'}}]
-    main = f'''<div class="page-head">
-    <h1>{bi(JP_NAME)}</h1>
-    <p class="lead">{site["jpquiz"]["intro"]}</p>
-    <div class="meta"><span><span class="lang-en">Currently v1.8.0</span><span class="lang-zh">目前 v1.8.0</span></span></div>
-    {head_links(links)}
-  </div>
-  <div class="list">{"".join(rows)}</div>
-  <div class="gallery">{transform(site["jpquiz"]["gallery"], d)}</div>'''
-    crumbs = [('<span class="lang-en">Home</span><span class="lang-zh">首頁</span>', ''), (bi(JP_NAME), d)]
-    return write(d, layout(d, 'Nihongo Quiz King — Tim', 'A 1v1 Japanese vocabulary game built solo with AI and live on the App Store, and what building it taught me.', crumbs, main))
+        out.append(f'<a class="btn{" f" if i == 0 else ""}" href="{esc(l["href"])}" target="_blank" rel="noopener">{bi(lab)}</a>')
+    return f'<div class="btns">{"".join(out)}</div>' if out else ''
 
 
 def build_article(aid):
     a = site['articles'][aid]
     d = page_dir(aid)
-    home = ('<span class="lang-en">Home</span><span class="lang-zh">首頁</span>', '')
+    home = (T('Home', '首頁'), '')
     if a['project'] == JP:
         crumbs = [home, (bi(JP_NAME), os.path.join('projects', JP)), (bi(a['title']), d)]
-        ver = a['category'].split('—', 1)[-1].strip()
-        meta = f'<span>{esc(ver)}</span>'
+        kick = f'<span class="ver">{esc(a["category"].split("—", 1)[-1].strip())}</span>'
     else:
         crumbs = [home, (bi(a['title']), d)]
-        meta = ''
-    if a.get('read'):
-        meta += f'<span>{bi(a["read"])}</span>'
+        kick = f'<span class="ver">{esc(a["category"].split("—", 1)[-1].strip())}</span>'
+    meta = kick + (f'<span>{bi(a["read"])}</span>' if a.get('read') else '')
     nav = ''
     if a['project'] == JP:
         i = JP_ORDER.index(aid)
-        prev_ = JP_ORDER[i - 1] if i > 0 else None
-        next_ = JP_ORDER[i + 1] if i < len(JP_ORDER) - 1 else None
         parts = []
-        if prev_:
-            parts.append(f'<a href="{rel(d, page_dir(prev_))}"><small><span class="lang-en">Previous</span><span class="lang-zh">上一篇</span></small>{bi(site["articles"][prev_]["title"])}</a>')
-        if next_:
-            parts.append(f'<a class="to-next" href="{rel(d, page_dir(next_))}"><small><span class="lang-en">Next</span><span class="lang-zh">下一篇</span></small>{bi(site["articles"][next_]["title"])}</a>')
+        if i > 0:
+            pv = JP_ORDER[i - 1]
+            parts.append(f'<a href="{rel(d, page_dir(pv))}"><small>{T("Previous", "上一篇")}</small>{bi(site["articles"][pv]["title"])}</a>')
+        if i < len(JP_ORDER) - 1:
+            nx = JP_ORDER[i + 1]
+            parts.append(f'<a class="to-next" href="{rel(d, page_dir(nx))}"><small>{T("Next", "下一篇")}</small>{bi(site["articles"][nx]["title"])}</a>')
         nav = f'<nav class="next" aria-label="More articles">{"".join(parts)}</nav>'
     body = transform(open(os.path.join(SRC, 'content', f'{aid}.html'), encoding='utf-8').read(), d)
-    main = f'''<article class="article">
-    <div class="page-head">
-      <h1>{bi(a["title"])}</h1>
-      <div class="meta">{meta}</div>
-      {head_links(a["links"])}
-    </div>
-    <div class="article-body">
+    main = f'''<div class="art">{vlab("記事", "ARTICLE")}<article>
+  <div class="ahead"><div class="meta">{meta}</div><h1 class="disp">{bi(a["title"])}</h1>{head_links(a["links"])}</div>
+  <div class="article-body">
 {body}
-    </div>
-    {nav}
-  </article>'''
-    title = f'{a["title"]["en"]} — Tim'
+  </div>
+  {nav}
+</article></div>'''
+    title = f'{a["title"]["en"]} — Tim Ho'
     desc = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', body.split('</p>', 2)[1] if body.count('</p>') > 1 else body))[:200].strip()
     return write(d, layout(d, title, desc, crumbs, main))
 

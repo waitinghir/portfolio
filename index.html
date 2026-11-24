@@ -3,76 +3,68 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tim — Product &amp; Growth × AI</title>
+<title>Tim Ho — Product &amp; Growth × AI</title>
 <meta name="description" content="Product and growth leader building and shipping products with AI, and writing up the judgment calls behind them.">
-<meta property="og:title" content="Tim — Product &amp; Growth × AI">
+<meta property="og:title" content="Tim Ho — Product &amp; Growth × AI">
 <meta property="og:description" content="Product and growth leader building and shipping products with AI, and writing up the judgment calls behind them.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600&family=Roboto:wght@400;500&family=Roboto+Mono:wght@500&family=Noto+Sans+TC:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&family=Shippori+Mincho+B1:wght@700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/site.js"></script>
 </head>
 <body>
-<header class="appbar"><div class="wrap">
-  <a class="brand" href="">Tim</a>
-  <nav class="nav" aria-label="Main">
-    <a href="#projects"><span class="lang-en">Projects</span><span class="lang-zh">專案</span></a>
-    <a href="#about"><span class="lang-en">About</span><span class="lang-zh">關於</span></a>
-    <a href="#contact"><span class="lang-en">Contact</span><span class="lang-zh">聯絡</span></a>
-  </nav>
-  <button class="chipbtn" id="lang-toggle" type="button"><span class="lang-en">中文</span><span class="lang-zh">EN</span></button>
-</div></header>
-<main class="wrap">
+<div class="w">
+<header class="top">
+  <a class="seal" href="" aria-label="Home">ティ<br>ム</a>
+  <a class="brand" href="">Tim<b>.</b></a>
+  <a class="n" href="#work"><span class="lang-en">Work</span><span class="lang-zh">作品</span></a>
+  <a class="n" href="#about"><span class="lang-en">About</span><span class="lang-zh">關於</span></a>
+  <button class="lang" id="lang-toggle" type="button"><span class="lang-en">中文</span><span class="lang-zh">EN</span></button>
+</header>
 
-<section class="hero">
-    <h1><span class="lang-en">Product and growth, built with AI</span><span class="lang-zh">產品與成長，用 AI 實作</span></h1>
-    <p><span class="lang-en">I&#x27;m Tim — a product and growth leader with 8+ years building consumer apps across Japan, Taiwan, Hong Kong and Southeast Asia. Here, I build and ship my own products with AI, and write up the judgment calls behind them — including the ones I got wrong.</span><span class="lang-zh">我是 Tim，在消費型 App 做了 8 年以上的產品與成長，負責過日本、台灣、香港和東南亞市場。在這裡，我用 AI 打造並上線自己的產品，也把背後的判斷寫下來，包括我做錯的那些。</span></p>
-    <div class="facts"><span class="fact"><b>8+</b> <span class="lang-en">Years in product &amp; growth</span><span class="lang-zh">年產品與成長經驗</span></span><span class="fact"><b>+300%</b> <span class="lang-en">Long-term retention, Japan market</span><span class="lang-zh">日本市場長期留存</span></span><span class="fact"><b>20M+</b> <span class="lang-en">MAU instrumented for ML recommendation &amp; search</span><span class="lang-zh">月活規模的推薦與搜尋埋點</span></span><span class="fact"><b>4</b> <span class="lang-en">Markets: JP / TW / HK / SEA</span><span class="lang-zh">市場：日本、台灣、香港、東南亞</span></span></div>
-  </section>
-  <section id="projects">
-    <div class="section-head"><h2><span class="lang-en">Projects</span><span class="lang-zh">專案</span></h2></div>
-    <div class="grid">
-    <a class="card feature" href="projects/nihongo-quiz-king/">
-      <span class="kicker"><span class="lang-en">App Store · 4 articles</span><span class="lang-zh">App Store · 4 篇文章</span></span>
-      <h3><span class="lang-en">Nihongo Quiz King</span><span class="lang-zh">日文知識王</span></h3>
-      <p><span class="lang-en">A 1v1 quiz game for learning Japanese vocabulary — built with Expo/React Native and shipped to the App Store. Currently on v1.8.0.</span><span class="lang-zh">一款 1v1 日文單字對戰遊戲，使用 Expo/React Native 開發並上架 App Store。目前版本 v1.8.0。</span></p>
-      <div class="tags"><span class="tag">AI</span><span class="tag">React Native</span><span class="tag">App Store</span></div>
-    </a><a class="card" href="projects/job-monitor/">
-      <span class="kicker">Automation × AI</span>
-      <h3><span class="lang-en">The Job Monitor That Lied for 27 Days</span><span class="lang-zh">那個騙了我 27 天的求職監控系統</span></h3>
-      <p><span class="lang-en">An AI-built daily job-search monitor that ran green on GitHub Actions for nearly a month while quietly catching nothing — and the three-act bug hunt that found out why.</span><span class="lang-zh">一個用 AI 打造的每日求職監控系統，在 GitHub Actions 上連續綠燈跑了將近一個月卻什麼都沒抓到——以及找出真相的三幕除錯偵探故事。</span></p>
-      <div class="tags"><span class="tag">AI</span><span class="tag">GitHub Actions</span><span class="tag"><span class="lang-en">Debugging</span><span class="lang-zh">除錯</span></span></div>
-    </a><a class="card" href="projects/game-feel/">
-      <span class="kicker">Gamification × AI</span>
-      <h3><span class="lang-en">Lunar New Year Challenge</span><span class="lang-zh">新春大作戰</span></h3><span class="sub"><span class="lang-en">Game Feel Is a Spec</span><span class="lang-zh">手感也是規格</span></span>
-      <p><span class="lang-en">A three-stage mobile game I built for Lunar New Year without writing code, and what it taught me about turning &quot;it feels wrong&quot; into feedback AI can act on.</span><span class="lang-zh">一款我沒寫一行程式碼、為農曆新年做的三關手機遊戲，以及它教會我的事：怎麼把「感覺不對」變成 AI 修得了的回饋。</span></p>
-      <div class="tags"><span class="tag">AI</span><span class="tag"><span class="lang-en">Gamification</span><span class="lang-zh">遊戲化</span></span><span class="tag"><span class="lang-en">Seasonal</span><span class="lang-zh">節慶</span></span></div>
-    </a><a class="card" href="projects/memories-of-flight/">
-      <span class="kicker">Interactive Storytelling × AI</span>
-      <h3><span class="lang-en">Memories of Flight</span><span class="lang-zh">飛行的回憶</span></h3>
-      <p><span class="lang-en">A narrative game where mechanics are metaphors — catch memories, dodge pain, and feel a story about loss unfold through your fingertips.</span><span class="lang-zh">一款以機制作為隱喻的敘事遊戲——接住回憶、閃避傷痛，用指尖感受一段關於失去的故事。</span></p>
-      <div class="tags"><span class="tag">AI</span><span class="tag">Canvas</span><span class="tag"><span class="lang-en">Narrative</span><span class="lang-zh">敘事</span></span></div>
-    </a><a class="card" href="projects/how-this-portfolio-gets-written/">
-      <span class="kicker">Meta × AI</span>
-      <h3><span class="lang-en">How This Portfolio Gets Written</span><span class="lang-zh">這個作品集是怎麼寫出來的</span></h3>
-      <p><span class="lang-en">AI drafts, I own the judgment: the same quality system I built for AI-written quiz questions, applied to writing this site, and the lesson the AI wrote that wasn&#x27;t mine.</span><span class="lang-zh">AI 起草，判斷由我負責：把我替答題 App 建立的品質系統用在寫這個網站上，以及 AI 替我寫出、但不屬於我的那個教訓。</span></p>
-      <div class="tags"><span class="tag">AI</span><span class="tag"><span class="lang-en">Writing</span><span class="lang-zh">寫作</span></span><span class="tag">Meta</span></div>
-    </a>
-    </div>
-  </section>
-  <section id="about">
-    <div class="section-head"><h2><span class="lang-en">About</span><span class="lang-zh">關於我</span></h2></div>
-    <div class="about"><div class="lang-en"><p>I've spent 8+ years in product and growth on consumer apps, leading international expansion across Japan, Taiwan, Hong Kong and Southeast Asia. At a community platform, I led the product repositioning for the Japan market, which improved long-term retention by 300%, and built the moderator and creator ecosystem from zero to one — growing posts by 36% and engagement time by 30% through a mix of product and ops incentives.</p>
+<div class="stage" id="stage" data-words="Product.|Growth.|AI.|Tim." aria-hidden="true"><canvas></canvas><span class="hint"><span class="lang-en">move here · tap to change</span><span class="lang-zh">滑過這裡 · 點一下換字</span></span></div>
+<section class="intro">
+  <div><h1 class="disp"><span class="lang-en">Product and growth, <span class="hl">built with AI.</span></span><span class="lang-zh">產品與成長，<span class="hl">用 AI 實作。</span></span></h1>
+  <div class="chips"><span><b>8+</b><span class="lang-en">Years in product &amp; growth</span><span class="lang-zh">年產品與成長經驗</span></span><span><b>+300%</b><span class="lang-en">Long-term retention, Japan market</span><span class="lang-zh">日本市場長期留存</span></span><span><b>20M+</b><span class="lang-en">MAU instrumented for ML recommendation &amp; search</span><span class="lang-zh">月活規模的推薦與搜尋埋點</span></span><span><b>4</b><span class="lang-en">Markets: JP / TW / HK / SEA</span><span class="lang-zh">市場：日本、台灣、香港、東南亞</span></span></div></div>
+  <p><span class="lang-en">I&#x27;m Tim — a product and growth leader with 8+ years building consumer apps across Japan, Taiwan, Hong Kong and Southeast Asia. Here, I build and ship my own products with AI, and write up the judgment calls behind them — including the ones I got wrong.</span><span class="lang-zh">我是 Tim，在消費型 App 做了 8 年以上的產品與成長，負責過日本、台灣、香港和東南亞市場。在這裡，我用 AI 打造並上線自己的產品，也把背後的判斷寫下來，包括我做錯的那些。</span></p>
+  <div class="vtag" aria-hidden="true">AIで、つくる。</div>
+</section>
+<section class="sec" id="work"><div class="vlab" aria-hidden="true">作品<small>WORK</small></div><div>
+  <h2 class="h2"><span class="lang-en">Selected work</span><span class="lang-zh">精選作品</span></h2>
+  <article class="feat">
+    <a href="projects/nihongo-quiz-king/" aria-label="Nihongo Quiz King"><div class="tilt lang-en"><img src="images/jpquiz-home-en.jpg" alt="" loading="lazy"><img src="images/jpquiz-today-en.jpg" alt="" loading="lazy"><img src="images/jpquiz-result-en.jpg" alt="" loading="lazy"></div><div class="tilt lang-zh"><img src="images/jpquiz-home-zh.jpg" alt="" loading="lazy"><img src="images/jpquiz-today-zh.jpg" alt="" loading="lazy"><img src="images/jpquiz-result-zh.jpg" alt="" loading="lazy"></div></a>
+    <div><span class="kick"><span class="lang-en">Live on the App Store · 4 articles</span><span class="lang-zh">已上架 App Store · 4 篇文章</span></span>
+      <h3><span class="lang-en">Nihongo Quiz King</span><span class="lang-zh">日文知識王</span></h3><p><span class="lang-en">A 1v1 Japanese vocabulary game I built solo with AI. Four write-ups on testing AI-written content, scaling it, and finding out why new players leave.</span><span class="lang-zh">一款我一個人和 AI 一起做的 1v1 日文單字對戰遊戲。四篇文章，寫怎麼檢驗 AI 產出的內容、讓它規模化，以及找出新玩家為什麼離開。</span></p>
+      <div class="arts"><a href="projects/nihongo-quiz-king/five-decisions/"><span><span class="v">v1.0.0 → v1.5.1</span><span class="t"><span class="lang-en">From Zero to an App People Use: Five Decisions</span><span class="lang-zh">從零到有人在用的 App：五個決定</span></span></span><span class="go" aria-hidden="true">→</span></a><a href="projects/nihongo-quiz-king/test-the-reviewer/"><span><span class="v">v1.5.2 → v1.6.3</span><span class="t"><span class="lang-en">Test the Reviewer Before You Trust It</span><span class="lang-zh">先測試評審，再信任它</span></span></span><span class="go" aria-hidden="true">→</span></a><a href="projects/nihongo-quiz-king/scale-needs-a-process/"><span><span class="v">v1.6.4 → v1.7.0</span><span class="t"><span class="lang-en">Scale Needs a Process First</span><span class="lang-zh">要規模化，先有流程</span></span></span><span class="go" aria-hidden="true">→</span></a><a href="projects/nihongo-quiz-king/it-was-the-clock/"><span><span class="v">v1.6.4 → v1.8.0</span><span class="t"><span class="lang-en">It Wasn&#x27;t the AI. It Was the Clock.</span><span class="lang-zh">問題不在 AI，在時間</span></span></span><span class="go" aria-hidden="true">→</span></a></div>
+      <a class="more" href="projects/nihongo-quiz-king/"><span class="lang-en">Project page, with the data</span><span class="lang-zh">專案頁與數據</span> →</a></div>
+  </article>
+</div></section>
+<section class="sec"><div class="vlab" aria-hidden="true">記録<small>NOTES</small></div><div>
+  <h2 class="h2"><span class="lang-en">More projects</span><span class="lang-zh">其他專案</span></h2>
+  <div class="deck"><a class="cardx c0" href="projects/job-monitor/" style="--i:0">
+      <div><span class="k">Automation × AI</span><h3><span class="lang-en">The Job Monitor That Lied for 27 Days</span><span class="lang-zh">那個騙了我 27 天的求職監控系統</span></h3><p><span class="lang-en">An AI-built daily job-search monitor that ran green on GitHub Actions for nearly a month while quietly catching nothing — and the three-act bug hunt that found out why.</span><span class="lang-zh">一個用 AI 打造的每日求職監控系統，在 GitHub Actions 上連續綠燈跑了將近一個月卻什麼都沒抓到——以及找出真相的三幕除錯偵探故事。</span></p><span class="cta"><span class="lang-en">Read</span><span class="lang-zh">閱讀</span> →</span></div>
+      <div class="vis" aria-hidden="true"><div class="lg">✓ run 19 · 0 new<br>✓ run 20 · 0 new<br>✓ run 21 · 0 new<br>✓ run 22 · 0 new<br>… 27 days of green</div></div>
+    </a><a class="cardx c1" href="projects/game-feel/" style="--i:1">
+      <div><span class="k">Gamification × AI</span><h3><span class="lang-en">Game Feel Is a Spec</span><span class="lang-zh">手感也是規格</span></h3><p><span class="lang-en">A three-stage mobile game I built for Lunar New Year without writing code, and what it taught me about turning &quot;it feels wrong&quot; into feedback AI can act on.</span><span class="lang-zh">一款我沒寫一行程式碼、為農曆新年做的三關手機遊戲，以及它教會我的事：怎麼把「感覺不對」變成 AI 修得了的回饋。</span></p><span class="cta"><span class="lang-en">Read</span><span class="lang-zh">閱讀</span> →</span></div>
+      <div class="vis" aria-hidden="true"><img src="cny-cover.png" alt="" loading="lazy"></div>
+    </a><a class="cardx c2" href="projects/memories-of-flight/" style="--i:2">
+      <div><span class="k">Interactive Storytelling × AI</span><h3><span class="lang-en">Memories of Flight</span><span class="lang-zh">飛行的回憶</span></h3><p><span class="lang-en">A narrative game where mechanics are metaphors — catch memories, dodge pain, and feel a story about loss unfold through your fingertips.</span><span class="lang-zh">一款以機制作為隱喻的敘事遊戲——接住回憶、閃避傷痛，用指尖感受一段關於失去的故事。</span></p><span class="cta"><span class="lang-en">Read</span><span class="lang-zh">閱讀</span> →</span></div>
+      <div class="vis" aria-hidden="true"><img src="images/flight-level1.jpg" alt="" loading="lazy"></div>
+    </a><a class="cardx c3" href="projects/how-this-portfolio-gets-written/" style="--i:3">
+      <div><span class="k">Meta × AI</span><h3><span class="lang-en">How This Portfolio Gets Written</span><span class="lang-zh">這個作品集是怎麼寫出來的</span></h3><p><span class="lang-en">AI drafts, I own the judgment: the same quality system I built for AI-written quiz questions, applied to writing this site, and the lesson the AI wrote that wasn&#x27;t mine.</span><span class="lang-zh">AI 起草，判斷由我負責：把我替答題 App 建立的品質系統用在寫這個網站上，以及 AI 替我寫出、但不屬於我的那個教訓。</span></p><span class="cta"><span class="lang-en">Read</span><span class="lang-zh">閱讀</span> →</span></div>
+      <div class="vis" aria-hidden="true"><div class="q"><span class="lang-en">AI drafts.<br>I own the judgment.</span><span class="lang-zh">AI 起草，<br>判斷由我負責。</span></div></div>
+    </a></div>
+</div></section>
+<section class="sec" id="about"><div class="vlab" aria-hidden="true">略歴<small>ABOUT</small></div><div class="about">
+  <div class="txt"><h2 class="h2"><span class="lang-en">About</span><span class="lang-zh">關於我</span></h2><div class="lang-en"><p>I've spent 8+ years in product and growth on consumer apps, leading international expansion across Japan, Taiwan, Hong Kong and Southeast Asia. At a community platform, I led the product repositioning for the Japan market, which improved long-term retention by 300%, and built the moderator and creator ecosystem from zero to one — growing posts by 36% and engagement time by 30% through a mix of product and ops incentives.</p>
 <p>I also led analytics instrumentation for ML-driven recommendation and search at 20M+ MAU: defining the events and schemas, and working with data engineers and data scientists to validate data quality before it fed experiments and model iterations.</p>
 <p>The projects here are where I bring the same habits to building with AI. Nihongo Quiz King's word bank gets the treatment I'd give a data pipeline: a written spec, automated checks, and reviewers that are calibrated before anyone trusts them. The job monitor taught me, again, that a green dashboard isn't a healthy system. Each article is about one judgment call you can take into your own work.</p></div><div class="lang-zh"><p>我在消費型 App 做了 8 年以上的產品與成長，負責過日本、台灣、香港和東南亞的海外擴張。在一個社群平台，我主導日本市場的產品重新定位，讓長期留存提升 300%；也從零建立版主與創作者生態，用產品加營運誘因，讓發文數成長 36%、使用時間成長 30%。</p>
 <p>我也主導過月活 2,000 萬以上規模的推薦與搜尋埋點：定義事件和資料結構，並和資料工程師、資料科學家一起驗證資料品質，再拿這些資料做實驗和模型迭代。</p>
 <p>這裡的專案，是我把同樣的習慣帶進 AI 開發的地方。日文知識王的題庫，我用對待資料管線的方式對待它：先寫規格、再做自動檢查，AI 評審也要先校準過才能信任。求職監控則再一次提醒我：儀表板全綠，不代表系統健康。每篇文章都在講一個判斷，你可以帶回自己的工作裡用。</p></div></div>
-  </section>
-</main>
-<footer id="contact"><div class="wrap">
-  <span>© 2026 Tim</span>
-  <span class="footer-links"><a href="https://www.linkedin.com/in/weitim/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/waitinghir" target="_blank" rel="noopener">GitHub</a><a href="mailto:waitinghir@gmail.com">Email</a></span>
-</div></footer>
+  <div><div class="facts"><div><b>8+</b><span><span class="lang-en">Years in product &amp; growth</span><span class="lang-zh">年產品與成長經驗</span></span></div><div><b>+300%</b><span><span class="lang-en">Long-term retention, Japan market</span><span class="lang-zh">日本市場長期留存</span></span></div><div><b>20M+</b><span><span class="lang-en">MAU instrumented for ML recommendation &amp; search</span><span class="lang-zh">月活規模的推薦與搜尋埋點</span></span></div><div><b>4</b><span><span class="lang-en">Markets: JP / TW / HK / SEA</span><span class="lang-zh">市場：日本、台灣、香港、東南亞</span></span></div></div><a class="mag" href="mailto:waitinghir@gmail.com">waitinghir@gmail.com →</a><div class="links"><a href="https://www.linkedin.com/in/weitim/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://github.com/waitinghir" target="_blank" rel="noopener">GitHub ↗</a></div></div>
+</div></section>
+<footer id="contact"><span>© 2026 Tim Ho</span><span class="flinks"><a href="https://www.linkedin.com/in/weitim/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/waitinghir" target="_blank" rel="noopener">GitHub</a><a href="mailto:waitinghir@gmail.com">Email</a></span></footer>
+</div>
 </body>
 </html>
