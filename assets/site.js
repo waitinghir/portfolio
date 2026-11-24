@@ -6,7 +6,7 @@
   if (lang !== 'en' && lang !== 'zh') lang = 'en';
   function apply() { root.setAttribute('data-lang', lang); root.setAttribute('lang', lang === 'zh' ? 'zh-Hant' : 'en'); }
   apply();
-  document.addEventListener('DOMContentLoaded', function () {
+  function init() {
     var btn = document.getElementById('lang-toggle');
     if (btn) btn.addEventListener('click', function () {
       lang = lang === 'en' ? 'zh' : 'en'; apply();
@@ -14,7 +14,8 @@
     });
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     particles(reduce); tilt(reduce); magnet(reduce);
-  });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 
   function particles(reduce) {
     var stage = document.getElementById('stage'); if (!stage) return;
@@ -44,7 +45,7 @@
     }
     function resize() {
       var dpr = Math.min(2, window.devicePixelRatio || 1), r = stage.getBoundingClientRect();
-      W = Math.round(r.width); H = Math.round(r.height); cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); setWord();
+      W = Math.round(r.width); H = Math.round(r.height); if (!W || !H) return; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); setWord();
     }
     function draw() {
       ctx.clearRect(0, 0, W, H); var fs = W < 600 ? 6.5 : 10;
@@ -68,8 +69,9 @@
     stage.addEventListener('click', function () { next(); clearInterval(timer); if (!reduce) timer = setInterval(next, 3600); });
     function go() { resize(); if (!reduce) { requestAnimationFrame(step); timer = setInterval(next, 3600); } }
     var fontReady = document.fonts && document.fonts.load ? Promise.race([document.fonts.load('800 100px Unbounded'), new Promise(function (r) { setTimeout(r, 1500); })]) : Promise.resolve();
-    fontReady.then(go);
-    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(resize, 150); });
+    fontReady.then(go, go);
+    var rt, onR = function () { clearTimeout(rt); rt = setTimeout(resize, 150); };
+    if (window.ResizeObserver) new ResizeObserver(onR).observe(stage); else window.addEventListener('resize', onR);
   }
 
   function tilt(reduce) {
