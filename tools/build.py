@@ -24,10 +24,8 @@ JP_ORDER = ['jpquiz-v1', 'jpquiz-v4', 'jpquiz-v5', 'jpquiz-v6']
 JP_BADGE = {'jpquiz-v4': {'en': 'Start here', 'zh': '從這篇開始'}, 'jpquiz-v6': {'en': 'In progress', 'zh': '持續更新'}}
 DECK = ['jobmonitor', 'cny', 'flight', 'i18n']
 DECK_VIS = {
-    'jobmonitor': '<div class="lg">✓ run 19 · 0 new<br>✓ run 20 · 0 new<br>✓ run 21 · 0 new<br>✓ run 22 · 0 new<br>… 27 days of green</div>',
     'cny': '<img src="{pre}cny-cover.png" alt="" loading="lazy">',
-    'flight': '<img src="{pre}images/flight-level1.jpg" alt="" loading="lazy">',
-    'i18n': '<div class="q"><span class="lang-en">AI drafts.<br>I own the judgment.</span><span class="lang-zh">AI 起草，<br>判斷由我負責。</span></div>',
+    'flight': '<img src="{pre}images/flight-title.jpg" alt="" loading="lazy">',
 }
 EMAIL = 'waitinghir@gmail.com'
 LINKS = [('LinkedIn', 'https://www.linkedin.com/in/weitim/'), ('GitHub', 'https://github.com/waitinghir')]
@@ -153,9 +151,9 @@ def build_home():
     for i, aid in enumerate(DECK):
         a, c = site['articles'][aid], cards[aid]
         cat = a['category'].split('—', 1)[-1].strip()
-        deck.append(f'''<a class="cardx c{i}" href="{page_dir(aid).replace(os.sep, "/")}/" style="--i:{i}">
-      <div><span class="k">{esc(cat)}</span><h3>{bi(a["title"])}</h3><p>{bi(c["desc"])}</p><span class="cta">{T("Read", "閱讀")} →</span></div>
-      <div class="vis" aria-hidden="true">{DECK_VIS[aid].format(pre="")}</div>
+        vis = f'\n      <div class="vis" aria-hidden="true">{DECK_VIS[aid].format(pre="")}</div>' if aid in DECK_VIS else ''
+        deck.append(f'''<a class="cardx c{i}{"" if vis else " novis"}" href="{page_dir(aid).replace(os.sep, "/")}/" style="--i:{i}">
+      <div><span class="k">{esc(cat)}</span><h3>{bi(a["title"])}</h3><p>{bi(c["desc"])}</p><span class="cta">{T("Read", "閱讀")} →</span></div>{vis}
     </a>''')
     facts = ''.join(f'<div><b>{esc(s["value"])}</b><span>{bi(s["label"])}</span></div>' for s in stats)
     links = ''.join(f'<a href="{u}" target="_blank" rel="noopener">{n} ↗</a>' for n, u in LINKS)
@@ -171,9 +169,9 @@ def build_home():
   <article class="feat">
     <a href="projects/{JP}/" aria-label="{esc(JP_NAME["en"])}"><div class="tilt lang-en">{shots("en")}</div><div class="tilt lang-zh">{shots("zh")}</div></a>
     <div><span class="kick">{T("Live on the App Store · 4 articles", "已上架 App Store · 4 篇文章")}</span>
-      <h3>{bi(JP_NAME)}</h3><p>{bi(JP_DESC)}</p>
-      <div class="arts">{arts_list(d)}</div>
-      <a class="more" href="projects/{JP}/">{T("Project page, with the data", "專案頁與數據")} →</a></div>
+      <h3><a href="projects/{JP}/">{bi(JP_NAME)}</a></h3><p>{bi(JP_DESC)}</p>
+      <a class="more" href="projects/{JP}/">{T("Project page, with the data", "專案頁與數據")} →</a>
+      <div class="arts">{arts_list(d)}</div></div>
   </article>
 </div></section>
 <section class="sec">{vlab("記録", "NOTES")}<div>

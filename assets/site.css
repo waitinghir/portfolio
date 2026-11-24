@@ -77,13 +77,15 @@ h1, h2, h3 { font-family: var(--d); text-wrap: balance; margin: 0; }
 .arts .t { font-weight: 700; font-size: 17px; }
 .arts .go { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--soft); transition: background .25s, transform .25s, color .25s; }
 .arts a:hover .go { background: var(--blue); color: #fff; transform: rotate(-45deg); }
-.more { display: inline-flex; gap: 8px; margin-top: 18px; font-weight: 700; color: var(--blue); }
+.more { display: inline-flex; gap: 8px; margin: 0 0 22px; font-weight: 700; color: var(--blue); }
 .more:hover { text-decoration: underline; text-underline-offset: 4px; }
 
 /* Stacked deck */
 .deck { position: relative; }
 .cardx { position: sticky; top: calc(84px + var(--i) * 22px); min-height: 360px; border-radius: 40px; padding: clamp(24px, 4vw, 48px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .8fr); gap: 32px; align-items: center; margin-bottom: 28px; box-shadow: 0 -20px 50px -30px rgb(13 15 26 / .35); }
 @media (max-width: 820px) { .cardx { grid-template-columns: 1fr; min-height: 0; position: relative; top: 0; } }
+.cardx.novis { grid-template-columns: 1fr; min-height: 300px; }
+.feat h3 a:hover { color: var(--blue); }
 .cardx .k { font-weight: 700; font-size: 14px; opacity: .78; }
 .cardx h3 { font-weight: 700; font-size: clamp(26px, 3.4vw, 44px); line-height: 1.05; letter-spacing: -.03em; margin: 10px 0 12px; }
 .cardx p { margin: 0; opacity: .88; max-width: 44ch; }
