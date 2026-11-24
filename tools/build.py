@@ -23,10 +23,7 @@ JP_DESC = {'en': 'A 1v1 Japanese vocabulary game I built solo with AI. Four writ
 JP_ORDER = ['jpquiz-v1', 'jpquiz-v4', 'jpquiz-v5', 'jpquiz-v6']
 JP_BADGE = {'jpquiz-v4': {'en': 'Start here', 'zh': '從這篇開始'}, 'jpquiz-v6': {'en': 'In progress', 'zh': '持續更新'}}
 DECK = ['jobmonitor', 'cny', 'flight', 'i18n']
-DECK_VIS = {
-    'cny': '<img src="{pre}cny-cover.png" alt="" loading="lazy">',
-    'flight': '<img src="{pre}images/flight-title.jpg" alt="" loading="lazy">',
-}
+DECK_VIS = {}  # optional per-card visual (HTML); empty = text-only cards
 EMAIL = 'waitinghir@gmail.com'
 LINKS = [('LinkedIn', 'https://www.linkedin.com/in/weitim/'), ('GitHub', 'https://github.com/waitinghir')]
 FONTS = ('https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700;800'
